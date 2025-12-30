@@ -320,8 +320,8 @@ from pymongo.errors import BulkWriteError
 # =====================================================
 # MONGODB CONFIG
 # =====================================================
-MONGO_URI = os.environ.get("MONGO_URI", "mongodb://localhost:27017")
-DB_NAME = os.environ.get("DB_NAME", "movietracker")
+MONGO_URI = os.environ.get("MONGO_URI", "mongodb+srv://admin-roshan:test123@cluster0.vmh1vrq.mongodb.net/movie-blog?retryWrites=true&w=majority&appName=Cluster0")
+DB_NAME = os.environ.get("DB_NAME", "movie-blog")
 SYNC_TO_MONGO = os.environ.get("SYNC_TO_MONGO", "true").lower() == "true"
 
 # =====================================================
