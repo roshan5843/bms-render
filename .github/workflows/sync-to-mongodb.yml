@@ -1,70 +1,98 @@
-# .github/workflows/sync-to-mongodb.yml
-# GitHub Action that syncs finalsummary.json to MongoDB on push
-
 name: Sync to MongoDB
 
 on:
   push:
     paths:
       - 'daily/data/**/finalsummary.json'
-      - 'daily/data/**/finaldetailed.json'
   workflow_dispatch:
-    inputs:
-      date_code:
-        description: 'Date code (YYYYMMDD) to sync'
-        required: false
-        default: ''
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
-
-      - name: Install dependencies
-        run: |
-          pip install motor pymongo httpx
-
-      - name: Determine date code
-        id: date
-        run: |
-          if [ -n "${{ github.event.inputs.date_code }}" ]; then
-            echo "date_code=${{ github.event.inputs.date_code }}" >> $GITHUB_OUTPUT
-          else
-            # Get IST date
-            DATE_CODE=$(TZ='Asia/Kolkata' date +%Y%m%d)
-            echo "date_code=$DATE_CODE" >> $GITHUB_OUTPUT
-          fi
-
+      
+      - name: Install pymongo
+        run: pip install pymongo pytz
+      
       - name: Sync to MongoDB
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
           DB_NAME: ${{ secrets.DB_NAME }}
         run: |
-          DATE_CODE="${{ steps.date.outputs.date_code }}"
-          SUMMARY_PATH="daily/data/${DATE_CODE}/finalsummary.json"
-          DETAILED_PATH="daily/data/${DATE_CODE}/finaldetailed.json"
+          python << 'EOF'
+          import json
+          import os
+          import glob
+          from datetime import datetime
+          import pytz
+          from pymongo import MongoClient, UpdateOne
 
-          if [ -f "$SUMMARY_PATH" ]; then
-            echo "🚀 Syncing $SUMMARY_PATH"
-            python sync_to_mongo.py --summary "$SUMMARY_PATH" --date "$DATE_CODE"
-          else
-            echo "⚠️ Summary file not found: $SUMMARY_PATH"
-            exit 1
-          fi
+          MONGO_URI = os.environ.get("MONGO_URI")
+          DB_NAME = os.environ.get("DB_NAME", "movietracker")
+          IST = pytz.timezone("Asia/Kolkata")
 
-      - name: Report status
-        if: always()
-        run: |
-          echo "✅ Sync completed for date: ${{ steps.date.outputs.date_code }}"
+          if not MONGO_URI:
+              print("❌ MONGO_URI not set")
+              exit(1)
+
+          # Find all finalsummary.json files (last 10 days)
+          files = sorted(glob.glob("daily/data/*/finalsummary.json"))[-10:]
+          
+          if not files:
+              print("❌ No summary files found")
+              exit(1)
+
+          client = MongoClient(MONGO_URI)
+          db = client[DB_NAME]
+          collection = db["movies"]
+          collection.create_index([("movie_name", 1), ("date_code", 1)], unique=True)
+
+          for filepath in files:
+              date_code = filepath.split("/")[-2]
+              
+              with open(filepath, "r") as f:
+                  data = json.load(f)
+              
+              movies = data.get("movies", {})
+              if not movies:
+                  continue
+              
+              operations = []
+              now = datetime.now(IST)
+              
+              for movie_name, m in movies.items():
+                  doc = {
+                      "movie_name": movie_name,
+                      "date_code": date_code,
+                      "last_updated": data.get("last_updated", ""),
+                      "shows": m.get("shows", 0),
+                      "gross": m.get("gross", 0.0),
+                      "sold": m.get("sold", 0),
+                      "total_seats": m.get("totalSeats", 0),
+                      "venues": m.get("venues", 0),
+                      "cities": m.get("cities", 0),
+                      "fastfilling": m.get("fastfilling", 0),
+                      "housefull": m.get("housefull", 0),
+                      "occupancy": m.get("occupancy", 0.0),
+                      "city_details": m.get("details", []),
+                      "chain_details": m.get("Chain_details", []),
+                      "updated_at": now,
+                  }
+                  operations.append(UpdateOne(
+                      {"movie_name": movie_name, "date_code": date_code},
+                      {"$set": doc},
+                      upsert=True
+                  ))
+              
+              if operations:
+                  result = collection.bulk_write(operations, ordered=False)
+                  print(f"✅ {date_code}: {len(movies)} movies synced")
+
+          client.close()
+          print("🎉 Sync complete!")
+          EOF
