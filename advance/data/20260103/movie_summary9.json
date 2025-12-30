@@ -340,54 +340,16 @@
       }
     ]
   },
-  "Akhanda 2: Thaandavam [2D | Telugu]": {
-    "shows": 4,
-    "gross": 36000.0,
-    "sold": 240,
-    "totalSeats": 2856,
-    "venues": 1,
-    "cities": 1,
-    "fastfilling": 0,
-    "housefull": 0,
-    "occupancy": 8.4,
-    "details": [
-      {
-        "city": "Khammam",
-        "state": "Telangana",
-        "venues": 1,
-        "shows": 4,
-        "gross": 36000.0,
-        "sold": 240,
-        "totalSeats": 2856,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 8.4
-      }
-    ],
-    "Chain_details": [
-      {
-        "chain": "Svc Sri Tirumala",
-        "venues": 1,
-        "shows": 4,
-        "gross": 36000.0,
-        "sold": 240,
-        "totalSeats": 2856,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 8.4
-      }
-    ]
-  },
   "Sirai [2D | Tamil]": {
-    "shows": 8,
-    "gross": 37280.0,
-    "sold": 356,
-    "totalSeats": 3004,
-    "venues": 2,
-    "cities": 2,
+    "shows": 12,
+    "gross": 48080.0,
+    "sold": 428,
+    "totalSeats": 4492,
+    "venues": 3,
+    "cities": 3,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 11.85,
+    "occupancy": 9.53,
     "details": [
       {
         "city": "Maduranthakam",
@@ -412,32 +374,44 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 9.54
+      },
+      {
+        "city": "Aranthangi",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 4,
+        "gross": 10800.0,
+        "sold": 72,
+        "totalSeats": 1488,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 4.84
       }
     ],
     "Chain_details": [
       {
         "chain": "Ticketnew",
-        "venues": 2,
-        "shows": 8,
-        "gross": 37280.0,
-        "sold": 356,
-        "totalSeats": 3004,
+        "venues": 3,
+        "shows": 12,
+        "gross": 48080.0,
+        "sold": 428,
+        "totalSeats": 4492,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 11.85
+        "occupancy": 9.53
       }
     ]
   },
   "Sarvam Maya [2D | Malayalam]": {
-    "shows": 14,
-    "gross": 13689.6,
-    "sold": 105,
-    "totalSeats": 4826,
-    "venues": 3,
-    "cities": 3,
-    "fastfilling": 0,
+    "shows": 23,
+    "gross": 223689.6,
+    "sold": 1505,
+    "totalSeats": 8426,
+    "venues": 5,
+    "cities": 5,
+    "fastfilling": 5,
     "housefull": 0,
-    "occupancy": 2.18,
+    "occupancy": 17.86,
     "details": [
       {
         "city": "Mukkam",
@@ -462,6 +436,30 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.16
+      },
+      {
+        "city": "Ottapalam",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 800,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Perambra",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 5,
+        "gross": 210000.0,
+        "sold": 1400,
+        "totalSeats": 2800,
+        "fastfilling": 5,
+        "housefull": 0,
+        "occupancy": 50.0
       },
       {
         "city": "Kunnamkulam",
@@ -500,15 +498,26 @@
         "occupancy": 0.16
       },
       {
-        "chain": "Ticketnew",
+        "chain": "Dreamax Cinemas 2k 7. 1 Surround Mayannur",
         "venues": 1,
-        "shows": 6,
+        "shows": 4,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 1446,
+        "totalSeats": 800,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
+      },
+      {
+        "chain": "Ticketnew",
+        "venues": 2,
+        "shows": 11,
+        "gross": 210000.0,
+        "sold": 1400,
+        "totalSeats": 4246,
+        "fastfilling": 5,
+        "housefull": 0,
+        "occupancy": 32.97
       }
     ]
   },
