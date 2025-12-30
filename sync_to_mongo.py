@@ -4,8 +4,8 @@ import os
 from pymongo import MongoClient, UpdateOne
 
 MONGO_URI = os.getenv("MONGO_URI")  # e.g., from GitHub Secrets
-DB_NAME = "bms_data"
-COLLECTION = "daily_summary"
+DB_NAME = "movie-blog"
+COLLECTION = "bms_data"
 
 DATE_CODE = os.getenv("DATE_CODE") or ""
 DATA_PATH = f"daily/data/{DATE_CODE}/finalsummary.json"
