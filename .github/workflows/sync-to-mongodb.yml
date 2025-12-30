@@ -1,0 +1,70 @@
+# .github/workflows/sync-to-mongodb.yml
+# GitHub Action that syncs finalsummary.json to MongoDB on push
+
+name: Sync to MongoDB
+
+on:
+  push:
+    paths:
+      - 'daily/data/**/finalsummary.json'
+      - 'daily/data/**/finaldetailed.json'
+  workflow_dispatch:
+    inputs:
+      date_code:
+        description: 'Date code (YYYYMMDD) to sync'
+        required: false
+        default: ''
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install motor pymongo httpx
+
+      - name: Determine date code
+        id: date
+        run: |
+          if [ -n "${{ github.event.inputs.date_code }}" ]; then
+            echo "date_code=${{ github.event.inputs.date_code }}" >> $GITHUB_OUTPUT
+          else
+            # Get IST date
+            DATE_CODE=$(TZ='Asia/Kolkata' date +%Y%m%d)
+            echo "date_code=$DATE_CODE" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Sync to MongoDB
+        env:
+          MONGO_URI: ${{ secrets.MONGO_URI }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+        run: |
+          DATE_CODE="${{ steps.date.outputs.date_code }}"
+          SUMMARY_PATH="daily/data/${DATE_CODE}/finalsummary.json"
+          DETAILED_PATH="daily/data/${DATE_CODE}/finaldetailed.json"
+
+          if [ -f "$SUMMARY_PATH" ]; then
+            echo "🚀 Syncing $SUMMARY_PATH"
+            python sync_to_mongo.py --summary "$SUMMARY_PATH" --date "$DATE_CODE"
+          else
+            echo "⚠️ Summary file not found: $SUMMARY_PATH"
+            exit 1
+          fi
+
+      - name: Report status
+        if: always()
+        run: |
+          echo "✅ Sync completed for date: ${{ steps.date.outputs.date_code }}"
