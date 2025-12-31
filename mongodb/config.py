@@ -12,18 +12,3 @@ COLLECTION_DETAILED = "daily_detailed"
 
 # Timezone
 IST = pytz.timezone("Asia/Kolkata")
-
-# File paths
-
-
-def get_date_code():
-    return datetime.now(IST).strftime("%Y%m%d")
-
-
-def get_file_paths():
-    date_code = get_date_code()
-    base_dir = f"daily/data/{date_code}"
-    return {
-        "summary": f"{base_dir}/finalsummary.json",
-        "detailed": f"{base_dir}/finaldetailed.json"
-    }

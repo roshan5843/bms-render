@@ -2,6 +2,7 @@ import json
 import os
 import sys
 from datetime import datetime
+from pathlib import Path
 from pymongo import MongoClient, UpdateOne
 from pymongo.errors import BulkWriteError
 import pytz
@@ -11,9 +12,7 @@ from config import (
     DATABASE_NAME,
     COLLECTION_SUMMARY,
     COLLECTION_DETAILED,
-    IST,
-    get_file_paths,
-    get_date_code
+    IST
 )
 
 
@@ -24,16 +23,52 @@ class MongoDBSync:
 
         self.client = MongoClient(MONGODB_URI)
         self.db = self.client[DATABASE_NAME]
-        self.date_code = get_date_code()
 
         print(f"✅ Connected to MongoDB: {DATABASE_NAME}")
-        print(f"📅 Date: {self.date_code}")
+
+    def find_latest_files(self):
+        """Find the most recent data files"""
+        print("\n🔍 Searching for latest data files...")
+
+        base_dir = Path("daily/data")
+
+        if not base_dir.exists():
+            print(f"❌ Directory not found: {base_dir}")
+            return None, None
+
+        # Get all date directories, sorted newest first
+        date_dirs = sorted(
+            [d for d in base_dir.iterdir() if d.is_dir() and d.name.isdigit()],
+            key=lambda x: x.name,
+            reverse=True
+        )
+
+        if not date_dirs:
+            print("❌ No date directories found in daily/data/")
+            return None, None
+
+        # Search for files in newest directories first
+        for date_dir in date_dirs[:3]:  # Check last 3 days
+            summary_path = date_dir / "finalsummary.json"
+            detailed_path = date_dir / "finaldetailed.json"
+
+            if summary_path.exists() and detailed_path.exists():
+                print(f"✅ Found files in: {date_dir.name}")
+                print(f"   • Summary: {summary_path}")
+                print(f"   • Detailed: {detailed_path}")
+                return str(summary_path), str(detailed_path)
+
+        print("❌ No finalsummary.json or finaldetailed.json found in recent directories")
+        return None, None
 
     def load_json(self, filepath):
         """Load JSON file safely"""
         try:
             with open(filepath, 'r', encoding='utf-8') as f:
-                return json.load(f)
+                data = json.load(f)
+                print(
+                    f"✅ Loaded: {filepath} ({os.path.getsize(filepath) / 1024:.1f} KB)")
+                return data
         except FileNotFoundError:
             print(f"❌ File not found: {filepath}")
             return None
@@ -41,21 +76,40 @@ class MongoDBSync:
             print(f"❌ Invalid JSON in {filepath}: {e}")
             return None
 
+    def extract_date_from_data(self, data):
+        """Extract date from data or filename"""
+        # Try last_updated first
+        last_updated = data.get("last_updated", "")
+        if last_updated:
+            try:
+                # Parse "2025-12-31 22:16 IST" format
+                date_str = last_updated.split()[0]
+                return date_str.replace("-", "")
+            except:
+                pass
+
+        # Fallback to current date
+        return datetime.now(IST).strftime("%Y%m%d")
+
     def sync_summary(self, filepath):
         """Sync summary data with bulk upsert"""
         print(f"\n📊 Syncing summary from: {filepath}")
 
         data = self.load_json(filepath)
         if not data:
-            return False
+            return False, None
 
         movies = data.get("movies", {})
         if not movies:
             print("⚠️  No movies found in summary")
-            return False
+            return False, None
 
+        date_code = self.extract_date_from_data(data)
         last_updated = data.get("last_updated")
         timestamp = datetime.now(IST)
+
+        print(f"📅 Date code: {date_code}")
+        print(f"🎬 Movies found: {len(movies)}")
 
         # Prepare bulk operations
         operations = []
@@ -65,7 +119,7 @@ class MongoDBSync:
             doc = {
                 **movie_data,
                 "movie": movie_name,
-                "date": self.date_code,
+                "date": date_code,
                 "last_updated": last_updated,
                 "synced_at": timestamp
             }
@@ -73,7 +127,7 @@ class MongoDBSync:
             # Upsert operation
             operations.append(
                 UpdateOne(
-                    {"movie": movie_name, "date": self.date_code},
+                    {"movie": movie_name, "date": date_code},
                     {"$set": doc},
                     upsert=True
                 )
@@ -92,16 +146,17 @@ class MongoDBSync:
             print(f"   • Upserted: {result.upserted_count}")
             print(f"   • Total movies: {len(movies)}")
 
-            return True
+            return True, date_code
 
         except BulkWriteError as e:
             print(
                 f"⚠️  Bulk write errors: {len(e.details.get('writeErrors', []))}")
-            print(
-                f"✅ Successfully processed: {e.details.get('nInserted', 0) + e.details.get('nModified', 0)}")
-            return True
+            processed = e.details.get(
+                'nInserted', 0) + e.details.get('nModified', 0)
+            print(f"✅ Successfully processed: {processed}")
+            return True, date_code
 
-    def sync_detailed(self, filepath):
+    def sync_detailed(self, filepath, date_code=None):
         """Sync detailed data with bulk upsert"""
         print(f"\n📋 Syncing detailed from: {filepath}")
 
@@ -114,21 +169,27 @@ class MongoDBSync:
             print("⚠️  No shows found in detailed")
             return False
 
+        if not date_code:
+            date_code = self.extract_date_from_data(data)
+
         last_updated = data.get("last_updated")
         timestamp = datetime.now(IST)
+
+        print(f"📅 Date code: {date_code}")
+        print(f"🎫 Shows found: {len(shows)}")
 
         # Prepare bulk operations
         operations = []
 
         for show in shows:
             # Create unique key
-            show_key = f"{show.get('venue')}_{show.get('time')}_{show.get('session_id')}_{show.get('audi')}"
+            show_key = f"{show.get('venue', '')}_{show.get('time', '')}_{show.get('session_id', '')}_{show.get('audi', '')}"
 
             # Add metadata
             doc = {
                 **show,
                 "_key": show_key,
-                "date": self.date_code,
+                "date": date_code,
                 "last_updated": last_updated,
                 "synced_at": timestamp
             }
@@ -136,20 +197,24 @@ class MongoDBSync:
             # Upsert operation
             operations.append(
                 UpdateOne(
-                    {"_key": show_key, "date": self.date_code},
+                    {"_key": show_key, "date": date_code},
                     {"$set": doc},
                     upsert=True
                 )
             )
 
-        # Batch process for large datasets (split into chunks of 1000)
+        # Batch process for large datasets
         batch_size = 1000
         total_matched = 0
         total_modified = 0
         total_upserted = 0
 
+        num_batches = (len(operations) + batch_size - 1) // batch_size
+        print(f"📦 Processing {num_batches} batches...")
+
         for i in range(0, len(operations), batch_size):
             batch = operations[i:i + batch_size]
+            batch_num = i // batch_size + 1
 
             try:
                 result = self.db[COLLECTION_DETAILED].bulk_write(
@@ -161,11 +226,13 @@ class MongoDBSync:
                 total_modified += result.modified_count
                 total_upserted += result.upserted_count
 
-                print(f"   Batch {i//batch_size + 1}: {len(batch)} operations")
+                print(
+                    f"   ✓ Batch {batch_num}/{num_batches}: {len(batch)} operations")
 
             except BulkWriteError as e:
+                errors = len(e.details.get('writeErrors', []))
                 print(
-                    f"⚠️  Batch {i//batch_size + 1} errors: {len(e.details.get('writeErrors', []))}")
+                    f"   ⚠️ Batch {batch_num}/{num_batches}: {errors} errors")
                 total_modified += e.details.get('nModified', 0)
                 total_upserted += e.details.get('nInserted', 0)
 
@@ -181,48 +248,54 @@ class MongoDBSync:
         """Create indexes for better query performance"""
         print("\n🔍 Creating indexes...")
 
-        # Summary indexes
-        self.db[COLLECTION_SUMMARY].create_index(
-            [("movie", 1), ("date", -1)], unique=True)
-        self.db[COLLECTION_SUMMARY].create_index([("date", -1)])
-        self.db[COLLECTION_SUMMARY].create_index([("gross", -1)])
-        self.db[COLLECTION_SUMMARY].create_index([("occupancy", -1)])
+        try:
+            # Summary indexes
+            self.db[COLLECTION_SUMMARY].create_index(
+                [("movie", 1), ("date", -1)], unique=True)
+            self.db[COLLECTION_SUMMARY].create_index([("date", -1)])
+            self.db[COLLECTION_SUMMARY].create_index([("gross", -1)])
+            self.db[COLLECTION_SUMMARY].create_index([("occupancy", -1)])
 
-        # Detailed indexes
-        self.db[COLLECTION_DETAILED].create_index(
-            [("_key", 1), ("date", -1)], unique=True)
-        self.db[COLLECTION_DETAILED].create_index([("date", -1)])
-        self.db[COLLECTION_DETAILED].create_index([("movie", 1)])
-        self.db[COLLECTION_DETAILED].create_index([("venue", 1)])
-        self.db[COLLECTION_DETAILED].create_index([("city", 1)])
-        self.db[COLLECTION_DETAILED].create_index([("time", 1)])
+            # Detailed indexes
+            self.db[COLLECTION_DETAILED].create_index(
+                [("_key", 1), ("date", -1)], unique=True)
+            self.db[COLLECTION_DETAILED].create_index([("date", -1)])
+            self.db[COLLECTION_DETAILED].create_index([("movie", 1)])
+            self.db[COLLECTION_DETAILED].create_index([("venue", 1)])
+            self.db[COLLECTION_DETAILED].create_index([("city", 1)])
+            self.db[COLLECTION_DETAILED].create_index([("time", 1)])
 
-        print("✅ Indexes created")
+            print("✅ Indexes created")
+        except Exception as e:
+            print(f"⚠️  Index creation warning: {e}")
 
     def sync_all(self):
         """Sync both summary and detailed data"""
-        paths = get_file_paths()
+        # Find latest files
+        summary_path, detailed_path = self.find_latest_files()
 
-        success = True
+        if not summary_path or not detailed_path:
+            print("\n❌ Could not find data files to sync")
+            return False
 
-        # Sync summary
-        if os.path.exists(paths["summary"]):
-            success &= self.sync_summary(paths["summary"])
-        else:
-            print(f"⚠️  Summary file not found: {paths['summary']}")
-            success = False
+        # Sync summary first (to get date_code)
+        success_summary, date_code = self.sync_summary(summary_path)
+
+        if not success_summary:
+            print("\n❌ Summary sync failed")
+            return False
 
         # Sync detailed
-        if os.path.exists(paths["detailed"]):
-            success &= self.sync_detailed(paths["detailed"])
-        else:
-            print(f"⚠️  Detailed file not found: {paths['detailed']}")
-            success = False
+        success_detailed = self.sync_detailed(detailed_path, date_code)
 
-        # Create indexes on first run
+        if not success_detailed:
+            print("\n⚠️  Detailed sync failed")
+            return False
+
+        # Create indexes
         self.create_indexes()
 
-        return success
+        return True
 
     def close(self):
         """Close MongoDB connection"""
@@ -240,10 +313,14 @@ def main():
         success = syncer.sync_all()
 
         if success:
-            print("\n✅ All syncs completed successfully")
+            print("\n" + "="*50)
+            print("✅ ALL SYNCS COMPLETED SUCCESSFULLY")
+            print("="*50)
             sys.exit(0)
         else:
-            print("\n⚠️  Some syncs failed")
+            print("\n" + "="*50)
+            print("❌ SYNC FAILED")
+            print("="*50)
             sys.exit(1)
 
     except Exception as e:
