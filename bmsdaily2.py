@@ -1,3 +1,4 @@
+#bms-render/bmsdaily2.py
 import json
 import os
 import random

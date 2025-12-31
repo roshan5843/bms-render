@@ -1,0 +1,52 @@
+name: MongoDB Sync
+
+on:
+  workflow_run:
+    workflows: ["BMS DailyBO 1–9 + Combine (Matrix)"]
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    name: Sync to MongoDB
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    # Only run if combine job succeeded
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+
+    steps:
+      - name: 🧾 Checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: 'pip'
+
+      - name: 📦 Install dependencies
+        run: |
+          cd mongodb
+          pip install -r requirements.txt
+
+      - name: 🔄 Sync to MongoDB
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
+        run: |
+          cd mongodb
+          python sync.py
+
+      - name: 📊 Verify sync
+        if: success()
+        run: |
+          echo "✅ MongoDB sync completed successfully"
+          echo "⏰ Completed at: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
