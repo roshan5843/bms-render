@@ -1,4 +1,4 @@
-name: 🚀 Sync BMS JSON to MongoDB
+name: 🚀 Sync JSON to MongoDB
 
 on:
   push:
@@ -25,6 +25,4 @@ jobs:
       - name: 🔁 Sync to MongoDB
         env:
           MONGO_URI: ${{ secrets.MONGO_URI }}
-          DATE_CODE: ${{ github.event.head_commit.message }}
-        run: |
-          python bms-render/sync_to_mongo.py
+        run: python bms-render/sync_to_mongo.py
