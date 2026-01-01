@@ -8,7 +8,6 @@ DATABASE_NAME = os.getenv("MONGODB_DATABASE", "movie-blog")
 
 # Collections
 COLLECTION_SUMMARY = "daily_summary"
-COLLECTION_DETAILED = "daily_detailed"
 
 # Timezone
 IST = pytz.timezone("Asia/Kolkata")
