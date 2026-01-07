@@ -1,10 +1,8 @@
-#mongodb-sync.yml
-
-name: MongoDB Sync
+name: MongoDB Sync Advance
 
 on:
   workflow_run:
-    workflows: ["BMS DailyBO 1–9 + Combine (Matrix)"]
+    workflows: ["BMS Advance Tracker (2,3,4,5)"]
     types:
       - completed
   workflow_dispatch:
@@ -14,11 +12,11 @@ permissions:
 
 jobs:
   sync:
-    name: Sync to MongoDB
+    name: Sync Advance Data to MongoDB
     runs-on: ubuntu-latest
     timeout-minutes: 10
     
-    # Only run if combine job succeeded
+    # Only run if combine job succeeded OR manual trigger
     if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
 
     steps:
@@ -39,16 +37,16 @@ jobs:
           cd mongodb
           pip install -r requirements.txt
 
-      - name: 🔄 Sync to MongoDB
+      - name: 🔄 Sync Advance Data to MongoDB
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
         run: |
           cd mongodb
-          python sync.py
+          python sync_advance.py
 
       - name: 📊 Verify sync
         if: success()
         run: |
-          echo "✅ MongoDB sync completed successfully"
+          echo "✅ MongoDB advance sync completed successfully"
           echo "⏰ Completed at: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"

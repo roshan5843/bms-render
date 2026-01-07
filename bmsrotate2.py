@@ -1,3 +1,4 @@
+#bms-render/bmsrotate2.py
 import json
 import os
 import random
