@@ -1,3 +1,4 @@
+#bms-render/combine_shards_rotate.py
 import json
 import os
 from datetime import datetime, timedelta

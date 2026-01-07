@@ -322,6 +322,84 @@ jobs:
             echo "Retry push $i..."
             sleep 3
           done
+# 
+# # =====================================================
+# # 3️⃣ Combine shards + MongoDB Sync (BUILT-IN)
+# # =====================================================
+#   combine:
+#     name: Combine + MongoDB Sync
+#     needs: [decide-day, shards]
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 30
+# 
+#     steps:
+#       - name: 🧾 Checkout repo
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+#           persist-credentials: true
+#           
+#       # 🔥 Sync with latest main
+#       - name: 🔄 Sync with latest main
+#         run: |
+#           git fetch origin
+#           git reset --hard origin/main
+#           git status
+# 
+#       - name: 🐍 Setup Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.11"
+# 
+#       - name: 📦 Install dependencies
+#         run: |
+#           pip install pytz pymongo dnspython
+# 
+#       - name: 🔗 Combine shard JSONs
+#         run: |
+#           python combine_shards_rotate.py
+#         env:
+#           DATE_CODE: ${{ needs.decide-day.outputs.date_code }}
+# 
+#       - name: 💾 Commit final combined JSONs
+#         run: |
+#           git config user.name "github-actions"
+#           git config user.email "actions@github.com"
+# 
+#           git add advance/data/${{ needs.decide-day.outputs.date_code }}/finaldetailed.json
+#           git add advance/data/${{ needs.decide-day.outputs.date_code }}/finalsummary.json
+# 
+#           git commit -m "Final combined BMS advance data (${{
+#             needs.decide-day.outputs.date_code
+#           }})" || echo "Nothing to commit"
+# 
+#           # 🔁 rebase-safe retry push
+#           for i in 1 2 3; do
+#             git pull --rebase origin main || true
+#             git push origin main && break
+#             echo "Retry push $i..."
+#             sleep 3
+#           done
+# 
+#       # ✨ SYNC TO MONGODB (BUILT-IN) ✨
+#       - name: 🔄 Sync Advance Data to MongoDB
+#         if: success()
+#         env:
+#           MONGODB_URI: ${{ secrets.MONGODB_URI }}
+#           MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
+#         run: |
+#           cd mongodb
+#           python sync_advance.py
+# 
+#       - name: 📊 Final Summary
+#         if: always()
+#         run: |
+#           echo "================================"
+#           echo "Workflow Complete"
+#           echo "================================"
+#           echo "Date: ${{ needs.decide-day.outputs.date_code }}"
+#           echo "Time: $(date +'%Y-%m-%d %H:%M IST')"
+#           echo "Status: ${{ job.status }}"
 
 # =====================================================
 # 3️⃣ Combine shards + MongoDB Sync (BUILT-IN)
@@ -381,15 +459,14 @@ jobs:
             sleep 3
           done
 
-      # ✨ SYNC TO MONGODB (BUILT-IN) ✨
+      # ✨ SYNC TO MONGODB (RUNS FROM ROOT) ✨
       - name: 🔄 Sync Advance Data to MongoDB
         if: success()
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
         run: |
-          cd mongodb
-          python sync_advance.py
+          python mongodb/sync_advance.py
 
       - name: 📊 Final Summary
         if: always()
