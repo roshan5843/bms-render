@@ -1,3 +1,5 @@
+#bms-render/bms2.py
+
 import json
 import os
 import random

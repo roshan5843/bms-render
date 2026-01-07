@@ -1,3 +1,5 @@
+#bms-render/combine_shards.py
+
 import json
 import os
 from datetime import datetime, timedelta
