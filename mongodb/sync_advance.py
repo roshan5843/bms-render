@@ -1,7 +1,7 @@
 import json
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
@@ -10,12 +10,12 @@ import pytz
 from config import (
     MONGODB_URI,
     DATABASE_NAME,
-    COLLECTION_SUMMARY,
+    COLLECTION_ADVANCE,
     IST
 )
 
 
-class MongoDBSync:
+class MongoDBAdvanceSync:
     def __init__(self):
         if not MONGODB_URI:
             raise ValueError("MONGODB_URI environment variable not set")
@@ -25,11 +25,11 @@ class MongoDBSync:
 
         print(f"✅ Connected to MongoDB: {DATABASE_NAME}")
 
-    def find_latest_summary(self):
-        """Find the most recent summary file"""
-        print("\n🔍 Searching for latest summary file...")
+    def find_latest_advance_summary(self):
+        """Find the most recent advance booking summary file"""
+        print("\n🔍 Searching for latest advance summary file...")
 
-        base_dir = Path("daily/data")
+        base_dir = Path("advance/data")
 
         if not base_dir.exists():
             print(f"❌ Directory not found: {base_dir}")
@@ -43,19 +43,19 @@ class MongoDBSync:
         )
 
         if not date_dirs:
-            print("❌ No date directories found in daily/data/")
+            print("❌ No date directories found in advance/data/")
             return None
 
-        # Search for summary file in newest directories first
-        for date_dir in date_dirs[:3]:  # Check last 3 days
+        # Search for summary file in newest directories first (check last 3 days)
+        for date_dir in date_dirs[:3]:
             summary_path = date_dir / "finalsummary.json"
 
             if summary_path.exists():
-                print(f"✅ Found summary in: {date_dir.name}")
+                print(f"✅ Found advance summary in: {date_dir.name}")
                 print(f"   • Summary: {summary_path}")
                 return str(summary_path)
 
-        print("❌ No finalsummary.json found in recent directories")
+        print("❌ No finalsummary.json found in recent advance directories")
         return None
 
     def load_json(self, filepath):
@@ -85,12 +85,13 @@ class MongoDBSync:
             except:
                 pass
 
-        # Fallback to current date
-        return datetime.now(IST).strftime("%Y%m%d")
+        # Fallback to tomorrow's date (advance bookings are for tomorrow)
+        tomorrow = datetime.now(IST) + timedelta(days=1)
+        return tomorrow.strftime("%Y%m%d")
 
-    def sync_summary(self, filepath):
-        """Sync summary data as nested document structure"""
-        print(f"\n📊 Syncing summary from: {filepath}")
+    def sync_advance_summary(self, filepath):
+        """Sync advance booking summary data as nested document structure"""
+        print(f"\n📊 Syncing advance summary from: {filepath}")
 
         data = self.load_json(filepath)
         if not data:
@@ -98,17 +99,17 @@ class MongoDBSync:
 
         movies = data.get("movies", {})
         if not movies:
-            print("⚠️  No movies found in summary")
+            print("⚠️  No movies found in advance summary")
             return False
 
         date_code = self.extract_date_from_data(data)
         last_updated = data.get("last_updated")
         timestamp = datetime.now(IST)
 
-        collection = self.db[COLLECTION_SUMMARY]
+        collection = self.db[COLLECTION_ADVANCE]
 
-        print(f"📅 Date code: {date_code}")
-        print(f"📁 Collection: {COLLECTION_SUMMARY}")
+        print(f"📅 Date code (Show Date): {date_code}")
+        print(f"📁 Collection: {COLLECTION_ADVANCE}")
         print(f"🎬 Movies found: {len(movies)}")
 
         # Convert movies dict to array format
@@ -121,29 +122,31 @@ class MongoDBSync:
 
         # Create document structure
         doc = {
-            "_id": f"summary_{date_code}",  # e.g., "summary_20250101"
-            "date": date_code,
+            "_id": f"advance_{date_code}",  # e.g., "advance_20250103"
+            "show_date": date_code,          # Date for which shows are booked
             "last_updated": last_updated,
             "synced_at": timestamp,
             "total_movies": len(movies),
             "movies": movies_array
         }
 
-        # Upsert the entire day's data
+        # Upsert the entire day's advance data
         try:
             result = collection.replace_one(
-                {"_id": f"summary_{date_code}"},
+                {"_id": f"advance_{date_code}"},
                 doc,
                 upsert=True
             )
 
             if result.upserted_id:
-                print(f"✅ Summary inserted:")
-                print(f"   • Document ID: summary_{date_code}")
+                print(f"✅ Advance summary inserted:")
+                print(f"   • Document ID: advance_{date_code}")
+                print(f"   • Show Date: {date_code}")
                 print(f"   • Total movies: {len(movies)}")
             else:
-                print(f"✅ Summary updated:")
-                print(f"   • Document ID: summary_{date_code}")
+                print(f"✅ Advance summary updated:")
+                print(f"   • Document ID: advance_{date_code}")
+                print(f"   • Show Date: {date_code}")
                 print(f"   • Total movies: {len(movies)}")
                 print(f"   • Modified: {result.modified_count}")
 
@@ -158,10 +161,10 @@ class MongoDBSync:
         print("\n🔍 Creating indexes...")
 
         try:
-            collection = self.db[COLLECTION_SUMMARY]
+            collection = self.db[COLLECTION_ADVANCE]
 
-            # Date index
-            collection.create_index([("date", -1)])
+            # Show date index
+            collection.create_index([("show_date", -1)])
 
             # Movie name index (for searching within movies array)
             collection.create_index([("movies.movie", 1)])
@@ -172,24 +175,27 @@ class MongoDBSync:
             # Occupancy index
             collection.create_index([("movies.occupancy", -1)])
 
-            print(f"✅ Indexes created for {COLLECTION_SUMMARY}")
+            # Last updated index
+            collection.create_index([("last_updated", -1)])
+
+            print(f"✅ Indexes created for {COLLECTION_ADVANCE}")
         except Exception as e:
             print(f"⚠️  Index creation warning: {e}")
 
     def sync_all(self):
-        """Sync summary data only"""
-        # Find latest summary file
-        summary_path = self.find_latest_summary()
+        """Sync advance booking summary data"""
+        # Find latest advance summary file
+        summary_path = self.find_latest_advance_summary()
 
         if not summary_path:
-            print("\n❌ Could not find summary file to sync")
+            print("\n❌ Could not find advance summary file to sync")
             return False
 
-        # Sync summary
-        success = self.sync_summary(summary_path)
+        # Sync advance summary
+        success = self.sync_advance_summary(summary_path)
 
         if not success:
-            print("\n❌ Summary sync failed")
+            print("\n❌ Advance summary sync failed")
             return False
 
         # Create indexes
@@ -204,17 +210,17 @@ class MongoDBSync:
 
 
 def main():
-    print("🚀 Starting MongoDB sync...")
+    print("🚀 Starting MongoDB Advance Booking Sync...")
     print(f"⏰ Time: {datetime.now(IST).strftime('%Y-%m-%d %H:%M:%S IST')}")
 
-    syncer = MongoDBSync()
+    syncer = MongoDBAdvanceSync()
 
     try:
         success = syncer.sync_all()
 
         if success:
             print("\n" + "="*50)
-            print("✅ SUMMARY SYNC COMPLETED SUCCESSFULLY")
+            print("✅ ADVANCE SUMMARY SYNC COMPLETED SUCCESSFULLY")
             print("="*50)
             sys.exit(0)
         else:
