@@ -1,3 +1,5 @@
+#bmsrotatemain.yml
+
 name: BMS Advance Tracker (2,3,4,5)
 
 on:
@@ -99,6 +101,66 @@ jobs:
             echo "Retry push $i..."
             sleep 3
           done
+# 
+# # =====================================================
+# # 3️⃣ Combine shards (AFTER ALL SHARDS FINISH)
+# # =====================================================
+#   combine:
+#     name: Combine all shards
+#     needs: [decide-day, shards]
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 30
+# 
+#     steps:
+#       - name: 🧾 Checkout repo
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+#           persist-credentials: true
+#           
+#       # 🔥🔥🔥 FIX START (MANDATORY) 🔥🔥🔥
+#       - name: 🔄 Sync with latest main (FIX)
+#         run: |
+#           git fetch origin
+#           git reset --hard origin/main
+#           git status
+#       # 🔥🔥🔥 FIX END 🔥🔥🔥
+# 
+#       - name: 🐍 Setup Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.11"
+# 
+#       - name: 📦 Install combiner deps
+#         run: |
+#           pip install pytz
+# 
+#       - name: 🔗 Combine shard JSONs
+#         run: |
+#           python combine_shards_rotate.py
+#         env:
+#           DATE_CODE: ${{ needs.decide-day.outputs.date_code }}
+# 
+#       - name: 💾 Commit final combined JSONs (REBASE SAFE)
+#         run: |
+#           git config user.name "github-actions"
+#           git config user.email "actions@github.com"
+# 
+#           git add advance/data/${{ needs.decide-day.outputs.date_code }}/finaldetailed.json
+#           git add advance/data/${{ needs.decide-day.outputs.date_code }}/finalsummary.json
+# 
+#           git commit -m "Final combined BMS data (${{
+#             needs.decide-day.outputs.date_code
+#           }})" || echo "Nothing to commit"
+# 
+#           # 🔁 rebase-safe retry push (NO FORCE)
+#           for i in 1 2 3; do
+#             git pull --rebase origin main || true
+#             git push origin main && break
+#             echo "Retry push $i..."
+#             sleep 3
+#           done
+
 
 # =====================================================
 # 3️⃣ Combine shards (AFTER ALL SHARDS FINISH)
@@ -116,13 +178,12 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
           
-      # 🔥🔥🔥 FIX START (MANDATORY) 🔥🔥🔥
-      - name: 🔄 Sync with latest main (FIX)
+      # 🔥 Sync with latest main
+      - name: 🔄 Sync with latest main
         run: |
           git fetch origin
           git reset --hard origin/main
           git status
-      # 🔥🔥🔥 FIX END 🔥🔥🔥
 
       - name: 🐍 Setup Python
         uses: actions/setup-python@v5
@@ -139,7 +200,7 @@ jobs:
         env:
           DATE_CODE: ${{ needs.decide-day.outputs.date_code }}
 
-      - name: 💾 Commit final combined JSONs (REBASE SAFE)
+      - name: 💾 Commit final combined JSONs
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
@@ -147,11 +208,11 @@ jobs:
           git add advance/data/${{ needs.decide-day.outputs.date_code }}/finaldetailed.json
           git add advance/data/${{ needs.decide-day.outputs.date_code }}/finalsummary.json
 
-          git commit -m "Final combined BMS data (${{
+          git commit -m "Final combined BMS advance data (${{
             needs.decide-day.outputs.date_code
           }})" || echo "Nothing to commit"
 
-          # 🔁 rebase-safe retry push (NO FORCE)
+          # 🔁 rebase-safe retry push
           for i in 1 2 3; do
             git pull --rebase origin main || true
             git push origin main && break
