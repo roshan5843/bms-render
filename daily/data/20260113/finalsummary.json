@@ -1,28 +1,40 @@
 {
-  "last_updated": "2026-01-13 02:59 IST",
+  "last_updated": "2026-01-13 03:57 IST",
   "movies": {
     "Bhartha Mahasayulaku Wignyapthi [2D | Telugu]": {
-      "shows": 2,
-      "gross": 45450.0,
-      "sold": 303,
-      "totalSeats": 651,
-      "venues": 2,
-      "cities": 2,
+      "shows": 4,
+      "gross": 67350.0,
+      "sold": 425,
+      "totalSeats": 1263,
+      "venues": 3,
+      "cities": 3,
       "fastfilling": 1,
       "housefull": 0,
-      "occupancy": 46.54,
+      "occupancy": 33.65,
       "details": [
         {
           "city": "Jalandhar",
           "state": "Punjab",
           "venues": 1,
-          "shows": 1,
-          "gross": 8850.0,
-          "sold": 59,
-          "totalSeats": 256,
+          "shows": 2,
+          "gross": 16350.0,
+          "sold": 109,
+          "totalSeats": 453,
           "fastfilling": 0,
           "housefull": 0,
-          "occupancy": 23.05
+          "occupancy": 24.06
+        },
+        {
+          "city": "Medarametla",
+          "state": "Andhra Pradesh",
+          "venues": 1,
+          "shows": 1,
+          "gross": 14400.0,
+          "sold": 72,
+          "totalSeats": 415,
+          "fastfilling": 0,
+          "housefull": 0,
+          "occupancy": 17.35
         },
         {
           "city": "Proddatur",
@@ -41,13 +53,24 @@
         {
           "chain": "GRD Entertainment",
           "venues": 1,
-          "shows": 1,
-          "gross": 8850.0,
-          "sold": 59,
-          "totalSeats": 256,
+          "shows": 2,
+          "gross": 16350.0,
+          "sold": 109,
+          "totalSeats": 453,
           "fastfilling": 0,
           "housefull": 0,
-          "occupancy": 23.05
+          "occupancy": 24.06
+        },
+        {
+          "chain": "Justickets",
+          "venues": 1,
+          "shows": 1,
+          "gross": 14400.0,
+          "sold": 72,
+          "totalSeats": 415,
+          "fastfilling": 0,
+          "housefull": 0,
+          "occupancy": 17.35
         },
         {
           "chain": "Sri Sai Rajeswari Complex Cine Hub: Proddatur",
@@ -63,16 +86,28 @@
       ]
     },
     "Mana Shankara Vara Prasad Garu [2D | Telugu]": {
-      "shows": 2,
-      "gross": 79600.0,
-      "sold": 385,
-      "totalSeats": 720,
-      "venues": 2,
-      "cities": 2,
-      "fastfilling": 1,
+      "shows": 5,
+      "gross": 319140.0,
+      "sold": 1390,
+      "totalSeats": 2010,
+      "venues": 5,
+      "cities": 4,
+      "fastfilling": 4,
       "housefull": 0,
-      "occupancy": 53.47,
+      "occupancy": 69.15,
       "details": [
+        {
+          "city": "Hyderabad",
+          "state": "Telangana",
+          "venues": 1,
+          "shows": 1,
+          "gross": 13950.0,
+          "sold": 31,
+          "totalSeats": 58,
+          "fastfilling": 1,
+          "housefull": 0,
+          "occupancy": 53.45
+        },
         {
           "city": "Jalandhar",
           "state": "Punjab",
@@ -90,15 +125,38 @@
           "state": "Andhra Pradesh",
           "venues": 1,
           "shows": 1,
-          "gross": 70750.0,
-          "sold": 326,
+          "gross": 72700.0,
+          "sold": 336,
           "totalSeats": 464,
           "fastfilling": 1,
           "housefull": 0,
-          "occupancy": 70.26
+          "occupancy": 72.41
+        },
+        {
+          "city": "Vizag",
+          "state": "Andhra Pradesh",
+          "venues": 2,
+          "shows": 2,
+          "gross": 223640.0,
+          "sold": 964,
+          "totalSeats": 1232,
+          "fastfilling": 2,
+          "housefull": 0,
+          "occupancy": 78.25
         }
       ],
       "Chain_details": [
+        {
+          "chain": "MOVIETIME",
+          "venues": 1,
+          "shows": 1,
+          "gross": 13950.0,
+          "sold": 31,
+          "totalSeats": 58,
+          "fastfilling": 1,
+          "housefull": 0,
+          "occupancy": 53.45
+        },
         {
           "chain": "GRD Entertainment",
           "venues": 1,
@@ -114,12 +172,34 @@
           "chain": "CS Cinemas: Tirupati",
           "venues": 1,
           "shows": 1,
-          "gross": 70750.0,
-          "sold": 326,
+          "gross": 72700.0,
+          "sold": 336,
           "totalSeats": 464,
           "fastfilling": 1,
           "housefull": 0,
-          "occupancy": 70.26
+          "occupancy": 72.41
+        },
+        {
+          "chain": "Justickets",
+          "venues": 1,
+          "shows": 1,
+          "gross": 152135.0,
+          "sold": 664,
+          "totalSeats": 777,
+          "fastfilling": 1,
+          "housefull": 0,
+          "occupancy": 85.46
+        },
+        {
+          "chain": "Sri Lakshmi Narasimha Picture Palace: Vizag",
+          "venues": 1,
+          "shows": 1,
+          "gross": 71505.0,
+          "sold": 300,
+          "totalSeats": 455,
+          "fastfilling": 1,
+          "housefull": 0,
+          "occupancy": 65.93
         }
       ]
     }
