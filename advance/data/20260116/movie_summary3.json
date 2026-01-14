@@ -1,23 +1,580 @@
 {
-  "Sarvam Maya [2D | Malayalam]": {
-    "shows": 32,
-    "gross": 28170.0,
-    "sold": 166,
-    "totalSeats": 9186,
-    "venues": 7,
-    "cities": 4,
+  "Vaa Vaathiyaar [2D | Tamil]": {
+    "shows": 88,
+    "gross": 172077.05,
+    "sold": 1219,
+    "totalSeats": 26294,
+    "venues": 25,
+    "cities": 18,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 1.81,
+    "occupancy": 4.64,
     "details": [
       {
         "city": "Kozhikode",
         "state": "Kerala",
         "venues": 1,
+        "shows": 3,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 576,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Sivakasi",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 4,
+        "gross": 7350.0,
+        "sold": 49,
+        "totalSeats": 2420,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 2.02
+      },
+      {
+        "city": "Chennai",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 3,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 552,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Tumakuru (Tumkur)",
+        "state": "Karnataka",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 556,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Ramanathapuram",
+        "state": "Tamil Nadu",
+        "venues": 4,
+        "shows": 12,
+        "gross": 14550.0,
+        "sold": 97,
+        "totalSeats": 4458,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 2.18
+      },
+      {
+        "city": "Dehradun",
+        "state": "Uttarakhand",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 96,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Sathyamangalam",
+        "state": "Tamil Nadu",
+        "venues": 1,
         "shows": 4,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 632,
+        "totalSeats": 943,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Jalakandapuram",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 200,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Vellore",
+        "state": "Tamil Nadu",
+        "venues": 4,
+        "shows": 19,
+        "gross": 44707.05,
+        "sold": 399,
+        "totalSeats": 5874,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 6.79
+      },
+      {
+        "city": "Uthangarai",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1484,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Hosur",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 2,
+        "gross": 4950.0,
+        "sold": 33,
+        "totalSeats": 476,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 6.93
+      },
+      {
+        "city": "Thrissur",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1105,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Villupuram",
+        "state": "Tamil Nadu",
+        "venues": 2,
+        "shows": 8,
+        "gross": 33140.0,
+        "sold": 236,
+        "totalSeats": 2052,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 11.5
+      },
+      {
+        "city": "Nagapattinam",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 4,
+        "gross": 2550.0,
+        "sold": 17,
+        "totalSeats": 1776,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.96
+      },
+      {
+        "city": "Kannur",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 2,
+        "gross": 2520.0,
+        "sold": 12,
+        "totalSeats": 352,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 3.41
+      },
+      {
+        "city": "Thuraiyur",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 4,
+        "gross": 34350.0,
+        "sold": 229,
+        "totalSeats": 850,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 26.94
+      },
+      {
+        "city": "Batlagundu",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 4,
+        "gross": 600.0,
+        "sold": 3,
+        "totalSeats": 1328,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.23
+      },
+      {
+        "city": "Thanjavur",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 4,
+        "gross": 27360.0,
+        "sold": 144,
+        "totalSeats": 1196,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 12.04
+      }
+    ],
+    "Chain_details": [
+      {
+        "chain": "Miraj Cinemas",
+        "venues": 1,
+        "shows": 3,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 576,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Sri PalaniAndavar Theatre: Sivakasi",
+        "venues": 1,
+        "shows": 4,
+        "gross": 7350.0,
+        "sold": 49,
+        "totalSeats": 2420,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 2.02
+      },
+      {
+        "chain": "Shri Sai Circuit 6000",
+        "venues": 1,
+        "shows": 3,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 552,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "INOX",
+        "venues": 3,
+        "shows": 11,
+        "gross": 8192.0,
+        "sold": 115,
+        "totalSeats": 2401,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 4.79
+      },
+      {
+        "chain": "The Cine Loungue",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 596,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Jagan Cinema: Ramanathapuram",
+        "venues": 1,
+        "shows": 2,
+        "gross": 9600.0,
+        "sold": 64,
+        "totalSeats": 1072,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 5.97
+      },
+      {
+        "chain": "D Cinema",
+        "venues": 1,
+        "shows": 2,
+        "gross": 4950.0,
+        "sold": 33,
+        "totalSeats": 822,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 4.01
+      },
+      {
+        "chain": "Ramesh Theatre",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1968,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "PVR",
+        "venues": 2,
+        "shows": 7,
+        "gross": 29075.05,
+        "sold": 242,
+        "totalSeats": 1138,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 21.27
+      },
+      {
+        "chain": "Sathya Cinemas: Sathyamangalam",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 943,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Justickets",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 200,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Cauvery Theatre: Trichy",
+        "venues": 1,
+        "shows": 4,
+        "gross": 960.0,
+        "sold": 6,
+        "totalSeats": 2204,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.27
+      },
+      {
+        "chain": "Apsara Cinema: Vellore",
+        "venues": 1,
+        "shows": 4,
+        "gross": 6480.0,
+        "sold": 36,
+        "totalSeats": 1888,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 1.91
+      },
+      {
+        "chain": "Sri Ganesha Theatre: Uthangarai",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1484,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "VL Associates",
+        "venues": 1,
+        "shows": 2,
+        "gross": 4950.0,
+        "sold": 33,
+        "totalSeats": 476,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 6.93
+      },
+      {
+        "chain": "Maghalakshmi Plaazaa: Villupuram",
+        "venues": 1,
+        "shows": 4,
+        "gross": 33140.0,
+        "sold": 236,
+        "totalSeats": 616,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 38.31
+      },
+      {
+        "chain": "Kasiamman Theatre",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1436,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Devi Theatre Nagapattinam",
+        "venues": 1,
+        "shows": 4,
+        "gross": 2550.0,
+        "sold": 17,
+        "totalSeats": 1776,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.96
+      },
+      {
+        "chain": "Cinepolis",
+        "venues": 1,
+        "shows": 2,
+        "gross": 2520.0,
+        "sold": 12,
+        "totalSeats": 352,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 3.41
+      },
+      {
+        "chain": "Maris Cinema",
+        "venues": 1,
+        "shows": 4,
+        "gross": 34350.0,
+        "sold": 229,
+        "totalSeats": 850,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 26.94
+      },
+      {
+        "chain": "Parimalam Cinemas: Batlagundu",
+        "venues": 1,
+        "shows": 4,
+        "gross": 600.0,
+        "sold": 3,
+        "totalSeats": 1328,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.23
+      },
+      {
+        "chain": "Screen Time Entertainment",
+        "venues": 1,
+        "shows": 4,
+        "gross": 27360.0,
+        "sold": 144,
+        "totalSeats": 1196,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 12.04
+      }
+    ]
+  },
+  "Run Baby Run (Malayalam) [2D | Malayalam]": {
+    "shows": 8,
+    "gross": 4200.0,
+    "sold": 20,
+    "totalSeats": 1481,
+    "venues": 3,
+    "cities": 3,
+    "fastfilling": 0,
+    "housefull": 0,
+    "occupancy": 1.35,
+    "details": [
+      {
+        "city": "Kozhikode",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 332,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Thrissur",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 3,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 707,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Kannur",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 3,
+        "gross": 4200.0,
+        "sold": 20,
+        "totalSeats": 442,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 4.52
+      }
+    ],
+    "Chain_details": [
+      {
+        "chain": "Miraj Cinemas",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 332,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "INOX",
+        "venues": 1,
+        "shows": 3,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 707,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Cinepolis",
+        "venues": 1,
+        "shows": 3,
+        "gross": 4200.0,
+        "sold": 20,
+        "totalSeats": 442,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 4.52
+      }
+    ]
+  },
+  "Sarvam Maya [2D | Malayalam]": {
+    "shows": 35,
+    "gross": 19120.0,
+    "sold": 120,
+    "totalSeats": 9644,
+    "venues": 8,
+    "cities": 4,
+    "fastfilling": 0,
+    "housefull": 0,
+    "occupancy": 1.24,
+    "details": [
+      {
+        "city": "Kozhikode",
+        "state": "Kerala",
+        "venues": 2,
+        "shows": 7,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1147,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -27,39 +584,50 @@
         "state": "Kerala",
         "venues": 1,
         "shows": 3,
-        "gross": 360.0,
-        "sold": 3,
+        "gross": 960.0,
+        "sold": 8,
         "totalSeats": 414,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.72
+        "occupancy": 1.93
       },
       {
         "city": "Thrissur",
         "state": "Kerala",
         "venues": 4,
         "shows": 17,
-        "gross": 17730.0,
-        "sold": 115,
-        "totalSeats": 6700,
+        "gross": 6900.0,
+        "sold": 58,
+        "totalSeats": 6643,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.72
+        "occupancy": 0.87
       },
       {
         "city": "Kannur",
         "state": "Kerala",
         "venues": 1,
         "shows": 8,
-        "gross": 10080.0,
-        "sold": 48,
+        "gross": 11260.0,
+        "sold": 54,
         "totalSeats": 1440,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.33
+        "occupancy": 3.75
       }
     ],
     "Chain_details": [
+      {
+        "chain": "Miraj Cinemas",
+        "venues": 1,
+        "shows": 3,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 515,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
       {
         "chain": "Justickets",
         "venues": 2,
@@ -75,23 +643,23 @@
         "chain": "Kerala State film development corporation Ltd",
         "venues": 1,
         "shows": 3,
-        "gross": 360.0,
-        "sold": 3,
+        "gross": 960.0,
+        "sold": 8,
         "totalSeats": 414,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.72
+        "occupancy": 1.93
       },
       {
         "chain": "INOX",
         "venues": 1,
         "shows": 6,
-        "gross": 10830.0,
-        "sold": 57,
-        "totalSeats": 1958,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1901,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.91
+        "occupancy": 0.0
       },
       {
         "chain": "Ragam Theatre",
@@ -119,37 +687,956 @@
         "chain": "Cinepolis",
         "venues": 1,
         "shows": 8,
-        "gross": 10080.0,
-        "sold": 48,
+        "gross": 11260.0,
+        "sold": 54,
         "totalSeats": 1440,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.33
+        "occupancy": 3.75
+      }
+    ]
+  },
+  "Pennu Case [2D | Malayalam]": {
+    "shows": 6,
+    "gross": 3780.0,
+    "sold": 18,
+    "totalSeats": 1064,
+    "venues": 3,
+    "cities": 3,
+    "fastfilling": 0,
+    "housefull": 0,
+    "occupancy": 1.69,
+    "details": [
+      {
+        "city": "Kozhikode",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 166,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Thrissur",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 422,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Kannur",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 3,
+        "gross": 3780.0,
+        "sold": 18,
+        "totalSeats": 476,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 3.78
+      }
+    ],
+    "Chain_details": [
+      {
+        "chain": "Miraj Cinemas",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 166,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "INOX",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 422,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Cinepolis",
+        "venues": 1,
+        "shows": 3,
+        "gross": 3780.0,
+        "sold": 18,
+        "totalSeats": 476,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 3.78
+      }
+    ]
+  },
+  "Happy Patel: Khatarnak Jasoos [2D | Hindi]": {
+    "shows": 170,
+    "gross": 190969.43,
+    "sold": 721,
+    "totalSeats": 33421,
+    "venues": 37,
+    "cities": 19,
+    "fastfilling": 0,
+    "housefull": 0,
+    "occupancy": 2.16,
+    "details": [
+      {
+        "city": "Kozhikode",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 332,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Bareilly",
+        "state": "Uttar Pradesh",
+        "venues": 1,
+        "shows": 5,
+        "gross": 48990.0,
+        "sold": 126,
+        "totalSeats": 1126,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 11.19
+      },
+      {
+        "city": "Khanna",
+        "state": "Punjab",
+        "venues": 1,
+        "shows": 6,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1529,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Dehradun",
+        "state": "Uttarakhand",
+        "venues": 3,
+        "shows": 18,
+        "gross": 1650.0,
+        "sold": 5,
+        "totalSeats": 2596,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.19
+      },
+      {
+        "city": "Ghaziabad",
+        "state": "NCR",
+        "venues": 3,
+        "shows": 12,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 3158,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Ludhiana",
+        "state": "Punjab",
+        "venues": 4,
+        "shows": 30,
+        "gross": 51140.0,
+        "sold": 234,
+        "totalSeats": 7356,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 3.18
+      },
+      {
+        "city": "Bhubaneswar",
+        "state": "Odisha",
+        "venues": 1,
+        "shows": 4,
+        "gross": 12800.0,
+        "sold": 59,
+        "totalSeats": 468,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 12.61
+      },
+      {
+        "city": "Bhubaneshwar",
+        "state": "Odisha",
+        "venues": 1,
+        "shows": 3,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 612,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Kota",
+        "state": "Rajasthan",
+        "venues": 2,
+        "shows": 8,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1690,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Vellore",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 2,
+        "gross": 59.43,
+        "sold": 1,
+        "totalSeats": 336,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.3
+      },
+      {
+        "city": "Guwahati",
+        "state": "Assam",
+        "venues": 5,
+        "shows": 19,
+        "gross": 23040.0,
+        "sold": 108,
+        "totalSeats": 2957,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 3.65
+      },
+      {
+        "city": "Thrissur",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 3,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 633,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Jaipur",
+        "state": "Rajasthan",
+        "venues": 5,
+        "shows": 26,
+        "gross": 27380.0,
+        "sold": 93,
+        "totalSeats": 4061,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 2.29
+      },
+      {
+        "city": "Gorakhpur",
+        "state": "Uttar Pradesh",
+        "venues": 3,
+        "shows": 14,
+        "gross": 5310.0,
+        "sold": 21,
+        "totalSeats": 2340,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.9
+      },
+      {
+        "city": "Shillong",
+        "state": "Meghalaya",
+        "venues": 1,
+        "shows": 2,
+        "gross": 11200.0,
+        "sold": 34,
+        "totalSeats": 348,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 9.77
+      },
+      {
+        "city": "Ambala",
+        "state": "Haryana",
+        "venues": 1,
+        "shows": 4,
+        "gross": 9400.0,
+        "sold": 40,
+        "totalSeats": 844,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 4.74
+      },
+      {
+        "city": "Anand",
+        "state": "Gujarat",
+        "venues": 1,
+        "shows": 5,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1255,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Sri Ganganagar",
+        "state": "Rajasthan",
+        "venues": 1,
+        "shows": 5,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1380,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 400,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      }
+    ],
+    "Chain_details": [
+      {
+        "chain": "Miraj Cinemas",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 332,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "PVR",
+        "venues": 17,
+        "shows": 98,
+        "gross": 113629.43,
+        "sold": 408,
+        "totalSeats": 19398,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 2.1
+      },
+      {
+        "chain": "INOX",
+        "venues": 12,
+        "shows": 45,
+        "gross": 18860.0,
+        "sold": 67,
+        "totalSeats": 8386,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.8
+      },
+      {
+        "chain": "Cinepolis",
+        "venues": 3,
+        "shows": 12,
+        "gross": 22280.0,
+        "sold": 94,
+        "totalSeats": 2709,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 3.47
+      },
+      {
+        "chain": "FUN",
+        "venues": 2,
+        "shows": 8,
+        "gross": 9400.0,
+        "sold": 40,
+        "totalSeats": 1498,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 2.67
+      },
+      {
+        "chain": "NY Cinemas LLP",
+        "venues": 1,
+        "shows": 3,
+        "gross": 15600.0,
+        "sold": 78,
+        "totalSeats": 750,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 10.4
+      },
+      {
+        "chain": "Anjalee",
+        "venues": 1,
+        "shows": 2,
+        "gross": 11200.0,
+        "sold": 34,
+        "totalSeats": 348,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 9.77
+      }
+    ]
+  },
+  "28 Years Later: The Bone Temple [2D | English]": {
+    "shows": 35,
+    "gross": 27710.0,
+    "sold": 119,
+    "totalSeats": 5185,
+    "venues": 19,
+    "cities": 12,
+    "fastfilling": 0,
+    "housefull": 0,
+    "occupancy": 2.3,
+    "details": [
+      {
+        "city": "Kozhikode",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 131,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Darjeeling",
+        "state": "West Bengal",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 336,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Kozhinjampara",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 736,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Dehradun",
+        "state": "Uttarakhand",
+        "venues": 1,
+        "shows": 1,
+        "gross": 290.0,
+        "sold": 1,
+        "totalSeats": 111,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.9
+      },
+      {
+        "city": "Ludhiana",
+        "state": "Punjab",
+        "venues": 1,
+        "shows": 1,
+        "gross": 250.0,
+        "sold": 1,
+        "totalSeats": 125,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.8
+      },
+      {
+        "city": "Bhubaneswar",
+        "state": "Odisha",
+        "venues": 2,
+        "shows": 3,
+        "gross": 180.0,
+        "sold": 1,
+        "totalSeats": 317,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.32
+      },
+      {
+        "city": "Kota",
+        "state": "Rajasthan",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 351,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Guwahati",
+        "state": "Assam",
+        "venues": 5,
+        "shows": 12,
+        "gross": 15100.0,
+        "sold": 78,
+        "totalSeats": 1877,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 4.16
+      },
+      {
+        "city": "Thrissur",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 222,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Jaipur",
+        "state": "Rajasthan",
+        "venues": 3,
+        "shows": 6,
+        "gross": 4320.0,
+        "sold": 12,
+        "totalSeats": 695,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 1.73
+      },
+      {
+        "city": "Kannur",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 1,
+        "gross": 1470.0,
+        "sold": 7,
+        "totalSeats": 112,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 6.25
+      },
+      {
+        "city": "Shillong",
+        "state": "Meghalaya",
+        "venues": 1,
+        "shows": 1,
+        "gross": 6100.0,
+        "sold": 19,
+        "totalSeats": 172,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 11.05
+      }
+    ],
+    "Chain_details": [
+      {
+        "chain": "Miraj Cinemas",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 131,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "JVL ENTERTAINMENT",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 336,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Justickets",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 736,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "PVR",
+        "venues": 4,
+        "shows": 7,
+        "gross": 720.0,
+        "sold": 3,
+        "totalSeats": 988,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.3
+      },
+      {
+        "chain": "INOX",
+        "venues": 8,
+        "shows": 15,
+        "gross": 4320.0,
+        "sold": 12,
+        "totalSeats": 1672,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.72
+      },
+      {
+        "chain": "Cinepolis",
+        "venues": 2,
+        "shows": 3,
+        "gross": 3810.0,
+        "sold": 19,
+        "totalSeats": 502,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 3.78
+      },
+      {
+        "chain": "NY Cinemas LLP",
+        "venues": 1,
+        "shows": 3,
+        "gross": 12760.0,
+        "sold": 66,
+        "totalSeats": 648,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 10.19
+      },
+      {
+        "chain": "Anjalee",
+        "venues": 1,
+        "shows": 1,
+        "gross": 6100.0,
+        "sold": 19,
+        "totalSeats": 172,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 11.05
+      }
+    ]
+  },
+  "Thalaivar Thambi Thalaimaiyil [2D | Tamil]": {
+    "shows": 30,
+    "gross": 20640.3,
+    "sold": 163,
+    "totalSeats": 6276,
+    "venues": 12,
+    "cities": 11,
+    "fastfilling": 0,
+    "housefull": 0,
+    "occupancy": 2.6,
+    "details": [
+      {
+        "city": "Kozhikode",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 131,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Chennai",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 2,
+        "gross": 780.0,
+        "sold": 6,
+        "totalSeats": 368,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 1.63
+      },
+      {
+        "city": "Ramanathapuram",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 460,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Kozhinjampara",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1796,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Sathyamangalam",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 356,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Goolikkadavu",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 948,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Vellore",
+        "state": "Tamil Nadu",
+        "venues": 2,
+        "shows": 3,
+        "gross": 9000.3,
+        "sold": 87,
+        "totalSeats": 486,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 17.9
+      },
+      {
+        "city": "Thrissur",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 211,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Villupuram",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 616,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Kannur",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 1,
+        "gross": 1260.0,
+        "sold": 6,
+        "totalSeats": 112,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 5.36
+      },
+      {
+        "city": "Thanjavur",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 4,
+        "gross": 9600.0,
+        "sold": 64,
+        "totalSeats": 792,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 8.08
+      }
+    ],
+    "Chain_details": [
+      {
+        "chain": "Miraj Cinemas",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 131,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Shri Sai Circuit 6000",
+        "venues": 1,
+        "shows": 2,
+        "gross": 780.0,
+        "sold": 6,
+        "totalSeats": 368,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 1.63
+      },
+      {
+        "chain": "The Cine Loungue",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 460,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Justickets",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1796,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Sathya Cinemas: Sathyamangalam",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 356,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "T-MAX Cineplex",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 948,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "PVR",
+        "venues": 1,
+        "shows": 2,
+        "gross": 7729.5,
+        "sold": 66,
+        "totalSeats": 336,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 19.64
+      },
+      {
+        "chain": "INOX",
+        "venues": 2,
+        "shows": 2,
+        "gross": 1270.8,
+        "sold": 21,
+        "totalSeats": 361,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 5.82
+      },
+      {
+        "chain": "Maghalakshmi Plaazaa: Villupuram",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 616,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Cinepolis",
+        "venues": 1,
+        "shows": 1,
+        "gross": 1260.0,
+        "sold": 6,
+        "totalSeats": 112,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 5.36
+      },
+      {
+        "chain": "Screen Time Entertainment",
+        "venues": 1,
+        "shows": 4,
+        "gross": 9600.0,
+        "sold": 64,
+        "totalSeats": 792,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 8.08
       }
     ]
   },
   "Mana Shankara Vara Prasad Garu [2D | Telugu]": {
-    "shows": 184,
-    "gross": 4625841.31,
-    "sold": 21043,
-    "totalSeats": 66354,
-    "venues": 52,
-    "cities": 44,
-    "fastfilling": 50,
-    "housefull": 2,
-    "occupancy": 31.71,
+    "shows": 187,
+    "gross": 3394229.12,
+    "sold": 15194,
+    "totalSeats": 66843,
+    "venues": 54,
+    "cities": 46,
+    "fastfilling": 36,
+    "housefull": 1,
+    "occupancy": 22.73,
     "details": [
       {
         "city": "Kalwakurthy",
         "state": "Telangana",
         "venues": 1,
         "shows": 4,
-        "gross": 82200.0,
-        "sold": 411,
+        "gross": 2200.0,
+        "sold": 11,
         "totalSeats": 1532,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 26.83
+        "occupancy": 0.72
       },
       {
         "city": "Huzurnagar",
@@ -180,72 +1667,72 @@
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 5,
-        "gross": 202000.0,
-        "sold": 808,
+        "gross": 181000.0,
+        "sold": 724,
         "totalSeats": 1900,
         "fastfilling": 2,
         "housefull": 0,
-        "occupancy": 42.53
+        "occupancy": 38.11
       },
       {
         "city": "Tadikalapudi",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 4,
-        "gross": 1800.0,
-        "sold": 9,
-        "totalSeats": 2024,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 2300,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.44
+        "occupancy": 0.0
       },
       {
         "city": "Nidadavolu",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 5,
-        "gross": 102250.0,
-        "sold": 409,
+        "gross": 104000.0,
+        "sold": 416,
         "totalSeats": 559,
         "fastfilling": 4,
         "housefull": 0,
-        "occupancy": 73.17
+        "occupancy": 74.42
       },
       {
         "city": "Palakollu",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 5,
-        "gross": 182400.0,
-        "sold": 750,
+        "gross": 116400.0,
+        "sold": 486,
         "totalSeats": 2695,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 27.83
+        "occupancy": 18.03
       },
       {
         "city": "Vizag (Visakhapatnam)",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 5,
-        "gross": 252200.0,
-        "sold": 1261,
+        "gross": 177800.0,
+        "sold": 889,
         "totalSeats": 1825,
-        "fastfilling": 4,
+        "fastfilling": 3,
         "housefull": 0,
-        "occupancy": 69.1
+        "occupancy": 48.71
       },
       {
         "city": "Macherla",
         "state": "Andhra Pradesh",
         "venues": 2,
         "shows": 5,
-        "gross": 141000.0,
-        "sold": 556,
+        "gross": 142500.0,
+        "sold": 562,
         "totalSeats": 1852,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 30.02
+        "occupancy": 30.35
       },
       {
         "city": "Achampet",
@@ -276,36 +1763,36 @@
         "state": "Telangana",
         "venues": 1,
         "shows": 4,
-        "gross": 52200.0,
-        "sold": 232,
+        "gross": 52900.0,
+        "sold": 236,
         "totalSeats": 1772,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 13.09
+        "occupancy": 13.32
       },
       {
         "city": "Pathapatnam",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 5,
-        "gross": 172800.0,
-        "sold": 864,
+        "gross": 173400.0,
+        "sold": 867,
         "totalSeats": 1835,
-        "fastfilling": 2,
+        "fastfilling": 3,
         "housefull": 0,
-        "occupancy": 47.08
+        "occupancy": 47.25
       },
       {
         "city": "Tumakuru (Tumkur)",
         "state": "Karnataka",
         "venues": 2,
         "shows": 10,
-        "gross": 1800.0,
-        "sold": 4,
-        "totalSeats": 3805,
+        "gross": 1750.0,
+        "sold": 5,
+        "totalSeats": 3801,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.11
+        "occupancy": 0.13
       },
       {
         "city": "Gannavaram",
@@ -324,12 +1811,12 @@
         "state": "Andhra Pradesh",
         "venues": 2,
         "shows": 6,
-        "gross": 192580.0,
-        "sold": 890,
+        "gross": 98780.0,
+        "sold": 449,
         "totalSeats": 2022,
-        "fastfilling": 3,
+        "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 44.02
+        "occupancy": 22.21
       },
       {
         "city": "Ankleshwar",
@@ -348,12 +1835,12 @@
         "state": "Andhra Pradesh",
         "venues": 2,
         "shows": 6,
-        "gross": 189600.0,
-        "sold": 948,
-        "totalSeats": 1461,
-        "fastfilling": 3,
-        "housefull": 1,
-        "occupancy": 64.89
+        "gross": 113400.0,
+        "sold": 567,
+        "totalSeats": 1080,
+        "fastfilling": 2,
+        "housefull": 0,
+        "occupancy": 52.5
       },
       {
         "city": "Sidlaghatta",
@@ -384,24 +1871,24 @@
         "state": "Odisha",
         "venues": 1,
         "shows": 1,
-        "gross": 3480.0,
-        "sold": 12,
-        "totalSeats": 140,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 128,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 8.57
+        "occupancy": 0.0
       },
       {
         "city": "Rajavommangi",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 2,
-        "gross": 71000.0,
-        "sold": 284,
-        "totalSeats": 716,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1296,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 39.66
+        "occupancy": 0.0
       },
       {
         "city": "Devarakonda",
@@ -420,72 +1907,72 @@
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 5,
-        "gross": 245500.0,
-        "sold": 1242,
-        "totalSeats": 1920,
-        "fastfilling": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1950,
+        "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 64.69
+        "occupancy": 0.0
       },
       {
         "city": "Vellore",
         "state": "Tamil Nadu",
         "venues": 2,
         "shows": 3,
-        "gross": 31760.31,
-        "sold": 195,
-        "totalSeats": 526,
+        "gross": 25483.12,
+        "sold": 164,
+        "totalSeats": 501,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 37.07
+        "occupancy": 32.73
       },
       {
         "city": "Nellore",
         "state": "Andhra Pradesh",
         "venues": 2,
         "shows": 13,
-        "gross": 994413.0,
-        "sold": 3665,
-        "totalSeats": 4445,
-        "fastfilling": 13,
+        "gross": 790801.0,
+        "sold": 2757,
+        "totalSeats": 3809,
+        "fastfilling": 10,
         "housefull": 0,
-        "occupancy": 82.45
+        "occupancy": 72.38
       },
       {
         "city": "Kaikaluru",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 1,
-        "gross": 7200.0,
-        "sold": 36,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 340,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 10.59
+        "occupancy": 0.0
       },
       {
         "city": "Karimnagar",
         "state": "Telangana",
         "venues": 2,
         "shows": 10,
-        "gross": 105650.0,
-        "sold": 277,
+        "gross": 53300.0,
+        "sold": 128,
         "totalSeats": 3719,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 7.45
+        "occupancy": 3.44
       },
       {
         "city": "Hosur",
         "state": "Tamil Nadu",
         "venues": 1,
         "shows": 3,
-        "gross": 31200.0,
-        "sold": 156,
+        "gross": 31800.0,
+        "sold": 159,
         "totalSeats": 628,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 24.84
+        "occupancy": 25.32
       },
       {
         "city": "Zaheerabad",
@@ -504,48 +1991,48 @@
         "state": "Kerala",
         "venues": 1,
         "shows": 1,
-        "gross": 3000.0,
-        "sold": 15,
-        "totalSeats": 126,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 111,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 11.9
+        "occupancy": 0.0
       },
       {
         "city": "Badvel",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 3,
-        "gross": 85400.0,
-        "sold": 427,
+        "gross": 68000.0,
+        "sold": 340,
         "totalSeats": 1215,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 35.14
+        "occupancy": 27.98
       },
       {
         "city": "Berhampur",
         "state": "Odisha",
         "venues": 1,
         "shows": 5,
-        "gross": 116400.0,
-        "sold": 508,
+        "gross": 116050.0,
+        "sold": 507,
         "totalSeats": 1655,
         "fastfilling": 2,
         "housefull": 0,
-        "occupancy": 30.69
+        "occupancy": 30.63
       },
       {
         "city": "Sathupally",
         "state": "Telangana",
         "venues": 1,
         "shows": 4,
-        "gross": 128500.0,
-        "sold": 865,
+        "gross": 84950.0,
+        "sold": 579,
         "totalSeats": 1752,
-        "fastfilling": 2,
+        "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 49.37
+        "occupancy": 33.05
       },
       {
         "city": "Madhavaram",
@@ -554,7 +2041,19 @@
         "shows": 3,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 297,
+        "totalSeats": 295,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Jaipur",
+        "state": "Rajasthan",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 36,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -564,24 +2063,24 @@
         "state": "Andhra Pradesh",
         "venues": 2,
         "shows": 6,
-        "gross": 376018.0,
-        "sold": 1886,
+        "gross": 213110.0,
+        "sold": 1028,
         "totalSeats": 3838,
-        "fastfilling": 2,
+        "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 49.14
+        "occupancy": 26.78
       },
       {
         "city": "Siddipet",
         "state": "Telangana",
         "venues": 1,
         "shows": 4,
-        "gross": 86400.0,
-        "sold": 386,
+        "gross": 87525.0,
+        "sold": 391,
         "totalSeats": 2212,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 17.45
+        "occupancy": 17.68
       },
       {
         "city": "Varadaiahpalem",
@@ -612,24 +2111,24 @@
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 1,
-        "gross": 57470.0,
-        "sold": 377,
+        "gross": 57310.0,
+        "sold": 376,
         "totalSeats": 380,
         "fastfilling": 0,
         "housefull": 1,
-        "occupancy": 99.21
+        "occupancy": 98.95
       },
       {
         "city": "Kovvur",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 5,
-        "gross": 272360.0,
-        "sold": 1115,
+        "gross": 257610.0,
+        "sold": 1060,
         "totalSeats": 2000,
         "fastfilling": 3,
         "housefull": 0,
-        "occupancy": 55.75
+        "occupancy": 53.0
       },
       {
         "city": "Damarcherla",
@@ -648,24 +2147,36 @@
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 1,
-        "gross": 58750.0,
-        "sold": 279,
+        "gross": 60750.0,
+        "sold": 287,
         "totalSeats": 341,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 81.82
+        "occupancy": 84.16
       },
       {
         "city": "Pedana",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 2,
-        "gross": 2400.0,
-        "sold": 12,
+        "gross": 4000.0,
+        "sold": 20,
         "totalSeats": 66,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 18.18
+        "occupancy": 30.3
+      },
+      {
+        "city": "Thanjavur",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 2,
+        "gross": 3300.0,
+        "sold": 22,
+        "totalSeats": 642,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 3.43
       }
     ],
     "Chain_details": [
@@ -673,12 +2184,12 @@
         "chain": "Asian Cinemas",
         "venues": 5,
         "shows": 20,
-        "gross": 450800.0,
-        "sold": 2109,
+        "gross": 372625.0,
+        "sold": 1718,
         "totalSeats": 10484,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 20.12
+        "occupancy": 16.39
       },
       {
         "chain": "Sri Sai Baba Theater: Huzurnagar",
@@ -706,56 +2217,56 @@
         "chain": "V Entertainments",
         "venues": 1,
         "shows": 5,
-        "gross": 202000.0,
-        "sold": 808,
+        "gross": 181000.0,
+        "sold": 724,
         "totalSeats": 1900,
         "fastfilling": 2,
         "housefull": 0,
-        "occupancy": 42.53
+        "occupancy": 38.11
       },
       {
         "chain": "Justickets",
         "venues": 9,
         "shows": 30,
-        "gross": 1017404.0,
-        "sold": 4683,
-        "totalSeats": 9920,
-        "fastfilling": 13,
-        "housefull": 1,
-        "occupancy": 47.21
+        "gross": 422467.0,
+        "sold": 1872,
+        "totalSeats": 9787,
+        "fastfilling": 5,
+        "housefull": 0,
+        "occupancy": 19.13
       },
       {
         "chain": "Veerabhadra Talkies: Nidadavolu",
         "venues": 1,
         "shows": 5,
-        "gross": 102250.0,
-        "sold": 409,
+        "gross": 104000.0,
+        "sold": 416,
         "totalSeats": 559,
         "fastfilling": 4,
         "housefull": 0,
-        "occupancy": 73.17
+        "occupancy": 74.42
       },
       {
         "chain": "Maruthi Theatre: Palakollu",
         "venues": 1,
         "shows": 5,
-        "gross": 182400.0,
-        "sold": 750,
+        "gross": 116400.0,
+        "sold": 486,
         "totalSeats": 2695,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 27.83
+        "occupancy": 18.03
       },
       {
         "chain": "Shri Lakshmi Narasimha Theatre: Kothavalasa",
         "venues": 1,
         "shows": 5,
-        "gross": 252200.0,
-        "sold": 1261,
+        "gross": 177800.0,
+        "sold": 889,
         "totalSeats": 1825,
-        "fastfilling": 4,
+        "fastfilling": 3,
         "housefull": 0,
-        "occupancy": 69.1
+        "occupancy": 48.71
       },
       {
         "chain": "Primeshow Films",
@@ -772,23 +2283,23 @@
         "chain": "J &J Cinemas A/C Dolby Atmos: Pathapatnam",
         "venues": 1,
         "shows": 5,
-        "gross": 172800.0,
-        "sold": 864,
+        "gross": 173400.0,
+        "sold": 867,
         "totalSeats": 1835,
-        "fastfilling": 2,
+        "fastfilling": 3,
         "housefull": 0,
-        "occupancy": 47.08
+        "occupancy": 47.25
       },
       {
         "chain": "INOX",
-        "venues": 3,
-        "shows": 8,
-        "gross": 14898.16,
-        "sold": 83,
-        "totalSeats": 1883,
+        "venues": 4,
+        "shows": 9,
+        "gross": 9013.3,
+        "sold": 55,
+        "totalSeats": 1886,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 4.41
+        "occupancy": 2.92
       },
       {
         "chain": "Jai Bharath Theatre: Tumkur",
@@ -816,23 +2327,23 @@
         "chain": "Sri Venkateswara A/C DTS: Mangalagiri",
         "venues": 1,
         "shows": 1,
-        "gross": 61020.0,
-        "sold": 292,
+        "gross": 25960.0,
+        "sold": 118,
         "totalSeats": 432,
-        "fastfilling": 1,
+        "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 67.59
+        "occupancy": 27.31
       },
       {
         "chain": "Urvasi Theater A/C DTS: Mangalagiri",
         "venues": 1,
         "shows": 5,
-        "gross": 131560.0,
-        "sold": 598,
+        "gross": 72820.0,
+        "sold": 331,
         "totalSeats": 1590,
-        "fastfilling": 2,
+        "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 37.61
+        "occupancy": 20.82
       },
       {
         "chain": "Rajhans Cinemas",
@@ -882,122 +2393,122 @@
         "chain": "PVR",
         "venues": 2,
         "shows": 3,
-        "gross": 25142.15,
-        "sold": 143,
-        "totalSeats": 502,
+        "gross": 18219.82,
+        "sold": 114,
+        "totalSeats": 479,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 28.49
+        "occupancy": 23.8
       },
       {
         "chain": "Rain Cinema: Nellore",
         "venues": 1,
         "shows": 8,
-        "gross": 661059.0,
-        "sold": 2182,
+        "gross": 661384.0,
+        "sold": 2183,
         "totalSeats": 2645,
         "fastfilling": 8,
         "housefull": 0,
-        "occupancy": 82.5
+        "occupancy": 82.53
       },
       {
         "chain": "Sri Venkata Ramana Cinemas: Kaikaluru",
         "venues": 1,
         "shows": 1,
-        "gross": 7200.0,
-        "sold": 36,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 340,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 10.59
+        "occupancy": 0.0
       },
       {
         "chain": "August Entertainment",
         "venues": 1,
         "shows": 5,
-        "gross": 52250.0,
-        "sold": 125,
+        "gross": 51350.0,
+        "sold": 123,
         "totalSeats": 1680,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 7.44
+        "occupancy": 7.32
       },
       {
         "chain": "P R Cinemas Private Limited",
         "venues": 1,
         "shows": 5,
-        "gross": 53400.0,
-        "sold": 152,
+        "gross": 1950.0,
+        "sold": 5,
         "totalSeats": 2039,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 7.45
+        "occupancy": 0.25
       },
       {
         "chain": "VL Associates",
         "venues": 1,
         "shows": 3,
-        "gross": 31200.0,
-        "sold": 156,
+        "gross": 31800.0,
+        "sold": 159,
         "totalSeats": 628,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 24.84
+        "occupancy": 25.32
       },
       {
         "chain": "SLN CINEMA",
         "venues": 1,
         "shows": 3,
-        "gross": 85400.0,
-        "sold": 427,
+        "gross": 68000.0,
+        "sold": 340,
         "totalSeats": 1215,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 35.14
+        "occupancy": 27.98
       },
       {
         "chain": "Rukmini Talkies: Berhampur",
         "venues": 1,
         "shows": 5,
-        "gross": 116400.0,
-        "sold": 508,
+        "gross": 116050.0,
+        "sold": 507,
         "totalSeats": 1655,
         "fastfilling": 2,
         "housefull": 0,
-        "occupancy": 30.69
+        "occupancy": 30.63
       },
       {
         "chain": "Sri Sai Balaji Theatre: Sathupally",
         "venues": 1,
         "shows": 4,
-        "gross": 128500.0,
-        "sold": 865,
+        "gross": 84950.0,
+        "sold": 579,
         "totalSeats": 1752,
-        "fastfilling": 2,
+        "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 49.37
+        "occupancy": 33.05
       },
       {
         "chain": "NCS Theatre",
         "venues": 1,
         "shows": 1,
-        "gross": 42261.0,
-        "sold": 173,
+        "gross": 41367.0,
+        "sold": 169,
         "totalSeats": 508,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 34.06
+        "occupancy": 33.27
       },
       {
         "chain": "Sri Leela Mahal - Vizianagaram",
         "venues": 1,
         "shows": 5,
-        "gross": 333757.0,
-        "sold": 1713,
+        "gross": 171743.0,
+        "sold": 859,
         "totalSeats": 3330,
-        "fastfilling": 2,
+        "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 51.44
+        "occupancy": 25.8
       },
       {
         "chain": "Gowri Shankar Talkies: Varadaiahpalem",
@@ -1025,473 +2536,45 @@
         "chain": "Geetha Entertainment Pvt Ltd",
         "venues": 1,
         "shows": 1,
-        "gross": 57470.0,
-        "sold": 377,
+        "gross": 57310.0,
+        "sold": 376,
         "totalSeats": 380,
         "fastfilling": 0,
         "housefull": 1,
-        "occupancy": 99.21
+        "occupancy": 98.95
       },
       {
         "chain": "Ananya Cinemas: Kovvur",
         "venues": 1,
         "shows": 5,
-        "gross": 272360.0,
-        "sold": 1115,
+        "gross": 257610.0,
+        "sold": 1060,
         "totalSeats": 2000,
         "fastfilling": 3,
         "housefull": 0,
-        "occupancy": 55.75
+        "occupancy": 53.0
       },
       {
         "chain": "Sri Krishna Tulasi Theater: Pedana",
         "venues": 1,
         "shows": 2,
-        "gross": 2400.0,
-        "sold": 12,
+        "gross": 4000.0,
+        "sold": 20,
         "totalSeats": 66,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 18.18
-      }
-    ]
-  },
-  "Vaa Vaathiyaar [2D | Tamil]": {
-    "shows": 81,
-    "gross": 211736.85,
-    "sold": 1441,
-    "totalSeats": 25163,
-    "venues": 23,
-    "cities": 17,
-    "fastfilling": 0,
-    "housefull": 0,
-    "occupancy": 5.73,
-    "details": [
-      {
-        "city": "Sivakasi",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 4,
-        "gross": 7350.0,
-        "sold": 49,
-        "totalSeats": 2420,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 2.02
-      },
-      {
-        "city": "Chennai",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 3,
-        "gross": 4680.0,
-        "sold": 36,
-        "totalSeats": 552,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 6.52
-      },
-      {
-        "city": "Tumakuru (Tumkur)",
-        "state": "Karnataka",
-        "venues": 1,
-        "shows": 2,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 556,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "city": "Ramanathapuram",
-        "state": "Tamil Nadu",
-        "venues": 3,
-        "shows": 8,
-        "gross": 9750.0,
-        "sold": 65,
-        "totalSeats": 3830,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 1.7
-      },
-      {
-        "city": "Dehradun",
-        "state": "Uttarakhand",
-        "venues": 1,
-        "shows": 1,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 96,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "city": "Sathyamangalam",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 4,
-        "gross": 990.0,
-        "sold": 9,
-        "totalSeats": 943,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.95
-      },
-      {
-        "city": "Jalakandapuram",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 4,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 200,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "city": "Vellore",
-        "state": "Tamil Nadu",
-        "venues": 4,
-        "shows": 19,
-        "gross": 57156.85,
-        "sold": 466,
-        "totalSeats": 5947,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 7.84
-      },
-      {
-        "city": "Uthangarai",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 4,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 1484,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "city": "Hosur",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 2,
-        "gross": 4950.0,
-        "sold": 33,
-        "totalSeats": 476,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 6.93
-      },
-      {
-        "city": "Thrissur",
-        "state": "Kerala",
-        "venues": 1,
-        "shows": 4,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 1105,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "city": "Villupuram",
-        "state": "Tamil Nadu",
-        "venues": 2,
-        "shows": 8,
-        "gross": 36980.0,
-        "sold": 260,
-        "totalSeats": 2052,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 12.67
-      },
-      {
-        "city": "Nagapattinam",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 4,
-        "gross": 2550.0,
-        "sold": 17,
-        "totalSeats": 1776,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.96
-      },
-      {
-        "city": "Kannur",
-        "state": "Kerala",
-        "venues": 1,
-        "shows": 2,
-        "gross": 2520.0,
-        "sold": 12,
-        "totalSeats": 352,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 3.41
-      },
-      {
-        "city": "Thuraiyur",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 4,
-        "gross": 34050.0,
-        "sold": 227,
-        "totalSeats": 850,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 26.71
-      },
-      {
-        "city": "Batlagundu",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 4,
-        "gross": 600.0,
-        "sold": 3,
-        "totalSeats": 1328,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.23
-      },
-      {
-        "city": "Thanjavur",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 4,
-        "gross": 50160.0,
-        "sold": 264,
-        "totalSeats": 1196,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 22.07
-      }
-    ],
-    "Chain_details": [
-      {
-        "chain": "Sri PalaniAndavar Theatre: Sivakasi",
-        "venues": 1,
-        "shows": 4,
-        "gross": 7350.0,
-        "sold": 49,
-        "totalSeats": 2420,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 2.02
-      },
-      {
-        "chain": "Shri Sai Circuit 6000",
-        "venues": 1,
-        "shows": 3,
-        "gross": 4680.0,
-        "sold": 36,
-        "totalSeats": 552,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 6.52
-      },
-      {
-        "chain": "INOX",
-        "venues": 3,
-        "shows": 11,
-        "gross": 19403.8,
-        "sold": 176,
-        "totalSeats": 2464,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 7.14
-      },
-      {
-        "chain": "Jagan Cinema: Ramanathapuram",
-        "venues": 1,
-        "shows": 2,
-        "gross": 9600.0,
-        "sold": 64,
-        "totalSeats": 1072,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 5.97
-      },
-      {
-        "chain": "D Cinema",
-        "venues": 1,
-        "shows": 2,
-        "gross": 150.0,
-        "sold": 1,
-        "totalSeats": 790,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.13
-      },
-      {
-        "chain": "Ramesh Theatre",
-        "venues": 1,
-        "shows": 4,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 1968,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "chain": "PVR",
-        "venues": 2,
-        "shows": 7,
-        "gross": 30913.05,
-        "sold": 252,
-        "totalSeats": 1148,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 21.95
-      },
-      {
-        "chain": "Sathya Cinemas: Sathyamangalam",
-        "venues": 1,
-        "shows": 4,
-        "gross": 990.0,
-        "sold": 9,
-        "totalSeats": 943,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.95
-      },
-      {
-        "chain": "Justickets",
-        "venues": 1,
-        "shows": 4,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 200,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "chain": "Cauvery Theatre: Trichy",
-        "venues": 1,
-        "shows": 4,
-        "gross": 360.0,
-        "sold": 2,
-        "totalSeats": 2204,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.09
-      },
-      {
-        "chain": "Apsara Cinema: Vellore",
-        "venues": 1,
-        "shows": 4,
-        "gross": 6480.0,
-        "sold": 36,
-        "totalSeats": 1888,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 1.91
-      },
-      {
-        "chain": "Sri Ganesha Theatre: Uthangarai",
-        "venues": 1,
-        "shows": 4,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 1484,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "chain": "VL Associates",
-        "venues": 1,
-        "shows": 2,
-        "gross": 4950.0,
-        "sold": 33,
-        "totalSeats": 476,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 6.93
-      },
-      {
-        "chain": "Maghalakshmi Plaazaa: Villupuram",
-        "venues": 1,
-        "shows": 4,
-        "gross": 36980.0,
-        "sold": 260,
-        "totalSeats": 616,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 42.21
-      },
-      {
-        "chain": "Kasiamman Theatre",
-        "venues": 1,
-        "shows": 4,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 1436,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "chain": "Devi Theatre Nagapattinam",
-        "venues": 1,
-        "shows": 4,
-        "gross": 2550.0,
-        "sold": 17,
-        "totalSeats": 1776,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.96
-      },
-      {
-        "chain": "Cinepolis",
-        "venues": 1,
-        "shows": 2,
-        "gross": 2520.0,
-        "sold": 12,
-        "totalSeats": 352,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 3.41
-      },
-      {
-        "chain": "Maris Cinema",
-        "venues": 1,
-        "shows": 4,
-        "gross": 34050.0,
-        "sold": 227,
-        "totalSeats": 850,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 26.71
-      },
-      {
-        "chain": "Parimalam Cinemas: Batlagundu",
-        "venues": 1,
-        "shows": 4,
-        "gross": 600.0,
-        "sold": 3,
-        "totalSeats": 1328,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.23
+        "occupancy": 30.3
       },
       {
         "chain": "Screen Time Entertainment",
         "venues": 1,
-        "shows": 4,
-        "gross": 50160.0,
-        "sold": 264,
-        "totalSeats": 1196,
+        "shows": 2,
+        "gross": 3300.0,
+        "sold": 22,
+        "totalSeats": 642,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 22.07
+        "occupancy": 3.43
       }
     ]
   },
@@ -1534,15 +2617,15 @@
     ]
   },
   "Dhurandhar [2D | Hindi]": {
-    "shows": 140,
-    "gross": 162474.0,
-    "sold": 828,
-    "totalSeats": 30079,
-    "venues": 51,
-    "cities": 35,
+    "shows": 175,
+    "gross": 181393.74,
+    "sold": 891,
+    "totalSeats": 37380,
+    "venues": 61,
+    "cities": 37,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 2.75,
+    "occupancy": 2.38,
     "details": [
       {
         "city": "Sheorinarayan",
@@ -1633,24 +2716,24 @@
         "state": "Karnataka",
         "venues": 1,
         "shows": 3,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 533,
+        "gross": 8660.0,
+        "sold": 36,
+        "totalSeats": 569,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.0
+        "occupancy": 6.33
       },
       {
         "city": "Bareilly",
         "state": "Uttar Pradesh",
         "venues": 3,
         "shows": 11,
-        "gross": 51120.0,
-        "sold": 352,
-        "totalSeats": 5630,
+        "gross": 71760.0,
+        "sold": 414,
+        "totalSeats": 5690,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 6.25
+        "occupancy": 7.28
       },
       {
         "city": "Khanna",
@@ -1693,12 +2776,12 @@
         "state": "Uttarakhand",
         "venues": 3,
         "shows": 9,
-        "gross": 14490.0,
-        "sold": 53,
-        "totalSeats": 1143,
+        "gross": 2160.0,
+        "sold": 8,
+        "totalSeats": 1098,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 4.64
+        "occupancy": 0.73
       },
       {
         "city": "Baramati",
@@ -1715,11 +2798,11 @@
       {
         "city": "Ghaziabad",
         "state": "NCR",
-        "venues": 2,
-        "shows": 3,
+        "venues": 3,
+        "shows": 5,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 755,
+        "totalSeats": 1171,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -1729,36 +2812,36 @@
         "state": "West Bengal",
         "venues": 1,
         "shows": 2,
-        "gross": 1390.0,
-        "sold": 10,
+        "gross": 2090.0,
+        "sold": 14,
         "totalSeats": 680,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.47
+        "occupancy": 2.06
       },
       {
         "city": "Ludhiana",
         "state": "Punjab",
-        "venues": 4,
-        "shows": 15,
+        "venues": 5,
+        "shows": 19,
         "gross": 8900.0,
         "sold": 40,
-        "totalSeats": 2531,
+        "totalSeats": 3040,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.58
+        "occupancy": 1.32
       },
       {
         "city": "Bhubaneswar",
         "state": "Odisha",
         "venues": 2,
         "shows": 7,
-        "gross": 4150.0,
-        "sold": 20,
-        "totalSeats": 1870,
+        "gross": 1810.0,
+        "sold": 7,
+        "totalSeats": 1856,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.07
+        "occupancy": 0.38
       },
       {
         "city": "Bhubaneshwar",
@@ -1775,26 +2858,38 @@
       {
         "city": "Kota",
         "state": "Rajasthan",
-        "venues": 2,
-        "shows": 6,
-        "gross": 4120.0,
-        "sold": 20,
-        "totalSeats": 1466,
+        "venues": 3,
+        "shows": 11,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 3067,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.36
+        "occupancy": 0.0
+      },
+      {
+        "city": "Vellore",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 1,
+        "gross": 1069.74,
+        "sold": 18,
+        "totalSeats": 168,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 10.71
       },
       {
         "city": "Guwahati",
         "state": "Assam",
-        "venues": 4,
-        "shows": 11,
-        "gross": 8000.0,
-        "sold": 40,
-        "totalSeats": 1698,
+        "venues": 5,
+        "shows": 14,
+        "gross": 12350.0,
+        "sold": 56,
+        "totalSeats": 2359,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.36
+        "occupancy": 2.37
       },
       {
         "city": "Bettiah",
@@ -1821,40 +2916,52 @@
         "occupancy": 0.0
       },
       {
+        "city": "Bathinda",
+        "state": "Punjab",
+        "venues": 1,
+        "shows": 2,
+        "gross": 5200.0,
+        "sold": 20,
+        "totalSeats": 686,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 2.92
+      },
+      {
         "city": "Vita",
         "state": "Maharashtra",
         "venues": 1,
         "shows": 1,
-        "gross": 1950.0,
-        "sold": 13,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 119,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 10.92
+        "occupancy": 0.0
       },
       {
         "city": "Thrissur",
         "state": "Kerala",
         "venues": 1,
         "shows": 2,
-        "gross": 2400.0,
-        "sold": 12,
-        "totalSeats": 334,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 322,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.59
+        "occupancy": 0.0
       },
       {
         "city": "Jaipur",
         "state": "Rajasthan",
-        "venues": 3,
-        "shows": 11,
-        "gross": 21540.0,
-        "sold": 72,
-        "totalSeats": 2222,
+        "venues": 5,
+        "shows": 21,
+        "gross": 27110.0,
+        "sold": 100,
+        "totalSeats": 3893,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.24
+        "occupancy": 2.57
       },
       {
         "city": "Dharamsala",
@@ -1884,13 +2991,13 @@
         "city": "Gorakhpur",
         "state": "Uttar Pradesh",
         "venues": 2,
-        "shows": 5,
-        "gross": 9240.0,
-        "sold": 36,
-        "totalSeats": 832,
+        "shows": 6,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 984,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 4.33
+        "occupancy": 0.0
       },
       {
         "city": "Shillong",
@@ -1907,26 +3014,26 @@
       {
         "city": "Ambala",
         "state": "Haryana",
-        "venues": 1,
-        "shows": 3,
-        "gross": 8050.0,
-        "sold": 35,
-        "totalSeats": 416,
+        "venues": 2,
+        "shows": 6,
+        "gross": 14810.0,
+        "sold": 64,
+        "totalSeats": 1371,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 8.41
+        "occupancy": 4.67
       },
       {
         "city": "Anand",
         "state": "Gujarat",
         "venues": 1,
         "shows": 4,
-        "gross": 1650.0,
-        "sold": 11,
-        "totalSeats": 635,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 624,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.73
+        "occupancy": 0.0
       },
       {
         "city": "Sri Ganganagar",
@@ -1943,11 +3050,11 @@
       {
         "city": "Nadiad",
         "state": "Gujarat",
-        "venues": 1,
-        "shows": 2,
+        "venues": 2,
+        "shows": 6,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 236,
+        "totalSeats": 704,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -2045,25 +3152,25 @@
       },
       {
         "chain": "INOX",
-        "venues": 13,
-        "shows": 37,
-        "gross": 29860.0,
-        "sold": 112,
-        "totalSeats": 7620,
+        "venues": 16,
+        "shows": 52,
+        "gross": 31840.0,
+        "sold": 122,
+        "totalSeats": 9929,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.47
+        "occupancy": 1.23
       },
       {
         "chain": "PVR",
-        "venues": 11,
-        "shows": 36,
-        "gross": 33810.0,
-        "sold": 116,
-        "totalSeats": 5455,
+        "venues": 15,
+        "shows": 46,
+        "gross": 39199.74,
+        "sold": 127,
+        "totalSeats": 7185,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.13
+        "occupancy": 1.77
       },
       {
         "chain": "Justickets",
@@ -2124,23 +3231,23 @@
         "chain": "K. P. SAHA Pvt.Ltd",
         "venues": 1,
         "shows": 2,
-        "gross": 1390.0,
-        "sold": 10,
+        "gross": 2090.0,
+        "sold": 14,
         "totalSeats": 680,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.47
+        "occupancy": 2.06
       },
       {
         "chain": "Cinepolis",
         "venues": 4,
         "shows": 14,
-        "gross": 22814.0,
-        "sold": 104,
+        "gross": 23654.0,
+        "sold": 106,
         "totalSeats": 3603,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.89
+        "occupancy": 2.94
       },
       {
         "chain": "Preet Palace",
@@ -2152,6 +3259,17 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
+      },
+      {
+        "chain": "FUN",
+        "venues": 2,
+        "shows": 8,
+        "gross": 7220.0,
+        "sold": 31,
+        "totalSeats": 2578,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 1.2
       },
       {
         "chain": "NY Cinemas LLP",
@@ -2176,15 +3294,26 @@
         "occupancy": 0.0
       },
       {
+        "chain": "Cinepolis P&A",
+        "venues": 1,
+        "shows": 2,
+        "gross": 5200.0,
+        "sold": 20,
+        "totalSeats": 686,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 2.92
+      },
+      {
         "chain": "Suriya Cinemas And Entertainments",
         "venues": 1,
         "shows": 1,
-        "gross": 1950.0,
-        "sold": 13,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 119,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 10.92
+        "occupancy": 0.0
       },
       {
         "chain": "Anjalee",
@@ -2201,12 +3330,12 @@
         "chain": "Prime Cinemas LLP",
         "venues": 1,
         "shows": 3,
-        "gross": 8050.0,
-        "sold": 35,
-        "totalSeats": 416,
+        "gross": 7590.0,
+        "sold": 33,
+        "totalSeats": 414,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 8.41
+        "occupancy": 7.97
       },
       {
         "chain": "Coconut Media Box LLP",
@@ -2223,50 +3352,50 @@
   },
   "Parasakthi [2D | Tamil]": {
     "shows": 61,
-    "gross": 456843.3,
-    "sold": 3107,
-    "totalSeats": 21499,
+    "gross": 337875.85,
+    "sold": 2284,
+    "totalSeats": 21467,
     "venues": 18,
     "cities": 15,
     "fastfilling": 2,
     "housefull": 0,
-    "occupancy": 14.45,
+    "occupancy": 10.64,
     "details": [
       {
         "city": "Kanchipuram",
         "state": "Tamil Nadu",
         "venues": 1,
         "shows": 4,
-        "gross": 47320.0,
-        "sold": 364,
+        "gross": 8060.0,
+        "sold": 62,
         "totalSeats": 2908,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 12.52
+        "occupancy": 2.13
       },
       {
         "city": "Chennai",
         "state": "Tamil Nadu",
         "venues": 1,
         "shows": 4,
-        "gross": 29380.0,
-        "sold": 226,
+        "gross": 1300.0,
+        "sold": 10,
         "totalSeats": 1524,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 14.83
+        "occupancy": 0.66
       },
       {
         "city": "Ramanathapuram",
         "state": "Tamil Nadu",
         "venues": 3,
         "shows": 8,
-        "gross": 27740.0,
-        "sold": 146,
-        "totalSeats": 2458,
+        "gross": 35530.0,
+        "sold": 187,
+        "totalSeats": 2490,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.94
+        "occupancy": 7.51
       },
       {
         "city": "Kozhinjampara",
@@ -2285,12 +3414,12 @@
         "state": "Tamil Nadu",
         "venues": 1,
         "shows": 3,
-        "gross": 2730.0,
-        "sold": 21,
+        "gross": 390.0,
+        "sold": 3,
         "totalSeats": 1227,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.71
+        "occupancy": 0.24
       },
       {
         "city": "Dharwad",
@@ -2309,60 +3438,60 @@
         "state": "Tamil Nadu",
         "venues": 2,
         "shows": 10,
-        "gross": 68658.3,
-        "sold": 513,
-        "totalSeats": 1700,
+        "gross": 62095.85,
+        "sold": 478,
+        "totalSeats": 1648,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 30.18
+        "occupancy": 29.0
       },
       {
         "city": "Hosur",
         "state": "Tamil Nadu",
         "venues": 1,
         "shows": 4,
-        "gross": 54205.0,
-        "sold": 293,
+        "gross": 55500.0,
+        "sold": 300,
         "totalSeats": 866,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 33.83
+        "occupancy": 34.64
       },
       {
         "city": "Thrissur",
         "state": "Kerala",
         "venues": 1,
         "shows": 1,
-        "gross": 2400.0,
-        "sold": 12,
-        "totalSeats": 223,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 211,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.38
+        "occupancy": 0.0
       },
       {
         "city": "Villupuram",
         "state": "Tamil Nadu",
         "venues": 1,
         "shows": 4,
-        "gross": 115360.0,
-        "sold": 845,
+        "gross": 99580.0,
+        "sold": 750,
         "totalSeats": 2020,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 41.83
+        "occupancy": 37.13
       },
       {
         "city": "Nagapattinam",
         "state": "Tamil Nadu",
         "venues": 1,
         "shows": 4,
-        "gross": 5100.0,
-        "sold": 34,
+        "gross": 6000.0,
+        "sold": 40,
         "totalSeats": 1368,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.49
+        "occupancy": 2.92
       },
       {
         "city": "Kannur",
@@ -2381,36 +3510,36 @@
         "state": "Tamil Nadu",
         "venues": 1,
         "shows": 4,
-        "gross": 32700.0,
-        "sold": 218,
+        "gross": 16650.0,
+        "sold": 111,
         "totalSeats": 2400,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 9.08
+        "occupancy": 4.62
       },
       {
         "city": "Thuraiyur",
         "state": "Tamil Nadu",
         "venues": 1,
         "shows": 4,
-        "gross": 43650.0,
-        "sold": 291,
+        "gross": 47400.0,
+        "sold": 316,
         "totalSeats": 1214,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 23.97
+        "occupancy": 26.03
       },
       {
         "city": "Thanjavur",
         "state": "Tamil Nadu",
         "venues": 1,
         "shows": 4,
-        "gross": 25080.0,
-        "sold": 132,
+        "gross": 2850.0,
+        "sold": 15,
         "totalSeats": 2476,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.33
+        "occupancy": 0.61
       }
     ],
     "Chain_details": [
@@ -2418,23 +3547,23 @@
         "chain": "Babu Theatre: Kanchipuram",
         "venues": 1,
         "shows": 4,
-        "gross": 47320.0,
-        "sold": 364,
+        "gross": 8060.0,
+        "sold": 62,
         "totalSeats": 2908,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 12.52
+        "occupancy": 2.13
       },
       {
         "chain": "Shri Sai Circuit 6000",
         "venues": 1,
         "shows": 4,
-        "gross": 29380.0,
-        "sold": 226,
+        "gross": 1300.0,
+        "sold": 10,
         "totalSeats": 1524,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 14.83
+        "occupancy": 0.66
       },
       {
         "chain": "The Cine Loungue",
@@ -2462,12 +3591,12 @@
         "chain": "D Cinema",
         "venues": 1,
         "shows": 2,
-        "gross": 5700.0,
-        "sold": 30,
-        "totalSeats": 790,
+        "gross": 13490.0,
+        "sold": 71,
+        "totalSeats": 822,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.8
+        "occupancy": 8.64
       },
       {
         "chain": "Justickets",
@@ -2484,67 +3613,67 @@
         "chain": "Sathya Cinemas: Sathyamangalam",
         "venues": 1,
         "shows": 3,
-        "gross": 2730.0,
-        "sold": 21,
+        "gross": 390.0,
+        "sold": 3,
         "totalSeats": 1227,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.71
+        "occupancy": 0.24
       },
       {
         "chain": "INOX",
         "venues": 3,
         "shows": 7,
-        "gross": 19046.8,
-        "sold": 173,
-        "totalSeats": 1187,
+        "gross": 12072.55,
+        "sold": 134,
+        "totalSeats": 1151,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 14.57
+        "occupancy": 11.64
       },
       {
         "chain": "PVR",
         "venues": 1,
         "shows": 5,
-        "gross": 52011.5,
-        "sold": 352,
-        "totalSeats": 917,
+        "gross": 50023.3,
+        "sold": 344,
+        "totalSeats": 889,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 38.39
+        "occupancy": 38.7
       },
       {
         "chain": "VL Associates",
         "venues": 1,
         "shows": 4,
-        "gross": 54205.0,
-        "sold": 293,
+        "gross": 55500.0,
+        "sold": 300,
         "totalSeats": 866,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 33.83
+        "occupancy": 34.64
       },
       {
         "chain": "Maghalakshmi Plaazaa: Villupuram",
         "venues": 1,
         "shows": 4,
-        "gross": 115360.0,
-        "sold": 845,
+        "gross": 99580.0,
+        "sold": 750,
         "totalSeats": 2020,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 41.83
+        "occupancy": 37.13
       },
       {
         "chain": "Pandian Theatre",
         "venues": 1,
         "shows": 4,
-        "gross": 5100.0,
-        "sold": 34,
+        "gross": 6000.0,
+        "sold": 40,
         "totalSeats": 1368,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.49
+        "occupancy": 2.92
       },
       {
         "chain": "Cinepolis",
@@ -2561,281 +3690,59 @@
         "chain": "Mahalakshmi Theatre",
         "venues": 1,
         "shows": 4,
-        "gross": 32700.0,
-        "sold": 218,
+        "gross": 16650.0,
+        "sold": 111,
         "totalSeats": 2400,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 9.08
+        "occupancy": 4.62
       },
       {
         "chain": "Maris Cinema",
         "venues": 1,
         "shows": 4,
-        "gross": 43650.0,
-        "sold": 291,
+        "gross": 47400.0,
+        "sold": 316,
         "totalSeats": 1214,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 23.97
+        "occupancy": 26.03
       },
       {
         "chain": "Screen Time Entertainment",
         "venues": 1,
         "shows": 4,
-        "gross": 25080.0,
-        "sold": 132,
+        "gross": 2850.0,
+        "sold": 15,
         "totalSeats": 2476,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.33
-      }
-    ]
-  },
-  "Thalaivar Thambi Thalaimaiyil [2D | Tamil]": {
-    "shows": 25,
-    "gross": 51751.1,
-    "sold": 370,
-    "totalSeats": 5738,
-    "venues": 10,
-    "cities": 9,
-    "fastfilling": 0,
-    "housefull": 0,
-    "occupancy": 6.45,
-    "details": [
-      {
-        "city": "Chennai",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 2,
-        "gross": 9750.0,
-        "sold": 75,
-        "totalSeats": 368,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 20.38
-      },
-      {
-        "city": "Kozhinjampara",
-        "state": "Kerala",
-        "venues": 1,
-        "shows": 4,
-        "gross": 1427.8,
-        "sold": 11,
-        "totalSeats": 1807,
-        "fastfilling": 0,
-        "housefull": 0,
         "occupancy": 0.61
-      },
-      {
-        "city": "Sathyamangalam",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 2,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 356,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "city": "Goolikkadavu",
-        "state": "Kerala",
-        "venues": 1,
-        "shows": 4,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 948,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "city": "Vellore",
-        "state": "Tamil Nadu",
-        "venues": 2,
-        "shows": 3,
-        "gross": 15433.3,
-        "sold": 122,
-        "totalSeats": 528,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 23.11
-      },
-      {
-        "city": "Thrissur",
-        "state": "Kerala",
-        "venues": 1,
-        "shows": 1,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 211,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "city": "Villupuram",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 4,
-        "gross": 7680.0,
-        "sold": 48,
-        "totalSeats": 616,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 7.79
-      },
-      {
-        "city": "Kannur",
-        "state": "Kerala",
-        "venues": 1,
-        "shows": 1,
-        "gross": 1260.0,
-        "sold": 6,
-        "totalSeats": 112,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 5.36
-      },
-      {
-        "city": "Thanjavur",
-        "state": "Tamil Nadu",
-        "venues": 1,
-        "shows": 4,
-        "gross": 16200.0,
-        "sold": 108,
-        "totalSeats": 792,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 13.64
-      }
-    ],
-    "Chain_details": [
-      {
-        "chain": "Shri Sai Circuit 6000",
-        "venues": 1,
-        "shows": 2,
-        "gross": 9750.0,
-        "sold": 75,
-        "totalSeats": 368,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 20.38
-      },
-      {
-        "chain": "Justickets",
-        "venues": 1,
-        "shows": 4,
-        "gross": 1427.8,
-        "sold": 11,
-        "totalSeats": 1807,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.61
-      },
-      {
-        "chain": "Sathya Cinemas: Sathyamangalam",
-        "venues": 1,
-        "shows": 2,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 356,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "chain": "T-MAX Cineplex",
-        "venues": 1,
-        "shows": 4,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 948,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "chain": "PVR",
-        "venues": 1,
-        "shows": 2,
-        "gross": 11589.3,
-        "sold": 87,
-        "totalSeats": 364,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 23.9
-      },
-      {
-        "chain": "INOX",
-        "venues": 2,
-        "shows": 2,
-        "gross": 3844.0,
-        "sold": 35,
-        "totalSeats": 375,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 9.33
-      },
-      {
-        "chain": "Maghalakshmi Plaazaa: Villupuram",
-        "venues": 1,
-        "shows": 4,
-        "gross": 7680.0,
-        "sold": 48,
-        "totalSeats": 616,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 7.79
-      },
-      {
-        "chain": "Cinepolis",
-        "venues": 1,
-        "shows": 1,
-        "gross": 1260.0,
-        "sold": 6,
-        "totalSeats": 112,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 5.36
-      },
-      {
-        "chain": "Screen Time Entertainment",
-        "venues": 1,
-        "shows": 4,
-        "gross": 16200.0,
-        "sold": 108,
-        "totalSeats": 792,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 13.64
       }
     ]
   },
   "Bhartha Mahasayulaku Wignyapthi [2D | Telugu]": {
     "shows": 57,
-    "gross": 348513.72,
-    "sold": 2082,
-    "totalSeats": 21342,
+    "gross": 285848.86,
+    "sold": 1705,
+    "totalSeats": 21310,
     "venues": 19,
     "cities": 16,
     "fastfilling": 3,
     "housefull": 0,
-    "occupancy": 9.76,
+    "occupancy": 8.0,
     "details": [
       {
         "city": "Sircilla",
         "state": "Telangana",
         "venues": 1,
         "shows": 4,
-        "gross": 10350.0,
-        "sold": 69,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 1964,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.51
+        "occupancy": 0.0
       },
       {
         "city": "Tadikalapudi",
@@ -2854,12 +3761,12 @@
         "state": "Karnataka",
         "venues": 1,
         "shows": 2,
-        "gross": 7940.0,
-        "sold": 28,
-        "totalSeats": 436,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 408,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 6.42
+        "occupancy": 0.0
       },
       {
         "city": "Mangalagiri",
@@ -2878,36 +3785,36 @@
         "state": "Telangana",
         "venues": 1,
         "shows": 4,
-        "gross": 12000.0,
-        "sold": 80,
+        "gross": 600.0,
+        "sold": 4,
         "totalSeats": 2008,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.98
+        "occupancy": 0.2
       },
       {
         "city": "Narasannapeta",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 5,
-        "gross": 111150.0,
-        "sold": 741,
-        "totalSeats": 2508,
+        "gross": 114000.0,
+        "sold": 760,
+        "totalSeats": 2546,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 29.55
+        "occupancy": 29.85
       },
       {
         "city": "Shadnagar",
         "state": "Telangana",
         "venues": 1,
         "shows": 4,
-        "gross": 43840.0,
-        "sold": 424,
+        "gross": 44200.0,
+        "sold": 427,
         "totalSeats": 1584,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 26.77
+        "occupancy": 26.96
       },
       {
         "city": "Vijayapura (Bengaluru Rural)",
@@ -2926,60 +3833,60 @@
         "state": "Tamil Nadu",
         "venues": 2,
         "shows": 3,
-        "gross": 13333.72,
-        "sold": 104,
-        "totalSeats": 504,
+        "gross": 10498.86,
+        "sold": 90,
+        "totalSeats": 490,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 20.63
+        "occupancy": 18.37
       },
       {
         "city": "Mahabubabad",
         "state": "Telangana",
         "venues": 1,
         "shows": 4,
-        "gross": 16050.0,
-        "sold": 107,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 1860,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.75
+        "occupancy": 0.0
       },
       {
         "city": "Nellore",
         "state": "Andhra Pradesh",
         "venues": 2,
         "shows": 5,
-        "gross": 119950.0,
-        "sold": 448,
-        "totalSeats": 835,
+        "gross": 116050.0,
+        "sold": 422,
+        "totalSeats": 807,
         "fastfilling": 2,
         "housefull": 0,
-        "occupancy": 53.65
+        "occupancy": 52.29
       },
       {
         "city": "Ponduru",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 4,
-        "gross": 7200.0,
-        "sold": 48,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 922,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.21
+        "occupancy": 0.0
       },
       {
         "city": "Karimnagar",
         "state": "Telangana",
         "venues": 2,
         "shows": 3,
-        "gross": 6700.0,
-        "sold": 33,
+        "gross": 500.0,
+        "sold": 2,
         "totalSeats": 647,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.1
+        "occupancy": 0.31
       },
       {
         "city": "Siddipet",
@@ -3023,34 +3930,34 @@
         "chain": "Asian Cinemas",
         "venues": 3,
         "shows": 10,
-        "gross": 26400.0,
-        "sold": 176,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 4802,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.67
+        "occupancy": 0.0
       },
       {
         "chain": "Justickets",
         "venues": 3,
         "shows": 9,
-        "gross": 115050.0,
-        "sold": 767,
-        "totalSeats": 3303,
+        "gross": 114000.0,
+        "sold": 760,
+        "totalSeats": 3313,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 23.22
+        "occupancy": 22.94
       },
       {
         "chain": "INOX",
         "venues": 2,
         "shows": 3,
-        "gross": 11963.46,
-        "sold": 62,
-        "totalSeats": 600,
+        "gross": 1188.6,
+        "sold": 20,
+        "totalSeats": 558,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 10.33
+        "occupancy": 3.58
       },
       {
         "chain": "Vijaya Deluxe: Mangalagiri",
@@ -3067,23 +3974,23 @@
         "chain": "Primeshow Films",
         "venues": 1,
         "shows": 4,
-        "gross": 12000.0,
-        "sold": 80,
+        "gross": 600.0,
+        "sold": 4,
         "totalSeats": 2008,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.98
+        "occupancy": 0.2
       },
       {
         "chain": "Sri Sai Baba: Shadnagar",
         "venues": 1,
         "shows": 4,
-        "gross": 43840.0,
-        "sold": 424,
+        "gross": 44200.0,
+        "sold": 427,
         "totalSeats": 1584,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 26.77
+        "occupancy": 26.96
       },
       {
         "chain": "Sri Sangameshwara Chitramandira: Vijayapura",
@@ -3122,12 +4029,12 @@
         "chain": "Rudram Cinema Associates",
         "venues": 1,
         "shows": 4,
-        "gross": 7200.0,
-        "sold": 48,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 922,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.21
+        "occupancy": 0.0
       },
       {
         "chain": "August Entertainment",
@@ -3144,12 +4051,12 @@
         "chain": "P R Cinemas Private Limited",
         "venues": 1,
         "shows": 1,
-        "gross": 6200.0,
-        "sold": 31,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 255,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 12.16
+        "occupancy": 0.0
       },
       {
         "chain": "Maheshwari 2K Dolby Atmos- Kothagudem",
@@ -3251,229 +4158,16 @@
       }
     ]
   },
-  "28 Years Later: The Bone Temple [2D | English]": {
-    "shows": 23,
-    "gross": 40420.0,
-    "sold": 140,
-    "totalSeats": 3484,
-    "venues": 14,
-    "cities": 11,
-    "fastfilling": 0,
-    "housefull": 0,
-    "occupancy": 4.02,
-    "details": [
-      {
-        "city": "Darjeeling",
-        "state": "West Bengal",
-        "venues": 1,
-        "shows": 1,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 336,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "city": "Kozhinjampara",
-        "state": "Kerala",
-        "venues": 1,
-        "shows": 4,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 736,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "city": "Dehradun",
-        "state": "Uttarakhand",
-        "venues": 1,
-        "shows": 1,
-        "gross": 3770.0,
-        "sold": 13,
-        "totalSeats": 134,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 9.7
-      },
-      {
-        "city": "Ludhiana",
-        "state": "Punjab",
-        "venues": 1,
-        "shows": 1,
-        "gross": 250.0,
-        "sold": 1,
-        "totalSeats": 125,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.8
-      },
-      {
-        "city": "Bhubaneswar",
-        "state": "Odisha",
-        "venues": 2,
-        "shows": 3,
-        "gross": 180.0,
-        "sold": 1,
-        "totalSeats": 317,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.32
-      },
-      {
-        "city": "Kota",
-        "state": "Rajasthan",
-        "venues": 1,
-        "shows": 2,
-        "gross": 1600.0,
-        "sold": 8,
-        "totalSeats": 359,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 2.23
-      },
-      {
-        "city": "Guwahati",
-        "state": "Assam",
-        "venues": 3,
-        "shows": 6,
-        "gross": 17390.0,
-        "sold": 50,
-        "totalSeats": 748,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 6.68
-      },
-      {
-        "city": "Thrissur",
-        "state": "Kerala",
-        "venues": 1,
-        "shows": 2,
-        "gross": 5550.0,
-        "sold": 30,
-        "totalSeats": 252,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 11.9
-      },
-      {
-        "city": "Jaipur",
-        "state": "Rajasthan",
-        "venues": 1,
-        "shows": 1,
-        "gross": 4320.0,
-        "sold": 12,
-        "totalSeats": 193,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 6.22
-      },
-      {
-        "city": "Kannur",
-        "state": "Kerala",
-        "venues": 1,
-        "shows": 1,
-        "gross": 1260.0,
-        "sold": 6,
-        "totalSeats": 112,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 5.36
-      },
-      {
-        "city": "Shillong",
-        "state": "Meghalaya",
-        "venues": 1,
-        "shows": 1,
-        "gross": 6100.0,
-        "sold": 19,
-        "totalSeats": 172,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 11.05
-      }
-    ],
-    "Chain_details": [
-      {
-        "chain": "JVL ENTERTAINMENT",
-        "venues": 1,
-        "shows": 1,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 336,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "chain": "Justickets",
-        "venues": 1,
-        "shows": 4,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 736,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "chain": "PVR",
-        "venues": 3,
-        "shows": 4,
-        "gross": 4200.0,
-        "sold": 15,
-        "totalSeats": 492,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 3.05
-      },
-      {
-        "chain": "INOX",
-        "venues": 6,
-        "shows": 10,
-        "gross": 24570.0,
-        "sold": 78,
-        "totalSeats": 1236,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 6.31
-      },
-      {
-        "chain": "Cinepolis",
-        "venues": 2,
-        "shows": 3,
-        "gross": 5550.0,
-        "sold": 28,
-        "totalSeats": 512,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 5.47
-      },
-      {
-        "chain": "Anjalee",
-        "venues": 1,
-        "shows": 1,
-        "gross": 6100.0,
-        "sold": 19,
-        "totalSeats": 172,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 11.05
-      }
-    ]
-  },
   "The Raja Saab [2D | Hindi]": {
-    "shows": 53,
-    "gross": 58495.0,
-    "sold": 243,
-    "totalSeats": 8646,
-    "venues": 33,
-    "cities": 26,
+    "shows": 61,
+    "gross": 55640.0,
+    "sold": 227,
+    "totalSeats": 10192,
+    "venues": 40,
+    "cities": 27,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 2.81,
+    "occupancy": 2.23,
     "details": [
       {
         "city": "Vidisha",
@@ -3610,14 +4304,14 @@
       {
         "city": "Ghaziabad",
         "state": "NCR",
-        "venues": 1,
-        "shows": 1,
-        "gross": 4505.0,
-        "sold": 17,
-        "totalSeats": 187,
+        "venues": 2,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 378,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 9.09
+        "occupancy": 0.0
       },
       {
         "city": "Kalyani",
@@ -3634,26 +4328,26 @@
       {
         "city": "Ludhiana",
         "state": "Punjab",
-        "venues": 3,
-        "shows": 6,
+        "venues": 4,
+        "shows": 7,
         "gross": 6500.0,
         "sold": 30,
-        "totalSeats": 1279,
+        "totalSeats": 1419,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.35
+        "occupancy": 2.11
       },
       {
         "city": "Bhubaneswar",
         "state": "Odisha",
         "venues": 2,
         "shows": 2,
-        "gross": 4700.0,
-        "sold": 20,
-        "totalSeats": 339,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 320,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.9
+        "occupancy": 0.0
       },
       {
         "city": "Bhubaneshwar",
@@ -3670,14 +4364,14 @@
       {
         "city": "Kota",
         "state": "Rajasthan",
-        "venues": 2,
-        "shows": 4,
-        "gross": 1770.0,
-        "sold": 9,
-        "totalSeats": 904,
+        "venues": 3,
+        "shows": 5,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1169,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.0
+        "occupancy": 0.0
       },
       {
         "city": "Guwahati",
@@ -3704,6 +4398,18 @@
         "occupancy": 7.42
       },
       {
+        "city": "Bathinda",
+        "state": "Punjab",
+        "venues": 1,
+        "shows": 2,
+        "gross": 4800.0,
+        "sold": 20,
+        "totalSeats": 276,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 7.25
+      },
+      {
         "city": "Vita",
         "state": "Maharashtra",
         "venues": 1,
@@ -3718,14 +4424,14 @@
       {
         "city": "Jaipur",
         "state": "Rajasthan",
-        "venues": 2,
-        "shows": 2,
-        "gross": 2240.0,
-        "sold": 8,
-        "totalSeats": 435,
+        "venues": 3,
+        "shows": 3,
+        "gross": 6060.0,
+        "sold": 18,
+        "totalSeats": 631,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.84
+        "occupancy": 2.85
       },
       {
         "city": "Dharamsala",
@@ -3742,14 +4448,14 @@
       {
         "city": "Gorakhpur",
         "state": "Uttar Pradesh",
-        "venues": 1,
-        "shows": 1,
-        "gross": 2700.0,
-        "sold": 10,
-        "totalSeats": 193,
+        "venues": 2,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 371,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.18
+        "occupancy": 0.0
       },
       {
         "city": "Shillong",
@@ -3766,14 +4472,14 @@
       {
         "city": "Ambala",
         "state": "Haryana",
-        "venues": 1,
-        "shows": 2,
-        "gross": 4140.0,
-        "sold": 18,
-        "totalSeats": 194,
+        "venues": 2,
+        "shows": 3,
+        "gross": 6340.0,
+        "sold": 28,
+        "totalSeats": 513,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 9.28
+        "occupancy": 5.46
       },
       {
         "city": "Sri Ganganagar",
@@ -3835,25 +4541,25 @@
       },
       {
         "chain": "INOX",
-        "venues": 6,
-        "shows": 6,
-        "gross": 5570.0,
-        "sold": 24,
-        "totalSeats": 979,
+        "venues": 8,
+        "shows": 8,
+        "gross": 4320.0,
+        "sold": 12,
+        "totalSeats": 1340,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.45
+        "occupancy": 0.9
       },
       {
         "chain": "PVR",
-        "venues": 10,
-        "shows": 14,
-        "gross": 14905.0,
-        "sold": 52,
-        "totalSeats": 2012,
+        "venues": 12,
+        "shows": 16,
+        "gross": 6800.0,
+        "sold": 20,
+        "totalSeats": 2329,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.58
+        "occupancy": 0.86
       },
       {
         "chain": "Sanelite Cinema LLP",
@@ -3903,12 +4609,23 @@
         "chain": "Cinepolis",
         "venues": 2,
         "shows": 4,
-        "gross": 8740.0,
-        "sold": 38,
+        "gross": 8240.0,
+        "sold": 36,
         "totalSeats": 1148,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.31
+        "occupancy": 3.14
+      },
+      {
+        "chain": "FUN",
+        "venues": 2,
+        "shows": 2,
+        "gross": 2200.0,
+        "sold": 10,
+        "totalSeats": 592,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 1.69
       },
       {
         "chain": "NY Cinemas LLP",
@@ -3920,6 +4637,17 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 10.19
+      },
+      {
+        "chain": "Cinepolis P&A",
+        "venues": 1,
+        "shows": 2,
+        "gross": 4800.0,
+        "sold": 20,
+        "totalSeats": 276,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 7.25
       },
       {
         "chain": "Suriya Cinemas And Entertainments",
@@ -3957,15 +4685,15 @@
     ]
   },
   "28 Years Later: The Bone Temple [2D | Hindi]": {
-    "shows": 20,
-    "gross": 17500.0,
-    "sold": 91,
-    "totalSeats": 3761,
-    "venues": 12,
-    "cities": 10,
+    "shows": 22,
+    "gross": 16360.0,
+    "sold": 92,
+    "totalSeats": 4208,
+    "venues": 13,
+    "cities": 11,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 2.42,
+    "occupancy": 2.19,
     "details": [
       {
         "city": "Vidisha",
@@ -3996,12 +4724,12 @@
         "state": "Uttarakhand",
         "venues": 2,
         "shows": 3,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 355,
+        "gross": 2340.0,
+        "sold": 13,
+        "totalSeats": 378,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.0
+        "occupancy": 3.44
       },
       {
         "city": "Kalyani",
@@ -4032,12 +4760,12 @@
         "state": "Odisha",
         "venues": 2,
         "shows": 2,
-        "gross": 3480.0,
-        "sold": 12,
-        "totalSeats": 224,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 212,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.36
+        "occupancy": 0.0
       },
       {
         "city": "Bhubaneshwar",
@@ -4086,6 +4814,18 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
+      },
+      {
+        "city": "Nadiad",
+        "state": "Gujarat",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 436,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
       }
     ],
     "Chain_details": [
@@ -4115,12 +4855,12 @@
         "chain": "PVR",
         "venues": 6,
         "shows": 10,
-        "gross": 3480.0,
-        "sold": 12,
-        "totalSeats": 1356,
+        "gross": 2340.0,
+        "sold": 13,
+        "totalSeats": 1367,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.88
+        "occupancy": 0.95
       },
       {
         "chain": "K. P. SAHA Pvt.Ltd",
@@ -4135,11 +4875,11 @@
       },
       {
         "chain": "INOX",
-        "venues": 3,
-        "shows": 4,
+        "venues": 4,
+        "shows": 6,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 785,
+        "totalSeats": 1221,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -4147,15 +4887,15 @@
     ]
   },
   "One Two Cha Cha Chaa [2D | Hindi]": {
-    "shows": 35,
-    "gross": 27320.0,
-    "sold": 127,
-    "totalSeats": 4920,
-    "venues": 21,
+    "shows": 41,
+    "gross": 34890.0,
+    "sold": 162,
+    "totalSeats": 6073,
+    "venues": 27,
     "cities": 17,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 2.58,
+    "occupancy": 2.67,
     "details": [
       {
         "city": "Vidisha",
@@ -4256,26 +4996,26 @@
       {
         "city": "Kota",
         "state": "Rajasthan",
-        "venues": 1,
-        "shows": 1,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 176,
+        "venues": 2,
+        "shows": 2,
+        "gross": 3610.0,
+        "sold": 13,
+        "totalSeats": 459,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.0
+        "occupancy": 2.83
       },
       {
         "city": "Guwahati",
         "state": "Assam",
-        "venues": 2,
-        "shows": 2,
-        "gross": 1260.0,
-        "sold": 6,
-        "totalSeats": 247,
+        "venues": 4,
+        "shows": 4,
+        "gross": 5220.0,
+        "sold": 28,
+        "totalSeats": 613,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.43
+        "occupancy": 4.57
       },
       {
         "city": "Bettiah",
@@ -4292,14 +5032,14 @@
       {
         "city": "Jaipur",
         "state": "Rajasthan",
-        "venues": 3,
-        "shows": 3,
+        "venues": 5,
+        "shows": 5,
         "gross": 5280.0,
         "sold": 18,
-        "totalSeats": 549,
+        "totalSeats": 804,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.28
+        "occupancy": 2.24
       },
       {
         "city": "Dharamsala",
@@ -4340,11 +5080,11 @@
       {
         "city": "Anand",
         "state": "Gujarat",
-        "venues": 1,
-        "shows": 5,
+        "venues": 2,
+        "shows": 6,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 610,
+        "totalSeats": 859,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -4420,11 +5160,11 @@
       },
       {
         "chain": "PVR",
-        "venues": 3,
-        "shows": 3,
+        "venues": 5,
+        "shows": 5,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 369,
+        "totalSeats": 768,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -4442,14 +5182,36 @@
       },
       {
         "chain": "INOX",
-        "venues": 5,
-        "shows": 5,
+        "venues": 7,
+        "shows": 7,
         "gross": 3660.0,
         "sold": 12,
-        "totalSeats": 605,
+        "totalSeats": 860,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.98
+        "occupancy": 1.4
+      },
+      {
+        "chain": "FUN",
+        "venues": 1,
+        "shows": 1,
+        "gross": 3610.0,
+        "sold": 13,
+        "totalSeats": 283,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 4.59
+      },
+      {
+        "chain": "NY Cinemas LLP",
+        "venues": 1,
+        "shows": 1,
+        "gross": 3960.0,
+        "sold": 22,
+        "totalSeats": 216,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 10.19
       },
       {
         "chain": "Nova Cinemaz Private Limited",
@@ -4515,14 +5277,14 @@
   },
   "The Raja Saab [2D | Telugu]": {
     "shows": 66,
-    "gross": 732410.0,
-    "sold": 2973,
-    "totalSeats": 29691,
+    "gross": 233920.0,
+    "sold": 784,
+    "totalSeats": 33446,
     "venues": 21,
     "cities": 20,
-    "fastfilling": 8,
+    "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 10.01,
+    "occupancy": 2.34,
     "details": [
       {
         "city": "Mulugu",
@@ -4541,12 +5303,12 @@
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 4,
-        "gross": 83650.0,
-        "sold": 288,
-        "totalSeats": 3432,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 8184,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 8.39
+        "occupancy": 0.0
       },
       {
         "city": "Macherla",
@@ -4555,7 +5317,7 @@
         "shows": 4,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 5296,
+        "totalSeats": 4276,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -4565,12 +5327,12 @@
         "state": "Karnataka",
         "venues": 1,
         "shows": 2,
-        "gross": 6700.0,
-        "sold": 22,
-        "totalSeats": 303,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 281,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 7.26
+        "occupancy": 0.0
       },
       {
         "city": "Gannavaram",
@@ -4601,12 +5363,12 @@
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 4,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 1662,
+        "gross": 40250.0,
+        "sold": 161,
+        "totalSeats": 1592,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.0
+        "occupancy": 10.11
       },
       {
         "city": "Dharwad",
@@ -4625,12 +5387,12 @@
         "state": "Andhra Pradesh",
         "venues": 2,
         "shows": 6,
-        "gross": 59500.0,
-        "sold": 160,
-        "totalSeats": 1746,
+        "gross": 54400.0,
+        "sold": 136,
+        "totalSeats": 2505,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 9.16
+        "occupancy": 5.43
       },
       {
         "city": "Ponduru",
@@ -4673,24 +5435,24 @@
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 2,
-        "gross": 14400.0,
-        "sold": 72,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 810,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 8.89
+        "occupancy": 0.0
       },
       {
         "city": "Sathupally",
         "state": "Telangana",
         "venues": 1,
         "shows": 4,
-        "gross": 16450.0,
-        "sold": 112,
+        "gross": 700.0,
+        "sold": 7,
         "totalSeats": 1908,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.87
+        "occupancy": 0.37
       },
       {
         "city": "Madhavaram",
@@ -4709,12 +5471,12 @@
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 4,
-        "gross": 138960.0,
-        "sold": 482,
+        "gross": 137970.0,
+        "sold": 478,
         "totalSeats": 2032,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 23.72
+        "occupancy": 23.52
       },
       {
         "city": "Akividu",
@@ -4745,12 +5507,12 @@
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 8,
-        "gross": 412150.0,
-        "sold": 1835,
-        "totalSeats": 2232,
-        "fastfilling": 8,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1588,
+        "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 82.21
+        "occupancy": 0.0
       },
       {
         "city": "Pedana",
@@ -4781,23 +5543,23 @@
         "chain": "Justickets",
         "venues": 8,
         "shows": 33,
-        "gross": 500900.0,
-        "sold": 2147,
-        "totalSeats": 21075,
-        "fastfilling": 8,
+        "gross": 40250.0,
+        "sold": 161,
+        "totalSeats": 24852,
+        "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 10.19
+        "occupancy": 0.65
       },
       {
         "chain": "INOX",
         "venues": 1,
         "shows": 2,
-        "gross": 6700.0,
-        "sold": 22,
-        "totalSeats": 303,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 281,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 7.26
+        "occupancy": 0.0
       },
       {
         "chain": "Shanthi Theater: Gannavaram",
@@ -4869,34 +5631,34 @@
         "chain": "SLN CINEMA",
         "venues": 1,
         "shows": 2,
-        "gross": 14400.0,
-        "sold": 72,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 810,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 8.89
+        "occupancy": 0.0
       },
       {
         "chain": "Sri Balaji Theater: Sathupally",
         "venues": 1,
         "shows": 4,
-        "gross": 16450.0,
-        "sold": 112,
+        "gross": 700.0,
+        "sold": 7,
         "totalSeats": 1908,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.87
+        "occupancy": 0.37
       },
       {
         "chain": "NCS Theatre",
         "venues": 1,
         "shows": 4,
-        "gross": 138960.0,
-        "sold": 482,
+        "gross": 137970.0,
+        "sold": 478,
         "totalSeats": 2032,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 23.72
+        "occupancy": 23.52
       },
       {
         "chain": "Gowri Shankar Talkies: Varadaiahpalem",
@@ -4923,27 +5685,27 @@
     ]
   },
   "Anaganaga Oka Raju [2D | Telugu]": {
-    "shows": 58,
-    "gross": 944776.86,
-    "sold": 5086,
-    "totalSeats": 19887,
-    "venues": 18,
-    "cities": 15,
-    "fastfilling": 12,
+    "shows": 61,
+    "gross": 658385.29,
+    "sold": 3385,
+    "totalSeats": 21115,
+    "venues": 19,
+    "cities": 16,
+    "fastfilling": 5,
     "housefull": 0,
-    "occupancy": 25.57,
+    "occupancy": 16.03,
     "details": [
       {
         "city": "Palakollu",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 5,
-        "gross": 116000.0,
-        "sold": 464,
+        "gross": 56500.0,
+        "sold": 226,
         "totalSeats": 770,
-        "fastfilling": 5,
+        "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 60.26
+        "occupancy": 29.35
       },
       {
         "city": "Tumakuru (Tumkur)",
@@ -4962,132 +5724,132 @@
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 4,
-        "gross": 51800.0,
-        "sold": 376,
+        "gross": 5250.0,
+        "sold": 35,
         "totalSeats": 1728,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 21.76
+        "occupancy": 2.03
       },
       {
         "city": "Palasa",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 3,
-        "gross": 150990.0,
-        "sold": 1065,
+        "gross": 77030.0,
+        "sold": 533,
         "totalSeats": 1536,
-        "fastfilling": 3,
+        "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 69.34
+        "occupancy": 34.7
       },
       {
         "city": "Narasannapeta",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 5,
-        "gross": 92850.0,
-        "sold": 619,
+        "gross": 69150.0,
+        "sold": 461,
         "totalSeats": 2055,
-        "fastfilling": 0,
+        "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 30.12
+        "occupancy": 22.43
       },
       {
         "city": "Draksharamam",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 5,
-        "gross": 42400.0,
-        "sold": 212,
+        "gross": 42000.0,
+        "sold": 210,
         "totalSeats": 1270,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 16.69
+        "occupancy": 16.54
       },
       {
         "city": "Dharwad",
         "state": "Karnataka",
         "venues": 1,
         "shows": 2,
-        "gross": 2000.0,
-        "sold": 10,
-        "totalSeats": 372,
+        "gross": 4000.0,
+        "sold": 20,
+        "totalSeats": 382,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.69
+        "occupancy": 5.24
       },
       {
         "city": "Ravulapalem",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 4,
-        "gross": 77800.0,
-        "sold": 389,
+        "gross": 16600.0,
+        "sold": 83,
         "totalSeats": 1692,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 22.99
+        "occupancy": 4.91
       },
       {
         "city": "Vellore",
         "state": "Tamil Nadu",
         "venues": 2,
-        "shows": 3,
-        "gross": 6424.86,
-        "sold": 72,
-        "totalSeats": 468,
+        "shows": 4,
+        "gross": 6484.29,
+        "sold": 73,
+        "totalSeats": 636,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 15.38
+        "occupancy": 11.48
       },
       {
         "city": "Nellore",
         "state": "Andhra Pradesh",
         "venues": 2,
         "shows": 6,
-        "gross": 178313.0,
-        "sold": 683,
-        "totalSeats": 1545,
-        "fastfilling": 3,
+        "gross": 165000.0,
+        "sold": 600,
+        "totalSeats": 1953,
+        "fastfilling": 2,
         "housefull": 0,
-        "occupancy": 44.21
+        "occupancy": 30.72
       },
       {
         "city": "Ponduru",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 4,
-        "gross": 20700.0,
-        "sold": 138,
+        "gross": 15450.0,
+        "sold": 103,
         "totalSeats": 1444,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 9.56
+        "occupancy": 7.13
       },
       {
         "city": "Karimnagar",
         "state": "Telangana",
         "venues": 2,
         "shows": 5,
-        "gross": 10500.0,
-        "sold": 48,
+        "gross": 4700.0,
+        "sold": 19,
         "totalSeats": 1289,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.72
+        "occupancy": 1.47
       },
       {
         "city": "Vizianagaram",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 4,
-        "gross": 194549.0,
-        "sold": 1007,
+        "gross": 192471.0,
+        "sold": 997,
         "totalSeats": 2572,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 39.15
+        "occupancy": 38.76
       },
       {
         "city": "Siddipet",
@@ -5112,6 +5874,18 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
+      },
+      {
+        "city": "Thanjavur",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 2,
+        "gross": 3300.0,
+        "sold": 22,
+        "totalSeats": 642,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 3.43
       }
     ],
     "Chain_details": [
@@ -5119,122 +5893,122 @@
         "chain": "Adabala Theaters: Palakollu",
         "venues": 1,
         "shows": 5,
-        "gross": 116000.0,
-        "sold": 464,
+        "gross": 56500.0,
+        "sold": 226,
         "totalSeats": 770,
-        "fastfilling": 5,
+        "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 60.26
+        "occupancy": 29.35
       },
       {
         "chain": "INOX",
         "venues": 3,
         "shows": 6,
-        "gross": 4984.67,
-        "sold": 53,
-        "totalSeats": 1228,
+        "gross": 6984.67,
+        "sold": 63,
+        "totalSeats": 1238,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 4.32
+        "occupancy": 5.09
       },
       {
         "chain": "Sri Venkateswara A/C DTS: Mangalagiri",
         "venues": 1,
         "shows": 4,
-        "gross": 51800.0,
-        "sold": 376,
+        "gross": 5250.0,
+        "sold": 35,
         "totalSeats": 1728,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 21.76
+        "occupancy": 2.03
       },
       {
         "chain": "Sri Kanthi Cinemas",
         "venues": 1,
         "shows": 3,
-        "gross": 150990.0,
-        "sold": 1065,
+        "gross": 77030.0,
+        "sold": 533,
         "totalSeats": 1536,
-        "fastfilling": 3,
+        "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 69.34
+        "occupancy": 34.7
       },
       {
         "chain": "Sri Rajeswari Kala Mandir: Narsannapeta",
         "venues": 1,
         "shows": 5,
-        "gross": 92850.0,
-        "sold": 619,
+        "gross": 69150.0,
+        "sold": 461,
         "totalSeats": 2055,
-        "fastfilling": 0,
+        "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 30.12
+        "occupancy": 22.43
       },
       {
         "chain": "Vijaya Lakshmi Movies",
         "venues": 1,
         "shows": 5,
-        "gross": 42400.0,
-        "sold": 212,
+        "gross": 42000.0,
+        "sold": 210,
         "totalSeats": 1270,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 16.69
+        "occupancy": 16.54
       },
       {
         "chain": "Vijaya Lakshmi (Durga Reddy) Group",
         "venues": 1,
         "shows": 4,
-        "gross": 77800.0,
-        "sold": 389,
+        "gross": 16600.0,
+        "sold": 83,
         "totalSeats": 1692,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 22.99
+        "occupancy": 4.91
       },
       {
         "chain": "PVR",
         "venues": 1,
-        "shows": 1,
-        "gross": 3440.19,
-        "sold": 29,
-        "totalSeats": 168,
+        "shows": 2,
+        "gross": 3499.62,
+        "sold": 30,
+        "totalSeats": 336,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 17.26
+        "occupancy": 8.93
       },
       {
         "chain": "Rain Cinema: Nellore",
         "venues": 1,
         "shows": 3,
-        "gross": 163900.0,
-        "sold": 596,
+        "gross": 165000.0,
+        "sold": 600,
         "totalSeats": 942,
         "fastfilling": 2,
         "housefull": 0,
-        "occupancy": 63.27
+        "occupancy": 63.69
       },
       {
         "chain": "Justickets",
         "venues": 1,
         "shows": 3,
-        "gross": 14413.0,
-        "sold": 87,
-        "totalSeats": 603,
-        "fastfilling": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1011,
+        "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 14.43
+        "occupancy": 0.0
       },
       {
         "chain": "Rudram Cinema Associates",
         "venues": 1,
         "shows": 4,
-        "gross": 20700.0,
-        "sold": 138,
+        "gross": 15450.0,
+        "sold": 103,
         "totalSeats": 1444,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 9.56
+        "occupancy": 7.13
       },
       {
         "chain": "August Entertainment",
@@ -5251,23 +6025,23 @@
         "chain": "P R Cinemas Private Limited",
         "venues": 1,
         "shows": 2,
-        "gross": 6000.0,
-        "sold": 30,
+        "gross": 200.0,
+        "sold": 1,
         "totalSeats": 701,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 4.28
+        "occupancy": 0.14
       },
       {
         "chain": "Venkateshwara Enterprises",
         "venues": 1,
         "shows": 4,
-        "gross": 194549.0,
-        "sold": 1007,
+        "gross": 192471.0,
+        "sold": 997,
         "totalSeats": 2572,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 39.15
+        "occupancy": 38.76
       },
       {
         "chain": "Asian Cinemas",
@@ -5290,19 +6064,30 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
+      },
+      {
+        "chain": "Screen Time Entertainment",
+        "venues": 1,
+        "shows": 2,
+        "gross": 3300.0,
+        "sold": 22,
+        "totalSeats": 642,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 3.43
       }
     ]
   },
   "Nari Nari Naduma Murari [2D | Telugu]": {
     "shows": 25,
-    "gross": 127061.0,
-    "sold": 1088,
-    "totalSeats": 7330,
+    "gross": 127517.0,
+    "sold": 1113,
+    "totalSeats": 7328,
     "venues": 10,
     "cities": 8,
     "fastfilling": 2,
     "housefull": 0,
-    "occupancy": 14.84,
+    "occupancy": 15.19,
     "details": [
       {
         "city": "Palakollu",
@@ -5333,48 +6118,48 @@
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 2,
-        "gross": 38180.0,
-        "sold": 411,
+        "gross": 40080.0,
+        "sold": 430,
         "totalSeats": 1024,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 40.14
+        "occupancy": 41.99
       },
       {
         "city": "Narasannapeta",
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 4,
-        "gross": 2700.0,
-        "sold": 27,
+        "gross": 2500.0,
+        "sold": 25,
         "totalSeats": 1964,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.37
+        "occupancy": 1.27
       },
       {
         "city": "Nellore",
         "state": "Andhra Pradesh",
         "venues": 2,
         "shows": 4,
-        "gross": 53841.0,
-        "sold": 359,
-        "totalSeats": 892,
+        "gross": 56697.0,
+        "sold": 378,
+        "totalSeats": 890,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 40.25
+        "occupancy": 42.47
       },
       {
         "city": "Karimnagar",
         "state": "Telangana",
         "venues": 2,
         "shows": 5,
-        "gross": 9450.0,
-        "sold": 44,
+        "gross": 3250.0,
+        "sold": 13,
         "totalSeats": 1098,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 4.01
+        "occupancy": 1.18
       },
       {
         "city": "Hosur",
@@ -5393,12 +6178,12 @@
         "state": "Andhra Pradesh",
         "venues": 1,
         "shows": 3,
-        "gross": 21840.0,
-        "sold": 240,
+        "gross": 23940.0,
+        "sold": 260,
         "totalSeats": 1377,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 17.43
+        "occupancy": 18.88
       }
     ],
     "Chain_details": [
@@ -5428,45 +6213,45 @@
         "chain": "Sri Kanthi Cinemas",
         "venues": 1,
         "shows": 2,
-        "gross": 38180.0,
-        "sold": 411,
+        "gross": 40080.0,
+        "sold": 430,
         "totalSeats": 1024,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 40.14
+        "occupancy": 41.99
       },
       {
         "chain": "Sree Devi Theatre-Narasannapeta",
         "venues": 1,
         "shows": 4,
-        "gross": 2700.0,
-        "sold": 27,
+        "gross": 2500.0,
+        "sold": 25,
         "totalSeats": 1964,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.37
+        "occupancy": 1.27
       },
       {
         "chain": "Rain Cinema: Nellore",
         "venues": 1,
         "shows": 2,
-        "gross": 53400.0,
-        "sold": 356,
+        "gross": 56550.0,
+        "sold": 377,
         "totalSeats": 762,
         "fastfilling": 1,
         "housefull": 0,
-        "occupancy": 46.72
+        "occupancy": 49.48
       },
       {
         "chain": "Justickets",
         "venues": 1,
         "shows": 2,
-        "gross": 441.0,
-        "sold": 3,
-        "totalSeats": 130,
+        "gross": 147.0,
+        "sold": 1,
+        "totalSeats": 128,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.31
+        "occupancy": 0.78
       },
       {
         "chain": "August Entertainment",
@@ -5483,12 +6268,12 @@
         "chain": "P R Cinemas Private Limited",
         "venues": 1,
         "shows": 2,
-        "gross": 6200.0,
-        "sold": 31,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 510,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 6.08
+        "occupancy": 0.0
       },
       {
         "chain": "VL Associates",
@@ -5505,25 +6290,25 @@
         "chain": "Aditya",
         "venues": 1,
         "shows": 3,
-        "gross": 21840.0,
-        "sold": 240,
+        "gross": 23940.0,
+        "sold": 260,
         "totalSeats": 1377,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 17.43
+        "occupancy": 18.88
       }
     ]
   },
   "Avatar: Fire and Ash [3D | Hindi]": {
-    "shows": 19,
-    "gross": 38170.0,
-    "sold": 137,
-    "totalSeats": 3840,
-    "venues": 19,
-    "cities": 15,
+    "shows": 29,
+    "gross": 24920.0,
+    "sold": 88,
+    "totalSeats": 5677,
+    "venues": 28,
+    "cities": 18,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 3.57,
+    "occupancy": 1.55,
     "details": [
       {
         "city": "Daltonganj",
@@ -5576,14 +6361,14 @@
       {
         "city": "Ghaziabad",
         "state": "NCR",
-        "venues": 1,
-        "shows": 1,
-        "gross": 3750.0,
-        "sold": 15,
-        "totalSeats": 239,
+        "venues": 2,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 418,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 6.28
+        "occupancy": 0.0
       },
       {
         "city": "Kalyani",
@@ -5600,47 +6385,47 @@
       {
         "city": "Ludhiana",
         "state": "Punjab",
-        "venues": 2,
-        "shows": 2,
+        "venues": 3,
+        "shows": 3,
         "gross": 2400.0,
         "sold": 10,
-        "totalSeats": 455,
+        "totalSeats": 595,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.2
+        "occupancy": 1.68
       },
       {
         "city": "Bhubaneswar",
         "state": "Odisha",
         "venues": 2,
         "shows": 2,
-        "gross": 3360.0,
-        "sold": 12,
-        "totalSeats": 352,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 340,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.41
+        "occupancy": 0.0
       },
       {
         "city": "Bhubaneshwar",
         "state": "Odisha",
         "venues": 1,
         "shows": 1,
-        "gross": 5940.0,
-        "sold": 22,
-        "totalSeats": 437,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 415,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.03
+        "occupancy": 0.0
       },
       {
         "city": "Kota",
         "state": "Rajasthan",
-        "venues": 1,
-        "shows": 1,
+        "venues": 2,
+        "shows": 2,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 175,
+        "totalSeats": 448,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -5650,36 +6435,60 @@
         "state": "Assam",
         "venues": 2,
         "shows": 2,
-        "gross": 7900.0,
-        "sold": 30,
-        "totalSeats": 471,
+        "gross": 5100.0,
+        "sold": 20,
+        "totalSeats": 461,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 6.37
+        "occupancy": 4.34
+      },
+      {
+        "city": "Bathinda",
+        "state": "Punjab",
+        "venues": 1,
+        "shows": 1,
+        "gross": 2600.0,
+        "sold": 10,
+        "totalSeats": 343,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 2.92
       },
       {
         "city": "Jaipur",
         "state": "Rajasthan",
-        "venues": 2,
-        "shows": 2,
+        "venues": 4,
+        "shows": 5,
         "gross": 1440.0,
         "sold": 6,
-        "totalSeats": 364,
+        "totalSeats": 655,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.65
+        "occupancy": 0.92
       },
       {
         "city": "Gorakhpur",
         "state": "Uttar Pradesh",
-        "venues": 1,
-        "shows": 1,
+        "venues": 2,
+        "shows": 2,
         "gross": 3100.0,
         "sold": 10,
-        "totalSeats": 193,
+        "totalSeats": 381,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.18
+        "occupancy": 2.62
+      },
+      {
+        "city": "Anand",
+        "state": "Gujarat",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 249,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
       },
       {
         "city": "Sri Ganganagar",
@@ -5689,6 +6498,18 @@
         "gross": 0.0,
         "sold": 0,
         "totalSeats": 134,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Nadiad",
+        "state": "Gujarat",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 218,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -5731,14 +6552,14 @@
       },
       {
         "chain": "PVR",
-        "venues": 6,
-        "shows": 6,
-        "gross": 14710.0,
-        "sold": 47,
-        "totalSeats": 982,
+        "venues": 9,
+        "shows": 9,
+        "gross": 7600.0,
+        "sold": 20,
+        "totalSeats": 1538,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 4.79
+        "occupancy": 1.3
       },
       {
         "chain": "K. P. SAHA Pvt.Ltd",
@@ -5764,14 +6585,25 @@
       },
       {
         "chain": "INOX",
-        "venues": 7,
-        "shows": 7,
-        "gross": 11840.0,
-        "sold": 42,
-        "totalSeats": 1595,
+        "venues": 11,
+        "shows": 12,
+        "gross": 3100.0,
+        "sold": 10,
+        "totalSeats": 2260,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.63
+        "occupancy": 0.44
+      },
+      {
+        "chain": "FUN",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 273,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
       },
       {
         "chain": "Mridul Properties Pvt Ltd",
@@ -5783,19 +6615,30 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 7.84
+      },
+      {
+        "chain": "Cinepolis P&A",
+        "venues": 1,
+        "shows": 1,
+        "gross": 2600.0,
+        "sold": 10,
+        "totalSeats": 343,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 2.92
       }
     ]
   },
   "Bihu Attack [2D | Hindi]": {
-    "shows": 10,
+    "shows": 12,
     "gross": 9480.0,
     "sold": 44,
-    "totalSeats": 1429,
-    "venues": 8,
+    "totalSeats": 1823,
+    "venues": 10,
     "cities": 6,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 3.08,
+    "occupancy": 2.41,
     "details": [
       {
         "city": "Samastipur",
@@ -5848,11 +6691,11 @@
       {
         "city": "Kota",
         "state": "Rajasthan",
-        "venues": 1,
-        "shows": 1,
+        "venues": 2,
+        "shows": 2,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 211,
+        "totalSeats": 484,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -5860,14 +6703,14 @@
       {
         "city": "Guwahati",
         "state": "Assam",
-        "venues": 3,
-        "shows": 3,
+        "venues": 4,
+        "shows": 4,
         "gross": 5760.0,
         "sold": 26,
-        "totalSeats": 656,
+        "totalSeats": 777,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.96
+        "occupancy": 3.35
       }
     ],
     "Chain_details": [
@@ -5927,6 +6770,28 @@
         "occupancy": 0.0
       },
       {
+        "chain": "FUN",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 273,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "PVR",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 121,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
         "chain": "Mridul Properties Pvt Ltd",
         "venues": 1,
         "shows": 1,
@@ -5940,15 +6805,15 @@
     ]
   },
   "Rahu Ketu [2D | Hindi]": {
-    "shows": 131,
-    "gross": 491840.0,
-    "sold": 1805,
-    "totalSeats": 29932,
-    "venues": 31,
-    "cities": 17,
+    "shows": 193,
+    "gross": 529260.0,
+    "sold": 1923,
+    "totalSeats": 42523,
+    "venues": 41,
+    "cities": 20,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 6.03,
+    "occupancy": 4.52,
     "details": [
       {
         "city": "Samastipur",
@@ -5967,12 +6832,12 @@
         "state": "Uttar Pradesh",
         "venues": 1,
         "shows": 6,
-        "gross": 24560.0,
-        "sold": 52,
-        "totalSeats": 1256,
+        "gross": 58160.0,
+        "sold": 152,
+        "totalSeats": 1356,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 4.14
+        "occupancy": 11.21
       },
       {
         "city": "Khanna",
@@ -6013,122 +6878,134 @@
       {
         "city": "Dehradun",
         "state": "Uttarakhand",
-        "venues": 3,
-        "shows": 17,
-        "gross": 15640.0,
-        "sold": 61,
-        "totalSeats": 2981,
+        "venues": 4,
+        "shows": 26,
+        "gross": 1060.0,
+        "sold": 4,
+        "totalSeats": 4533,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.05
+        "occupancy": 0.09
       },
       {
         "city": "Ghaziabad",
         "state": "NCR",
         "venues": 2,
         "shows": 7,
-        "gross": 55810.0,
-        "sold": 196,
-        "totalSeats": 2194,
+        "gross": 49980.0,
+        "sold": 174,
+        "totalSeats": 2172,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 8.93
+        "occupancy": 8.01
       },
       {
         "city": "Ludhiana",
         "state": "Punjab",
-        "venues": 3,
-        "shows": 21,
-        "gross": 17920.0,
-        "sold": 82,
-        "totalSeats": 3857,
+        "venues": 4,
+        "shows": 31,
+        "gross": 13400.0,
+        "sold": 60,
+        "totalSeats": 6060,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.13
+        "occupancy": 0.99
       },
       {
         "city": "Bhubaneswar",
         "state": "Odisha",
         "venues": 2,
         "shows": 8,
-        "gross": 5520.0,
-        "sold": 26,
-        "totalSeats": 1429,
+        "gross": 9000.0,
+        "sold": 38,
+        "totalSeats": 1441,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.82
+        "occupancy": 2.64
       },
       {
         "city": "Bhubaneshwar",
         "state": "Odisha",
         "venues": 1,
         "shows": 4,
-        "gross": 4680.0,
-        "sold": 24,
-        "totalSeats": 1014,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 990,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.37
+        "occupancy": 0.0
       },
       {
         "city": "Kota",
         "state": "Rajasthan",
-        "venues": 1,
-        "shows": 5,
-        "gross": 3690.0,
-        "sold": 21,
-        "totalSeats": 1017,
+        "venues": 2,
+        "shows": 10,
+        "gross": 1680.0,
+        "sold": 8,
+        "totalSeats": 1830,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.06
+        "occupancy": 0.44
       },
       {
         "city": "Jhansi",
         "state": "Uttar Pradesh",
         "venues": 1,
         "shows": 5,
-        "gross": 9720.0,
-        "sold": 40,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 730,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.48
+        "occupancy": 0.0
       },
       {
         "city": "Guwahati",
         "state": "Assam",
-        "venues": 4,
-        "shows": 14,
-        "gross": 14820.0,
-        "sold": 70,
-        "totalSeats": 2341,
+        "venues": 6,
+        "shows": 21,
+        "gross": 34460.0,
+        "sold": 167,
+        "totalSeats": 4102,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.99
+        "occupancy": 4.07
+      },
+      {
+        "city": "Bathinda",
+        "state": "Punjab",
+        "venues": 1,
+        "shows": 4,
+        "gross": 10400.0,
+        "sold": 40,
+        "totalSeats": 800,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 5.0
       },
       {
         "city": "Jaipur",
         "state": "Rajasthan",
-        "venues": 4,
-        "shows": 15,
-        "gross": 299020.0,
-        "sold": 1049,
-        "totalSeats": 6389,
+        "venues": 6,
+        "shows": 28,
+        "gross": 297160.0,
+        "sold": 1041,
+        "totalSeats": 8585,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 16.42
+        "occupancy": 12.13
       },
       {
         "city": "Gorakhpur",
         "state": "Uttar Pradesh",
         "venues": 3,
-        "shows": 11,
-        "gross": 7820.0,
-        "sold": 34,
-        "totalSeats": 3330,
+        "shows": 16,
+        "gross": 9720.0,
+        "sold": 39,
+        "totalSeats": 4387,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 1.02
+        "occupancy": 0.89
       },
       {
         "city": "Shillong",
@@ -6141,6 +7018,30 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 9.88
+      },
+      {
+        "city": "Ambala",
+        "state": "Haryana",
+        "venues": 1,
+        "shows": 5,
+        "gross": 11600.0,
+        "sold": 50,
+        "totalSeats": 1145,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 4.37
+      },
+      {
+        "city": "Anand",
+        "state": "Gujarat",
+        "venues": 1,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 998,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
       },
       {
         "city": "Srinagar",
@@ -6169,14 +7070,14 @@
       },
       {
         "chain": "PVR",
-        "venues": 8,
-        "shows": 49,
-        "gross": 67950.0,
-        "sold": 227,
-        "totalSeats": 9335,
+        "venues": 12,
+        "shows": 76,
+        "gross": 84660.0,
+        "sold": 257,
+        "totalSeats": 15189,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.43
+        "occupancy": 1.69
       },
       {
         "chain": "Sanelite Cinema LLP",
@@ -6213,36 +7114,58 @@
       },
       {
         "chain": "INOX",
-        "venues": 11,
-        "shows": 36,
-        "gross": 76870.0,
-        "sold": 277,
-        "totalSeats": 8351,
+        "venues": 13,
+        "shows": 54,
+        "gross": 70040.0,
+        "sold": 236,
+        "totalSeats": 11568,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.32
+        "occupancy": 2.04
       },
       {
         "chain": "Cinepolis",
         "venues": 3,
         "shows": 16,
-        "gross": 28460.0,
-        "sold": 124,
+        "gross": 28160.0,
+        "sold": 122,
         "totalSeats": 3489,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.55
+        "occupancy": 3.5
+      },
+      {
+        "chain": "FUN",
+        "venues": 2,
+        "shows": 10,
+        "gross": 11600.0,
+        "sold": 50,
+        "totalSeats": 1970,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 2.54
       },
       {
         "chain": "Nataraj Cinema: Jhansi",
         "venues": 1,
         "shows": 5,
-        "gross": 9720.0,
-        "sold": 40,
+        "gross": 0.0,
+        "sold": 0,
         "totalSeats": 730,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.48
+        "occupancy": 0.0
+      },
+      {
+        "chain": "NY Cinemas LLP",
+        "venues": 1,
+        "shows": 3,
+        "gross": 15080.0,
+        "sold": 78,
+        "totalSeats": 750,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 10.4
       },
       {
         "chain": "Mridul Properties Pvt Ltd",
@@ -6254,6 +7177,17 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 7.84
+      },
+      {
+        "chain": "Cinepolis P&A",
+        "venues": 1,
+        "shows": 4,
+        "gross": 10400.0,
+        "sold": 40,
+        "totalSeats": 800,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 5.0
       },
       {
         "chain": "Rajmandir cinema",
@@ -6270,12 +7204,12 @@
         "chain": "Superstar Empire Pvt Ltd",
         "venues": 1,
         "shows": 5,
-        "gross": 0.0,
-        "sold": 0,
+        "gross": 480.0,
+        "sold": 3,
         "totalSeats": 1635,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.0
+        "occupancy": 0.18
       },
       {
         "chain": "Anjalee",
@@ -6292,14 +7226,14 @@
   },
   "Projapati 2 [2D | Bengali]": {
     "shows": 17,
-    "gross": 3180.0,
-    "sold": 14,
+    "gross": 3280.0,
+    "sold": 15,
     "totalSeats": 2511,
     "venues": 7,
     "cities": 6,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 0.56,
+    "occupancy": 0.6,
     "details": [
       {
         "city": "Purulia",
@@ -6366,12 +7300,12 @@
         "state": "West Bengal",
         "venues": 1,
         "shows": 3,
-        "gross": 0.0,
-        "sold": 0,
+        "gross": 100.0,
+        "sold": 1,
         "totalSeats": 342,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.0
+        "occupancy": 0.29
       }
     ],
     "Chain_details": [
@@ -6434,25 +7368,25 @@
         "chain": "Sree Lakshmi Talkies",
         "venues": 1,
         "shows": 3,
-        "gross": 0.0,
-        "sold": 0,
+        "gross": 100.0,
+        "sold": 1,
         "totalSeats": 342,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.0
+        "occupancy": 0.29
       }
     ]
   },
   "Aga Aga Sunbai! Kay Mhantay Sasubai? [2D | Marathi]": {
-    "shows": 32,
+    "shows": 35,
     "gross": 97440.0,
     "sold": 1008,
-    "totalSeats": 9332,
-    "venues": 10,
+    "totalSeats": 9782,
+    "venues": 11,
     "cities": 9,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 10.8,
+    "occupancy": 10.3,
     "details": [
       {
         "city": "Belagavi (Belgaum)",
@@ -6469,11 +7403,11 @@
       {
         "city": "Baramati",
         "state": "Maharashtra",
-        "venues": 1,
-        "shows": 3,
+        "venues": 2,
+        "shows": 6,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 564,
+        "totalSeats": 1014,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -6582,6 +7516,17 @@
         "gross": 0.0,
         "sold": 0,
         "totalSeats": 564,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Tara Cinema: Baramati",
+        "venues": 1,
+        "shows": 3,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 450,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -6716,26 +7661,26 @@
   },
   "Surya Power of Love [2D | Kannada]": {
     "shows": 1,
-    "gross": 0.0,
-    "sold": 0,
-    "totalSeats": 130,
+    "gross": 1900.0,
+    "sold": 10,
+    "totalSeats": 140,
     "venues": 1,
     "cities": 1,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 0.0,
+    "occupancy": 7.14,
     "details": [
       {
         "city": "Tumakuru (Tumkur)",
         "state": "Karnataka",
         "venues": 1,
         "shows": 1,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 130,
+        "gross": 1900.0,
+        "sold": 10,
+        "totalSeats": 140,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.0
+        "occupancy": 7.14
       }
     ],
     "Chain_details": [
@@ -6743,37 +7688,37 @@
         "chain": "INOX",
         "venues": 1,
         "shows": 1,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 130,
+        "gross": 1900.0,
+        "sold": 10,
+        "totalSeats": 140,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.0
+        "occupancy": 7.14
       }
     ]
   },
   "Mark [2D | Kannada]": {
     "shows": 6,
-    "gross": 2500.0,
-    "sold": 14,
-    "totalSeats": 1768,
+    "gross": 2300.0,
+    "sold": 12,
+    "totalSeats": 1766,
     "venues": 3,
     "cities": 2,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 0.79,
+    "occupancy": 0.68,
     "details": [
       {
         "city": "Tumakuru (Tumkur)",
         "state": "Karnataka",
         "venues": 2,
         "shows": 3,
-        "gross": 2500.0,
-        "sold": 14,
-        "totalSeats": 1456,
+        "gross": 2300.0,
+        "sold": 12,
+        "totalSeats": 1454,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.96
+        "occupancy": 0.83
       },
       {
         "city": "Dharwad",
@@ -6804,12 +7749,12 @@
         "chain": "Gayatri Enterprises: Tumkur",
         "venues": 1,
         "shows": 2,
-        "gross": 400.0,
-        "sold": 4,
-        "totalSeats": 1316,
+        "gross": 200.0,
+        "sold": 2,
+        "totalSeats": 1314,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.3
+        "occupancy": 0.15
       },
       {
         "chain": "Raiker Entertainments",
@@ -6826,26 +7771,26 @@
   },
   "Bharathi Teacher [2D | Kannada]": {
     "shows": 2,
-    "gross": 200.0,
-    "sold": 4,
-    "totalSeats": 1316,
+    "gross": 0.0,
+    "sold": 0,
+    "totalSeats": 1312,
     "venues": 1,
     "cities": 1,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 0.3,
+    "occupancy": 0.0,
     "details": [
       {
         "city": "Tumakuru (Tumkur)",
         "state": "Karnataka",
         "venues": 1,
         "shows": 2,
-        "gross": 200.0,
-        "sold": 4,
-        "totalSeats": 1316,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 1312,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.3
+        "occupancy": 0.0
       }
     ],
     "Chain_details": [
@@ -6853,264 +7798,25 @@
         "chain": "Gayatri Enterprises: Tumkur",
         "venues": 1,
         "shows": 2,
-        "gross": 200.0,
-        "sold": 4,
-        "totalSeats": 1316,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.3
-      }
-    ]
-  },
-  "Happy Patel: Khatarnak Jasoos [2D | Hindi]": {
-    "shows": 128,
-    "gross": 185525.0,
-    "sold": 688,
-    "totalSeats": 24357,
-    "venues": 28,
-    "cities": 15,
-    "fastfilling": 0,
-    "housefull": 0,
-    "occupancy": 2.82,
-    "details": [
-      {
-        "city": "Bareilly",
-        "state": "Uttar Pradesh",
-        "venues": 1,
-        "shows": 5,
-        "gross": 21790.0,
-        "sold": 46,
-        "totalSeats": 1046,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 4.4
-      },
-      {
-        "city": "Khanna",
-        "state": "Punjab",
-        "venues": 1,
-        "shows": 6,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 1529,
+        "totalSeats": 1312,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
-      },
-      {
-        "city": "Dehradun",
-        "state": "Uttarakhand",
-        "venues": 3,
-        "shows": 18,
-        "gross": 13910.0,
-        "sold": 64,
-        "totalSeats": 2656,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 2.41
-      },
-      {
-        "city": "Ghaziabad",
-        "state": "NCR",
-        "venues": 2,
-        "shows": 7,
-        "gross": 42225.0,
-        "sold": 145,
-        "totalSeats": 2053,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 7.06
-      },
-      {
-        "city": "Ludhiana",
-        "state": "Punjab",
-        "venues": 3,
-        "shows": 20,
-        "gross": 9000.0,
-        "sold": 40,
-        "totalSeats": 4421,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.9
-      },
-      {
-        "city": "Bhubaneswar",
-        "state": "Odisha",
-        "venues": 1,
-        "shows": 4,
-        "gross": 12800.0,
-        "sold": 59,
-        "totalSeats": 468,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 12.61
-      },
-      {
-        "city": "Bhubaneshwar",
-        "state": "Odisha",
-        "venues": 1,
-        "shows": 3,
-        "gross": 4680.0,
-        "sold": 24,
-        "totalSeats": 636,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 3.77
-      },
-      {
-        "city": "Kota",
-        "state": "Rajasthan",
-        "venues": 1,
-        "shows": 4,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 1036,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "city": "Guwahati",
-        "state": "Assam",
-        "venues": 4,
-        "shows": 16,
-        "gross": 15720.0,
-        "sold": 52,
-        "totalSeats": 2229,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 2.33
-      },
-      {
-        "city": "Thrissur",
-        "state": "Kerala",
-        "venues": 1,
-        "shows": 3,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 633,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      },
-      {
-        "city": "Jaipur",
-        "state": "Rajasthan",
-        "venues": 4,
-        "shows": 19,
-        "gross": 13460.0,
-        "sold": 49,
-        "totalSeats": 3028,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 1.62
-      },
-      {
-        "city": "Gorakhpur",
-        "state": "Uttar Pradesh",
-        "venues": 3,
-        "shows": 14,
-        "gross": 14260.0,
-        "sold": 59,
-        "totalSeats": 2378,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 2.48
-      },
-      {
-        "city": "Shillong",
-        "state": "Meghalaya",
-        "venues": 1,
-        "shows": 2,
-        "gross": 11200.0,
-        "sold": 34,
-        "totalSeats": 348,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 9.77
-      },
-      {
-        "city": "Sri Ganganagar",
-        "state": "Rajasthan",
-        "venues": 1,
-        "shows": 5,
-        "gross": 26480.0,
-        "sold": 116,
-        "totalSeats": 1496,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 7.75
-      },
-      {
-        "city": "Srinagar",
-        "state": "Jammu and Kashmir",
-        "venues": 1,
-        "shows": 2,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 400,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      }
-    ],
-    "Chain_details": [
-      {
-        "chain": "PVR",
-        "venues": 13,
-        "shows": 76,
-        "gross": 88245.0,
-        "sold": 337,
-        "totalSeats": 13837,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 2.44
-      },
-      {
-        "chain": "INOX",
-        "venues": 11,
-        "shows": 38,
-        "gross": 65500.0,
-        "sold": 229,
-        "totalSeats": 7463,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 3.07
-      },
-      {
-        "chain": "Cinepolis",
-        "venues": 3,
-        "shows": 12,
-        "gross": 20580.0,
-        "sold": 88,
-        "totalSeats": 2709,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 3.25
-      },
-      {
-        "chain": "Anjalee",
-        "venues": 1,
-        "shows": 2,
-        "gross": 11200.0,
-        "sold": 34,
-        "totalSeats": 348,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 9.77
       }
     ]
   },
   "Ikkis [2D | Hindi]": {
-    "shows": 22,
-    "gross": 11560.0,
-    "sold": 52,
-    "totalSeats": 3053,
-    "venues": 16,
-    "cities": 9,
+    "shows": 29,
+    "gross": 8620.0,
+    "sold": 38,
+    "totalSeats": 4090,
+    "venues": 21,
+    "cities": 10,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 1.7,
+    "occupancy": 0.93,
     "details": [
       {
         "city": "Bareilly",
@@ -7151,14 +7857,14 @@
       {
         "city": "Ludhiana",
         "state": "Punjab",
-        "venues": 3,
-        "shows": 5,
+        "venues": 4,
+        "shows": 7,
         "gross": 2100.0,
         "sold": 10,
-        "totalSeats": 463,
+        "totalSeats": 726,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.16
+        "occupancy": 1.38
       },
       {
         "city": "Bhubaneswar",
@@ -7177,21 +7883,21 @@
         "state": "Odisha",
         "venues": 1,
         "shows": 1,
-        "gross": 3680.0,
-        "sold": 16,
-        "totalSeats": 307,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 291,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.21
+        "occupancy": 0.0
       },
       {
         "city": "Guwahati",
         "state": "Assam",
-        "venues": 2,
-        "shows": 3,
+        "venues": 3,
+        "shows": 4,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 321,
+        "totalSeats": 471,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -7199,14 +7905,14 @@
       {
         "city": "Jaipur",
         "state": "Rajasthan",
-        "venues": 2,
-        "shows": 2,
-        "gross": 5780.0,
-        "sold": 26,
-        "totalSeats": 443,
+        "venues": 4,
+        "shows": 5,
+        "gross": 4320.0,
+        "sold": 18,
+        "totalSeats": 872,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.87
+        "occupancy": 2.06
       },
       {
         "city": "Gorakhpur",
@@ -7219,16 +7925,28 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
+      },
+      {
+        "city": "Ambala",
+        "state": "Haryana",
+        "venues": 1,
+        "shows": 1,
+        "gross": 2200.0,
+        "sold": 10,
+        "totalSeats": 211,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 4.74
       }
     ],
     "Chain_details": [
       {
         "chain": "PVR",
-        "venues": 8,
-        "shows": 13,
+        "venues": 10,
+        "shows": 16,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 1620,
+        "totalSeats": 2033,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -7237,36 +7955,47 @@
         "chain": "Cinepolis",
         "venues": 2,
         "shows": 2,
-        "gross": 4340.0,
-        "sold": 18,
+        "gross": 3840.0,
+        "sold": 16,
         "totalSeats": 337,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.34
+        "occupancy": 4.75
       },
       {
         "chain": "INOX",
-        "venues": 6,
-        "shows": 7,
-        "gross": 7220.0,
-        "sold": 34,
-        "totalSeats": 1096,
+        "venues": 8,
+        "shows": 10,
+        "gross": 2580.0,
+        "sold": 12,
+        "totalSeats": 1509,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.1
+        "occupancy": 0.8
+      },
+      {
+        "chain": "FUN",
+        "venues": 1,
+        "shows": 1,
+        "gross": 2200.0,
+        "sold": 10,
+        "totalSeats": 211,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 4.74
       }
     ]
   },
   "Jai Kanhaiyalall Ki [2D | Gujarati]": {
-    "shows": 7,
+    "shows": 8,
     "gross": 5250.0,
     "sold": 25,
-    "totalSeats": 776,
-    "venues": 5,
+    "totalSeats": 994,
+    "venues": 6,
     "cities": 4,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 3.22,
+    "occupancy": 2.52,
     "details": [
       {
         "city": "Mehsana",
@@ -7307,11 +8036,11 @@
       {
         "city": "Nadiad",
         "state": "Gujarat",
-        "venues": 1,
-        "shows": 1,
+        "venues": 2,
+        "shows": 2,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 105,
+        "totalSeats": 323,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -7358,6 +8087,17 @@
         "gross": 0.0,
         "sold": 0,
         "totalSeats": 156,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "INOX",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 218,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -7490,15 +8230,15 @@
     ]
   },
   "Mauje Dariya [2D | Gujarati]": {
-    "shows": 3,
+    "shows": 5,
     "gross": 5000.0,
     "sold": 25,
-    "totalSeats": 474,
-    "venues": 3,
-    "cities": 3,
+    "totalSeats": 848,
+    "venues": 5,
+    "cities": 4,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 5.27,
+    "occupancy": 2.95,
     "details": [
       {
         "city": "Mehsana",
@@ -7525,13 +8265,25 @@
         "occupancy": 8.47
       },
       {
-        "city": "Nadiad",
+        "city": "Anand",
         "state": "Gujarat",
         "venues": 1,
         "shows": 1,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 118,
+        "totalSeats": 156,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Nadiad",
+        "state": "Gujarat",
+        "venues": 2,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 336,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -7561,6 +8313,28 @@
         "occupancy": 8.47
       },
       {
+        "chain": "PVR",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 156,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "INOX",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 218,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
         "chain": "Coconut Media Box LLP",
         "venues": 1,
         "shows": 1,
@@ -7574,15 +8348,15 @@
     ]
   },
   "Sirai [2D | Tamil]": {
-    "shows": 2,
-    "gross": 0.0,
-    "sold": 0,
-    "totalSeats": 380,
-    "venues": 1,
-    "cities": 1,
+    "shows": 7,
+    "gross": 10523.95,
+    "sold": 81,
+    "totalSeats": 1248,
+    "venues": 3,
+    "cities": 3,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 0.0,
+    "occupancy": 6.49,
     "details": [
       {
         "city": "Kozhinjampara",
@@ -7595,6 +8369,30 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
+      },
+      {
+        "city": "Vellore",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 1,
+        "gross": 923.95,
+        "sold": 17,
+        "totalSeats": 168,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 10.12
+      },
+      {
+        "city": "Thanjavur",
+        "state": "Tamil Nadu",
+        "venues": 1,
+        "shows": 4,
+        "gross": 9600.0,
+        "sold": 64,
+        "totalSeats": 700,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 9.14
       }
     ],
     "Chain_details": [
@@ -7608,6 +8406,28 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
+      },
+      {
+        "chain": "PVR",
+        "venues": 1,
+        "shows": 1,
+        "gross": 923.95,
+        "sold": 17,
+        "totalSeats": 168,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 10.12
+      },
+      {
+        "chain": "Screen Time Entertainment",
+        "venues": 1,
+        "shows": 4,
+        "gross": 9600.0,
+        "sold": 64,
+        "totalSeats": 700,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 9.14
       }
     ]
   },
@@ -7650,27 +8470,27 @@
     ]
   },
   "Band Baaja Baaraat [2D | Hindi]": {
-    "shows": 4,
-    "gross": 4200.0,
-    "sold": 28,
-    "totalSeats": 511,
-    "venues": 4,
-    "cities": 3,
+    "shows": 5,
+    "gross": 150.0,
+    "sold": 1,
+    "totalSeats": 503,
+    "venues": 5,
+    "cities": 4,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 5.48,
+    "occupancy": 0.2,
     "details": [
       {
         "city": "Dehradun",
         "state": "Uttarakhand",
         "venues": 2,
         "shows": 2,
-        "gross": 4200.0,
-        "sold": 28,
-        "totalSeats": 271,
+        "gross": 150.0,
+        "sold": 1,
+        "totalSeats": 233,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 10.33
+        "occupancy": 0.43
       },
       {
         "city": "Ludhiana",
@@ -7680,6 +8500,18 @@
         "gross": 0.0,
         "sold": 0,
         "totalSeats": 84,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Jaipur",
+        "state": "Rajasthan",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 30,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -7702,12 +8534,23 @@
         "chain": "PVR",
         "venues": 4,
         "shows": 4,
-        "gross": 4200.0,
-        "sold": 28,
-        "totalSeats": 511,
+        "gross": 150.0,
+        "sold": 1,
+        "totalSeats": 473,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.48
+        "occupancy": 0.21
+      },
+      {
+        "chain": "INOX",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 30,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
       }
     ]
   },
@@ -7826,15 +8669,15 @@
     ]
   },
   "Greenland 2: Migration [2D | English]": {
-    "shows": 2,
+    "shows": 4,
     "gross": 4950.0,
     "sold": 17,
-    "totalSeats": 281,
-    "venues": 1,
-    "cities": 1,
+    "totalSeats": 523,
+    "venues": 2,
+    "cities": 2,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 6.05,
+    "occupancy": 3.25,
     "details": [
       {
         "city": "Dehradun",
@@ -7847,66 +8690,90 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 6.05
+      },
+      {
+        "city": "Guwahati",
+        "state": "Assam",
+        "venues": 1,
+        "shows": 2,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 242,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
       }
     ],
     "Chain_details": [
       {
         "chain": "PVR",
-        "venues": 1,
-        "shows": 2,
+        "venues": 2,
+        "shows": 4,
         "gross": 4950.0,
         "sold": 17,
-        "totalSeats": 281,
+        "totalSeats": 523,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 6.05
+        "occupancy": 3.25
       }
     ]
   },
   "The Housemaid [2D | English]": {
-    "shows": 1,
-    "gross": 4060.0,
-    "sold": 14,
-    "totalSeats": 108,
-    "venues": 1,
-    "cities": 1,
+    "shows": 2,
+    "gross": 580.0,
+    "sold": 2,
+    "totalSeats": 344,
+    "venues": 2,
+    "cities": 2,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 12.96,
+    "occupancy": 0.58,
     "details": [
       {
         "city": "Dehradun",
         "state": "Uttarakhand",
         "venues": 1,
         "shows": 1,
-        "gross": 4060.0,
-        "sold": 14,
-        "totalSeats": 108,
+        "gross": 580.0,
+        "sold": 2,
+        "totalSeats": 96,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 12.96
+        "occupancy": 2.08
+      },
+      {
+        "city": "Guwahati",
+        "state": "Assam",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 248,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
       }
     ],
     "Chain_details": [
       {
         "chain": "PVR",
-        "venues": 1,
-        "shows": 1,
-        "gross": 4060.0,
-        "sold": 14,
-        "totalSeats": 108,
+        "venues": 2,
+        "shows": 2,
+        "gross": 580.0,
+        "sold": 2,
+        "totalSeats": 344,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 12.96
+        "occupancy": 0.58
       }
     ]
   },
   "Krantijyoti Vidyalay Marathi Madhyam [2D | Marathi]": {
-    "shows": 5,
+    "shows": 6,
     "gross": 0.0,
     "sold": 0,
-    "totalSeats": 2098,
-    "venues": 4,
+    "totalSeats": 2248,
+    "venues": 5,
     "cities": 4,
     "fastfilling": 0,
     "housefull": 0,
@@ -7915,11 +8782,11 @@
       {
         "city": "Baramati",
         "state": "Maharashtra",
-        "venues": 1,
-        "shows": 1,
+        "venues": 2,
+        "shows": 2,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 188,
+        "totalSeats": 338,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -7969,6 +8836,17 @@
         "gross": 0.0,
         "sold": 0,
         "totalSeats": 188,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "Tara Cinema: Baramati",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 150,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -8048,26 +8926,26 @@
   },
   "Maa Surkanda [2D | Garhwali]": {
     "shows": 1,
-    "gross": 0.0,
-    "sold": 0,
-    "totalSeats": 212,
+    "gross": 2000.0,
+    "sold": 10,
+    "totalSeats": 222,
     "venues": 1,
     "cities": 1,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 0.0,
+    "occupancy": 4.5,
     "details": [
       {
         "city": "Ghaziabad",
         "state": "NCR",
         "venues": 1,
         "shows": 1,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 212,
+        "gross": 2000.0,
+        "sold": 10,
+        "totalSeats": 222,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.0
+        "occupancy": 4.5
       }
     ],
     "Chain_details": [
@@ -8075,12 +8953,12 @@
         "chain": "RR Cinema: Jaipuriya Mall",
         "venues": 1,
         "shows": 1,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 212,
+        "gross": 2000.0,
+        "sold": 10,
+        "totalSeats": 222,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 0.0
+        "occupancy": 4.5
       }
     ]
   },
@@ -8184,15 +9062,15 @@
     ]
   },
   "28 Years Later [2D | Hindi]": {
-    "shows": 1,
-    "gross": 2400.0,
-    "sold": 10,
-    "totalSeats": 95,
-    "venues": 1,
-    "cities": 1,
+    "shows": 3,
+    "gross": 3900.0,
+    "sold": 18,
+    "totalSeats": 428,
+    "venues": 2,
+    "cities": 2,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 10.53,
+    "occupancy": 4.21,
     "details": [
       {
         "city": "Ludhiana",
@@ -8205,6 +9083,18 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 10.53
+      },
+      {
+        "city": "Kota",
+        "state": "Rajasthan",
+        "venues": 1,
+        "shows": 2,
+        "gross": 1500.0,
+        "sold": 8,
+        "totalSeats": 333,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 2.4
       }
     ],
     "Chain_details": [
@@ -8218,31 +9108,42 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 10.53
+      },
+      {
+        "chain": "FUN",
+        "venues": 1,
+        "shows": 2,
+        "gross": 1500.0,
+        "sold": 8,
+        "totalSeats": 333,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 2.4
       }
     ]
   },
   "Sagwaan [2D | Hindi]": {
-    "shows": 2,
-    "gross": 4060.0,
-    "sold": 14,
-    "totalSeats": 415,
-    "venues": 2,
-    "cities": 2,
+    "shows": 3,
+    "gross": 4140.0,
+    "sold": 12,
+    "totalSeats": 594,
+    "venues": 3,
+    "cities": 3,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 3.37,
+    "occupancy": 2.02,
     "details": [
       {
         "city": "Bhubaneswar",
         "state": "Odisha",
         "venues": 1,
         "shows": 1,
-        "gross": 4060.0,
-        "sold": 14,
-        "totalSeats": 175,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 161,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 8.0
+        "occupancy": 0.0
       },
       {
         "city": "Kota",
@@ -8255,6 +9156,18 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
+      },
+      {
+        "city": "Jaipur",
+        "state": "Rajasthan",
+        "venues": 1,
+        "shows": 1,
+        "gross": 4140.0,
+        "sold": 12,
+        "totalSeats": 193,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 6.22
       }
     ],
     "Chain_details": [
@@ -8262,12 +9175,12 @@
         "chain": "PVR",
         "venues": 1,
         "shows": 1,
-        "gross": 4060.0,
-        "sold": 14,
-        "totalSeats": 175,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 161,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 8.0
+        "occupancy": 0.0
       },
       {
         "chain": "Gold Cinema",
@@ -8279,31 +9192,42 @@
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
+      },
+      {
+        "chain": "INOX",
+        "venues": 1,
+        "shows": 1,
+        "gross": 4140.0,
+        "sold": 12,
+        "totalSeats": 193,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 6.22
       }
     ]
   },
   "Avatar: Fire and Ash [2D | Hindi]": {
     "shows": 1,
-    "gross": 2160.0,
-    "sold": 12,
-    "totalSeats": 223,
+    "gross": 0.0,
+    "sold": 0,
+    "totalSeats": 211,
     "venues": 1,
     "cities": 1,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 5.38,
+    "occupancy": 0.0,
     "details": [
       {
         "city": "Kota",
         "state": "Rajasthan",
         "venues": 1,
         "shows": 1,
-        "gross": 2160.0,
-        "sold": 12,
-        "totalSeats": 223,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 211,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.38
+        "occupancy": 0.0
       }
     ],
     "Chain_details": [
@@ -8311,12 +9235,12 @@
         "chain": "INOX",
         "venues": 1,
         "shows": 1,
-        "gross": 2160.0,
-        "sold": 12,
-        "totalSeats": 223,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 211,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 5.38
+        "occupancy": 0.0
       }
     ]
   },
@@ -8352,6 +9276,128 @@
         "gross": 0.0,
         "sold": 0,
         "totalSeats": 264,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      }
+    ]
+  },
+  "Avatar: Fire and Ash [3D | English]": {
+    "shows": 7,
+    "gross": 6640.0,
+    "sold": 19,
+    "totalSeats": 1108,
+    "venues": 4,
+    "cities": 3,
+    "fastfilling": 0,
+    "housefull": 0,
+    "occupancy": 1.71,
+    "details": [
+      {
+        "city": "Guwahati",
+        "state": "Assam",
+        "venues": 2,
+        "shows": 4,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 714,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "city": "Thrissur",
+        "state": "Kerala",
+        "venues": 1,
+        "shows": 2,
+        "gross": 360.0,
+        "sold": 2,
+        "totalSeats": 222,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.9
+      },
+      {
+        "city": "Shillong",
+        "state": "Meghalaya",
+        "venues": 1,
+        "shows": 1,
+        "gross": 6280.0,
+        "sold": 17,
+        "totalSeats": 172,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 9.88
+      }
+    ],
+    "Chain_details": [
+      {
+        "chain": "PVR",
+        "venues": 1,
+        "shows": 3,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 676,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      },
+      {
+        "chain": "INOX",
+        "venues": 2,
+        "shows": 3,
+        "gross": 360.0,
+        "sold": 2,
+        "totalSeats": 260,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.77
+      },
+      {
+        "chain": "Anjalee",
+        "venues": 1,
+        "shows": 1,
+        "gross": 6280.0,
+        "sold": 17,
+        "totalSeats": 172,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 9.88
+      }
+    ]
+  },
+  "Joubone Amoni Kore 2 [2D | Assamese]": {
+    "shows": 1,
+    "gross": 0.0,
+    "sold": 0,
+    "totalSeats": 150,
+    "venues": 1,
+    "cities": 1,
+    "fastfilling": 0,
+    "housefull": 0,
+    "occupancy": 0.0,
+    "details": [
+      {
+        "city": "Guwahati",
+        "state": "Assam",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 150,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      }
+    ],
+    "Chain_details": [
+      {
+        "chain": "PVR",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 150,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -8398,112 +9444,39 @@
   },
   "Prastabana: The Preamble [2D | Assamese]": {
     "shows": 1,
-    "gross": 2400.0,
-    "sold": 10,
-    "totalSeats": 216,
+    "gross": 0.0,
+    "sold": 0,
+    "totalSeats": 206,
     "venues": 1,
     "cities": 1,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 4.63,
+    "occupancy": 0.0,
     "details": [
       {
         "city": "Guwahati",
         "state": "Assam",
         "venues": 1,
         "shows": 1,
-        "gross": 2400.0,
-        "sold": 10,
-        "totalSeats": 216,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 4.63
-      }
-    ],
-    "Chain_details": [
-      {
-        "chain": "INOX",
-        "venues": 1,
-        "shows": 1,
-        "gross": 2400.0,
-        "sold": 10,
-        "totalSeats": 216,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 4.63
-      }
-    ]
-  },
-  "Avatar: Fire and Ash [3D | English]": {
-    "shows": 4,
-    "gross": 10600.0,
-    "sold": 23,
-    "totalSeats": 438,
-    "venues": 3,
-    "cities": 3,
-    "fastfilling": 0,
-    "housefull": 0,
-    "occupancy": 5.25,
-    "details": [
-      {
-        "city": "Guwahati",
-        "state": "Assam",
-        "venues": 1,
-        "shows": 1,
-        "gross": 4320.0,
-        "sold": 6,
-        "totalSeats": 44,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 13.64
-      },
-      {
-        "city": "Thrissur",
-        "state": "Kerala",
-        "venues": 1,
-        "shows": 2,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 222,
+        "totalSeats": 206,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
-      },
-      {
-        "city": "Shillong",
-        "state": "Meghalaya",
-        "venues": 1,
-        "shows": 1,
-        "gross": 6280.0,
-        "sold": 17,
-        "totalSeats": 172,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 9.88
       }
     ],
     "Chain_details": [
       {
         "chain": "INOX",
-        "venues": 2,
-        "shows": 3,
-        "gross": 4320.0,
-        "sold": 6,
-        "totalSeats": 266,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 2.26
-      },
-      {
-        "chain": "Anjalee",
         "venues": 1,
         "shows": 1,
-        "gross": 6280.0,
-        "sold": 17,
-        "totalSeats": 172,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 206,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 9.88
+        "occupancy": 0.0
       }
     ]
   },
@@ -8545,25 +9518,25 @@
       }
     ]
   },
-  "Pennu Case [2D | Malayalam]": {
+  "Kanimangalam Kovilakam [2D | Malayalam]": {
     "shows": 5,
-    "gross": 3780.0,
-    "sold": 18,
-    "totalSeats": 898,
+    "gross": 2520.0,
+    "sold": 12,
+    "totalSeats": 557,
     "venues": 2,
     "cities": 2,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 2.0,
+    "occupancy": 2.15,
     "details": [
       {
         "city": "Thrissur",
         "state": "Kerala",
         "venues": 1,
-        "shows": 2,
+        "shows": 3,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 422,
+        "totalSeats": 333,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -8572,23 +9545,23 @@
         "city": "Kannur",
         "state": "Kerala",
         "venues": 1,
-        "shows": 3,
-        "gross": 3780.0,
-        "sold": 18,
-        "totalSeats": 476,
+        "shows": 2,
+        "gross": 2520.0,
+        "sold": 12,
+        "totalSeats": 224,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.78
+        "occupancy": 5.36
       }
     ],
     "Chain_details": [
       {
         "chain": "INOX",
         "venues": 1,
-        "shows": 2,
+        "shows": 3,
         "gross": 0.0,
         "sold": 0,
-        "totalSeats": 422,
+        "totalSeats": 333,
         "fastfilling": 0,
         "housefull": 0,
         "occupancy": 0.0
@@ -8596,38 +9569,38 @@
       {
         "chain": "Cinepolis",
         "venues": 1,
-        "shows": 3,
-        "gross": 3780.0,
-        "sold": 18,
-        "totalSeats": 476,
+        "shows": 2,
+        "gross": 2520.0,
+        "sold": 12,
+        "totalSeats": 224,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 3.78
+        "occupancy": 5.36
       }
     ]
   },
   "Tu Meri Main Tera Main Tera Tu Meri [2D | Hindi]": {
     "shows": 1,
-    "gross": 1740.0,
-    "sold": 6,
+    "gross": 2320.0,
+    "sold": 8,
     "totalSeats": 242,
     "venues": 1,
     "cities": 1,
     "fastfilling": 0,
     "housefull": 0,
-    "occupancy": 2.48,
+    "occupancy": 3.31,
     "details": [
       {
         "city": "Jaipur",
         "state": "Rajasthan",
         "venues": 1,
         "shows": 1,
-        "gross": 1740.0,
-        "sold": 6,
+        "gross": 2320.0,
+        "sold": 8,
         "totalSeats": 242,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.48
+        "occupancy": 3.31
       }
     ],
     "Chain_details": [
@@ -8635,12 +9608,73 @@
         "chain": "Cinepolis",
         "venues": 1,
         "shows": 1,
-        "gross": 1740.0,
-        "sold": 6,
+        "gross": 2320.0,
+        "sold": 8,
         "totalSeats": 242,
         "fastfilling": 0,
         "housefull": 0,
-        "occupancy": 2.48
+        "occupancy": 3.31
+      }
+    ]
+  },
+  "Laalo - Krishna Sada Sahaayate (Hindi) [2D | Hindi]": {
+    "shows": 2,
+    "gross": 920.0,
+    "sold": 4,
+    "totalSeats": 145,
+    "venues": 2,
+    "cities": 2,
+    "fastfilling": 0,
+    "housefull": 0,
+    "occupancy": 2.76,
+    "details": [
+      {
+        "city": "Jaipur",
+        "state": "Rajasthan",
+        "venues": 1,
+        "shows": 1,
+        "gross": 920.0,
+        "sold": 4,
+        "totalSeats": 40,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 10.0
+      },
+      {
+        "city": "Nadiad",
+        "state": "Gujarat",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 105,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
+      }
+    ],
+    "Chain_details": [
+      {
+        "chain": "INOX",
+        "venues": 1,
+        "shows": 1,
+        "gross": 920.0,
+        "sold": 4,
+        "totalSeats": 40,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 10.0
+      },
+      {
+        "chain": "Coconut Media Box LLP",
+        "venues": 1,
+        "shows": 1,
+        "gross": 0.0,
+        "sold": 0,
+        "totalSeats": 105,
+        "fastfilling": 0,
+        "housefull": 0,
+        "occupancy": 0.0
       }
     ]
   },
@@ -8949,44 +9983,6 @@
     ]
   },
   "Chaal Jeevi Laiye [2D | Gujarati]": {
-    "shows": 1,
-    "gross": 0.0,
-    "sold": 0,
-    "totalSeats": 105,
-    "venues": 1,
-    "cities": 1,
-    "fastfilling": 0,
-    "housefull": 0,
-    "occupancy": 0.0,
-    "details": [
-      {
-        "city": "Nadiad",
-        "state": "Gujarat",
-        "venues": 1,
-        "shows": 1,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 105,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      }
-    ],
-    "Chain_details": [
-      {
-        "chain": "Coconut Media Box LLP",
-        "venues": 1,
-        "shows": 1,
-        "gross": 0.0,
-        "sold": 0,
-        "totalSeats": 105,
-        "fastfilling": 0,
-        "housefull": 0,
-        "occupancy": 0.0
-      }
-    ]
-  },
-  "Laalo - Krishna Sada Sahaayate (Hindi) [2D | Hindi]": {
     "shows": 1,
     "gross": 0.0,
     "sold": 0,
