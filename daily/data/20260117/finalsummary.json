@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-01-17 03:01 IST",
+  "last_updated": "2026-01-17 03:59 IST",
   "movies": {
     "Anaganaga Oka Raju [2D | Telugu]": {
       "shows": 2,
@@ -62,6 +62,44 @@
         }
       ]
     },
+    "Dhurandhar [2D | Hindi]": {
+      "shows": 1,
+      "gross": 0.0,
+      "sold": 0,
+      "totalSeats": 123,
+      "venues": 1,
+      "cities": 1,
+      "fastfilling": 0,
+      "housefull": 0,
+      "occupancy": 0.0,
+      "details": [
+        {
+          "city": "Ahmedabad",
+          "state": "Gujarat",
+          "venues": 1,
+          "shows": 1,
+          "gross": 0.0,
+          "sold": 0,
+          "totalSeats": 123,
+          "fastfilling": 0,
+          "housefull": 0,
+          "occupancy": 0.0
+        }
+      ],
+      "Chain_details": [
+        {
+          "chain": "Manya Enterprise: Ahmedabad",
+          "venues": 1,
+          "shows": 1,
+          "gross": 0.0,
+          "sold": 0,
+          "totalSeats": 123,
+          "fastfilling": 0,
+          "housefull": 0,
+          "occupancy": 0.0
+        }
+      ]
+    },
     "Jai Kanhaiyalall Ki [2D | Gujarati]": {
       "shows": 1,
       "gross": 0.0,
@@ -101,15 +139,15 @@
       ]
     },
     "Mana Shankara Vara Prasad Garu [2D | Telugu]": {
-      "shows": 5,
-      "gross": 156900.0,
-      "sold": 663,
-      "totalSeats": 1972,
-      "venues": 4,
-      "cities": 4,
-      "fastfilling": 0,
-      "housefull": 1,
-      "occupancy": 33.62,
+      "shows": 12,
+      "gross": 577377.0,
+      "sold": 2638,
+      "totalSeats": 4772,
+      "venues": 11,
+      "cities": 9,
+      "fastfilling": 5,
+      "housefull": 2,
+      "occupancy": 55.28,
       "details": [
         {
           "city": "Annavaram",
@@ -124,16 +162,40 @@
           "occupancy": 18.66
         },
         {
-          "city": "Rajahmundry",
+          "city": "Jalandhar",
+          "state": "Punjab",
+          "venues": 1,
+          "shows": 1,
+          "gross": 7500.0,
+          "sold": 50,
+          "totalSeats": 197,
+          "fastfilling": 0,
+          "housefull": 0,
+          "occupancy": 25.38
+        },
+        {
+          "city": "Narasannapeta",
           "state": "Andhra Pradesh",
           "venues": 1,
           "shows": 1,
-          "gross": 75500.0,
-          "sold": 302,
-          "totalSeats": 302,
+          "gross": 38400.0,
+          "sold": 192,
+          "totalSeats": 194,
           "fastfilling": 0,
           "housefull": 1,
-          "occupancy": 100.0
+          "occupancy": 98.97
+        },
+        {
+          "city": "Rajahmundry",
+          "state": "Andhra Pradesh",
+          "venues": 2,
+          "shows": 2,
+          "gross": 141330.0,
+          "sold": 580,
+          "totalSeats": 689,
+          "fastfilling": 1,
+          "housefull": 1,
+          "occupancy": 84.18
         },
         {
           "city": "Rajavommangi",
@@ -148,6 +210,18 @@
           "occupancy": 14.74
         },
         {
+          "city": "Tekkali",
+          "state": "Andhra Pradesh",
+          "venues": 1,
+          "shows": 1,
+          "gross": 65400.0,
+          "sold": 327,
+          "totalSeats": 375,
+          "fastfilling": 1,
+          "housefull": 0,
+          "occupancy": 87.2
+        },
+        {
           "city": "Tirupati",
           "state": "Andhra Pradesh",
           "venues": 1,
@@ -158,6 +232,30 @@
           "fastfilling": 0,
           "housefull": 0,
           "occupancy": 37.72
+        },
+        {
+          "city": "Vizag",
+          "state": "Andhra Pradesh",
+          "venues": 2,
+          "shows": 2,
+          "gross": 163220.0,
+          "sold": 717,
+          "totalSeats": 981,
+          "fastfilling": 2,
+          "housefull": 0,
+          "occupancy": 73.09
+        },
+        {
+          "city": "Vizianagaram",
+          "state": "Andhra Pradesh",
+          "venues": 1,
+          "shows": 1,
+          "gross": 80127.0,
+          "sold": 411,
+          "totalSeats": 666,
+          "fastfilling": 1,
+          "housefull": 0,
+          "occupancy": 61.71
         }
       ],
       "Chain_details": [
@@ -173,6 +271,28 @@
           "occupancy": 18.66
         },
         {
+          "chain": "GRD Entertainment",
+          "venues": 1,
+          "shows": 1,
+          "gross": 7500.0,
+          "sold": 50,
+          "totalSeats": 197,
+          "fastfilling": 0,
+          "housefull": 0,
+          "occupancy": 25.38
+        },
+        {
+          "chain": "Justickets",
+          "venues": 2,
+          "shows": 3,
+          "gross": 75150.0,
+          "sold": 339,
+          "totalSeats": 1191,
+          "fastfilling": 0,
+          "housefull": 1,
+          "occupancy": 28.46
+        },
+        {
           "chain": "Vijaya Lakshmi (Durga Reddy) Group",
           "venues": 1,
           "shows": 1,
@@ -184,15 +304,26 @@
           "occupancy": 100.0
         },
         {
-          "chain": "Justickets",
+          "chain": "Sri Venkata Surya Picture Palace",
           "venues": 1,
-          "shows": 2,
-          "gross": 36750.0,
-          "sold": 147,
-          "totalSeats": 997,
-          "fastfilling": 0,
+          "shows": 1,
+          "gross": 65830.0,
+          "sold": 278,
+          "totalSeats": 387,
+          "fastfilling": 1,
           "housefull": 0,
-          "occupancy": 14.74
+          "occupancy": 71.83
+        },
+        {
+          "chain": "Sri Kanthi Cinemas",
+          "venues": 1,
+          "shows": 1,
+          "gross": 65400.0,
+          "sold": 327,
+          "totalSeats": 375,
+          "fastfilling": 1,
+          "housefull": 0,
+          "occupancy": 87.2
         },
         {
           "chain": "CS Cinemas: Tirupati",
@@ -204,6 +335,77 @@
           "fastfilling": 0,
           "housefull": 0,
           "occupancy": 37.72
+        },
+        {
+          "chain": "Sree Leela Mahal Theatre: Vizag",
+          "venues": 1,
+          "shows": 1,
+          "gross": 67195.0,
+          "sold": 289,
+          "totalSeats": 526,
+          "fastfilling": 1,
+          "housefull": 0,
+          "occupancy": 54.94
+        },
+        {
+          "chain": "Sri Lakshmi Narasimha Picture Palace: Vizag",
+          "venues": 1,
+          "shows": 1,
+          "gross": 96025.0,
+          "sold": 428,
+          "totalSeats": 455,
+          "fastfilling": 1,
+          "housefull": 0,
+          "occupancy": 94.07
+        },
+        {
+          "chain": "Sri Leela Mahal - Vizianagaram",
+          "venues": 1,
+          "shows": 1,
+          "gross": 80127.0,
+          "sold": 411,
+          "totalSeats": 666,
+          "fastfilling": 1,
+          "housefull": 0,
+          "occupancy": 61.71
+        }
+      ]
+    },
+    "Ninaithathai Mudippavan [2D | Tamil]": {
+      "shows": 1,
+      "gross": 4650.0,
+      "sold": 38,
+      "totalSeats": 897,
+      "venues": 1,
+      "cities": 1,
+      "fastfilling": 0,
+      "housefull": 0,
+      "occupancy": 4.24,
+      "details": [
+        {
+          "city": "Bengaluru",
+          "state": "Karnataka",
+          "venues": 1,
+          "shows": 1,
+          "gross": 4650.0,
+          "sold": 38,
+          "totalSeats": 897,
+          "fastfilling": 0,
+          "housefull": 0,
+          "occupancy": 4.24
+        }
+      ],
+      "Chain_details": [
+        {
+          "chain": "Nayana Enterprises",
+          "venues": 1,
+          "shows": 1,
+          "gross": 4650.0,
+          "sold": 38,
+          "totalSeats": 897,
+          "fastfilling": 0,
+          "housefull": 0,
+          "occupancy": 4.24
         }
       ]
     }
