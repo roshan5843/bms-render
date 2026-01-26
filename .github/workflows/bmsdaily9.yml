@@ -43,8 +43,11 @@ jobs:
 
       # ---------------- RUN DAILY SCRAPER ----------------
       - name: 🚀 Run BMS District Daily shard 9 scraper
+        env:
+          MY_API_URL: ${{ secrets.MY_API_URL }}
         run: |
           python bmsdaily9.py
+
 
       # ---------------- COMMIT & PUSH ----------------
       - name: 💾 Commit & push DAILY data

@@ -1,4 +1,4 @@
-#bms-render/bmsdaily9.py
+# bms-render/bmsdaily9.py
 import json
 import os
 import asyncio
@@ -22,25 +22,34 @@ NOW_IST = datetime.now(IST)
 DATE_CODE = NOW_IST.strftime("%Y%m%d")
 DATE_DISTRICT = NOW_IST.strftime("%Y-%m-%d")
 
+API_URL = os.getenv("MY_API_URL")
+
+if not API_URL:
+    raise RuntimeError("❌ MY_API_URL env variable not set")
+
+
 BASE_DIR = os.path.join("daily", "data", DATE_CODE)
 LOG_DIR = os.path.join(BASE_DIR, "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
 
 DETAILED_FILE = f"{BASE_DIR}/detailed{SHARD_ID}.json"
-SUMMARY_FILE  = f"{BASE_DIR}/movie_summary{SHARD_ID}.json"
-LOG_FILE      = f"{LOG_DIR}/districtdaily{SHARD_ID}.log"
+SUMMARY_FILE = f"{BASE_DIR}/movie_summary{SHARD_ID}.json"
+LOG_FILE = f"{LOG_DIR}/districtdaily{SHARD_ID}.log"
 
-API_URL = "https://districtvenues.text2029mail.workers.dev/?cinema_id={cid}&date={date}"
+# API_URL = "https://districtvenues.text2029mail.workers.dev/?cinema_id={cid}&date={date}"
 
 # =====================================================
 # LOGGING
 # =====================================================
+
+
 def log(msg):
     ts = datetime.now(IST).strftime("%H:%M:%S")
     line = f"[{ts}] {msg}"
     print(line, flush=True)
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(line + "\n")
+
 
 # =====================================================
 # LOAD DISTRICT VENUES
@@ -53,15 +62,19 @@ log(f"📍 Loaded {len(DIST_VENUES)} district venues")
 # =====================================================
 # HELPERS
 # =====================================================
+
+
 def format_state(s):
     if not s:
         return "Unknown"
     return " ".join(w.capitalize() for w in s.replace("-", " ").split())
 
+
 def format_chain(s):
     if not s:
         return "Unknown"
     return " ".join(w.capitalize() for w in s.replace("-", " ").split())
+
 
 def minutes_left(show_time_str):
     """
@@ -86,6 +99,7 @@ def minutes_left(show_time_str):
     except:
         return 9999
 
+
 def show_key(r):
     return (
         r.get("venue"),
@@ -97,6 +111,8 @@ def show_key(r):
 # =====================================================
 # FETCH SINGLE VENUE
 # =====================================================
+
+
 async def fetch_one(session, venue):
     cid = venue.get("id")
     url = API_URL.format(cid=cid, date=DATE_DISTRICT)
@@ -122,6 +138,8 @@ async def fetch_one(session, venue):
 # =====================================================
 # FETCH ALL (ASYNC)
 # =====================================================
+
+
 async def fetch_all():
     sem = asyncio.Semaphore(CONCURRENCY)
     results = []
@@ -145,6 +163,8 @@ async def fetch_all():
 # =====================================================
 # PARSE + APPLY CUTOFF
 # =====================================================
+
+
 def parse(results):
     detailed = []
 
@@ -230,6 +250,8 @@ def parse(results):
 # =====================================================
 # BUILD SUMMARY (FROM FINAL DETAILED)
 # =====================================================
+
+
 def build_summary(detailed):
     summary = {}
 
@@ -286,6 +308,8 @@ def build_summary(detailed):
 # =====================================================
 # ENTRY
 # =====================================================
+
+
 async def main():
     log("🚀 DISTRICT DAILY SCRAPER STARTED")
 
