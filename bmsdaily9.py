@@ -22,11 +22,6 @@ NOW_IST = datetime.now(IST)
 DATE_CODE = NOW_IST.strftime("%Y%m%d")
 DATE_DISTRICT = NOW_IST.strftime("%Y-%m-%d")
 
-API_URL = os.getenv("MY_API_URL")
-
-if not API_URL:
-    raise RuntimeError("❌ MY_API_URL env variable not set")
-
 
 BASE_DIR = os.path.join("daily", "data", DATE_CODE)
 LOG_DIR = os.path.join(BASE_DIR, "logs")
@@ -35,6 +30,11 @@ os.makedirs(LOG_DIR, exist_ok=True)
 DETAILED_FILE = f"{BASE_DIR}/detailed{SHARD_ID}.json"
 SUMMARY_FILE = f"{BASE_DIR}/movie_summary{SHARD_ID}.json"
 LOG_FILE = f"{LOG_DIR}/districtdaily{SHARD_ID}.log"
+
+API_URL = os.getenv("MY_API_URL")
+
+if not API_URL:
+    raise RuntimeError("❌ MY_API_URL env variable not set")
 
 # API_URL = "https://districtvenues.text2029mail.workers.dev/?cinema_id={cid}&date={date}"
 
