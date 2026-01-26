@@ -43,7 +43,10 @@ jobs:
 
       # ---------------- RUN SCRAPER ----------------
       - name: 🚀 Run BMS shard 9 scraper
-        run: python bms9.py
+        env:
+          MY_API_URL: ${{ secrets.MY_API_URL }}
+        run: |
+          python bms9.py
 
       # ---------------- COMMIT & PUSH ----------------
       - name: 💾 Commit & push (AUTO-RESOLVE CONFLICTS)

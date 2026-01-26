@@ -1,4 +1,4 @@
-#bms-render/bms9.py
+# bms-render/bms9.py
 import json
 import os
 import asyncio
@@ -24,20 +24,26 @@ LOG_DIR = os.path.join(BASE_DIR, "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
 
 DETAILED_FILE = f"{BASE_DIR}/detailed{SHARD_ID}.json"
-SUMMARY_FILE  = f"{BASE_DIR}/movie_summary{SHARD_ID}.json"
-LOG_FILE      = f"{LOG_DIR}/district{SHARD_ID}.log"
+SUMMARY_FILE = f"{BASE_DIR}/movie_summary{SHARD_ID}.json"
+LOG_FILE = f"{LOG_DIR}/district{SHARD_ID}.log"
 
-API_URL = "https://districtvenues.text2029mail.workers.dev/?cinema_id={cid}&date={date}"
+API_URL = os.getenv("MY_API_URL")
+
+if not API_URL:
+    raise RuntimeError("❌ MY_API_URL env variable not set")
 
 # =====================================================
 # LOGGING
 # =====================================================
+
+
 def log(msg):
     ts = datetime.now(IST).strftime("%H:%M:%S")
     line = f"[{ts}] {msg}"
     print(line, flush=True)
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(line + "\n")
+
 
 # =====================================================
 # LOAD DISTRICT VENUES
@@ -50,15 +56,19 @@ log(f"📍 Loaded {len(DIST_VENUES)} district venues")
 # =====================================================
 # HELPERS
 # =====================================================
+
+
 def format_state(s):
     if not s:
         return "Unknown"
     return " ".join(w.capitalize() for w in s.replace("-", " ").split())
 
+
 def format_chain(s):
     if not s:
         return "Unknown"
     return " ".join(w.capitalize() for w in s.replace("-", " ").split())
+
 
 def dedupe(rows):
     seen = set()
@@ -81,6 +91,8 @@ def dedupe(rows):
 # =====================================================
 # FETCH SINGLE VENUE
 # =====================================================
+
+
 async def fetch_one(session, venue):
     cid = venue.get("id")
     url = API_URL.format(cid=cid, date=DATE_DISTRICT)
@@ -107,6 +119,8 @@ async def fetch_one(session, venue):
 # =====================================================
 # FETCH ALL (ASYNC)
 # =====================================================
+
+
 async def fetch_all():
     sem = asyncio.Semaphore(CONCURRENCY)
     results = []
@@ -130,6 +144,8 @@ async def fetch_all():
 # =====================================================
 # PARSE DATA
 # =====================================================
+
+
 def parse(results):
     detailed = []
 
@@ -224,6 +240,8 @@ def parse(results):
 # =====================================================
 # BUILD SUMMARY
 # =====================================================
+
+
 def build_summary(detailed):
     summary = {}
 
@@ -362,6 +380,8 @@ def build_summary(detailed):
 # =====================================================
 # ENTRY
 # =====================================================
+
+
 async def main():
     log("🚀 DISTRICT SCRAPER STARTED")
     results = await fetch_all()

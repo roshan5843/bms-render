@@ -36,7 +36,6 @@ API_URL = os.getenv("MY_API_URL")
 if not API_URL:
     raise RuntimeError("❌ MY_API_URL env variable not set")
 
-# API_URL = "https://districtvenues.text2029mail.workers.dev/?cinema_id={cid}&date={date}"
 
 # =====================================================
 # LOGGING
