@@ -206,7 +206,10 @@ jobs:
           pip install selenium webdriver-manager cloudscraper aiohttp pytz
 
       - name: 🚀 Run shard scraper
-        run: python bmsdaily${{ matrix.shard }}.py
+        env:
+          MY_API_URL: ${{ matrix.shard == 9 && secrets.MY_API_URL || '' }}
+        run: |
+          python bmsdaily${{ matrix.shard }}.py
 
       - name: 💾 Commit & push shard data
         run: |

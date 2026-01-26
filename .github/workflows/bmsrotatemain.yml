@@ -304,7 +304,7 @@ jobs:
         env:
           DAYS_AHEAD: ${{ needs.decide-day.outputs.days_ahead }}
           DATE_CODE:  ${{ needs.decide-day.outputs.date_code }}
-          MY_API_URL: ${{ matrix.shard == 9 && secrets.DISTRICT_API_URL || '' }}
+          MY_API_URL: ${{ matrix.shard == 9 && secrets.MY_API_URL || '' }}
 
       - name: 💾 Commit shard output (REBASE SAFE)
         run: |
