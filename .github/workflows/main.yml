@@ -1,3 +1,4 @@
+# 
 # name: BMS TmrwAdv 1–9 + Combine (Matrix | HARD SAFE)
 # 
 # on:
@@ -11,7 +12,7 @@
 # 
 # jobs:
 # # =====================================================
-# # 1️⃣ SHARDS (PARALLEL – NO PUSH ISSUES HERE)
+# # 1️⃣ SHARDS (PARALLEL)
 # # =====================================================
 #   shards:
 #     name: Shard ${{ matrix.shard }}
@@ -50,8 +51,8 @@
 # 
 #       - name: 🚀 Run shard scraper
 #         env:
-#           SHARD_ID: ${{ matrix.shard }}
-#         run: |
+#           MY_API_URL: ${{ matrix.shard == 9 && secrets.MY_API_URL || '' }}
+#         run: | 
 #           python bms${{ matrix.shard }}.py
 # 
 #       - name: 💾 Commit & push shard data
@@ -60,7 +61,7 @@
 #           git config user.email "actions@github.com"
 # 
 #           git add advance/
-#           git commit -m "BMS shard ${{ matrix.shard }} ($(date +'%Y-%m-%d %H:%M IST'))" || exit 0
+#           git commit -m "Advance BMS shard ${{ matrix.shard }} ($(date +'%Y-%m-%d %H:%M IST'))" || exit 0
 # 
 #           for i in 1 2 3; do
 #             git pull --rebase origin main || true
@@ -71,17 +72,16 @@
 #           git push --force-with-lease origin main || true
 # 
 # # =====================================================
-# # 2️⃣ COMBINER (SINGLE WRITER – HARD SAFE)
+# # 2️⃣ COMBINER + MONGODB SYNC
 # # =====================================================
 #   combine:
-#     name: Combine all shards (SAFE)
+#     name: Combine + MongoDB Sync
 #     needs: shards
 #     runs-on: ubuntu-latest
 #     timeout-minutes: 30
 # 
-#     # 🔒 absolutely critical
 #     concurrency:
-#       group: bms-combiner
+#       group: bms-advance-combiner
 #       cancel-in-progress: false
 # 
 #     steps:
@@ -96,11 +96,11 @@
 #         with:
 #           python-version: "3.11"
 # 
-#       - name: 📦 Install deps
+#       - name: 📦 Install dependencies
 #         run: |
-#           pip install pytz
+#           pip install pytz pymongo dnspython
 # 
-#       - name: 🔁 Safe combine + push (auto retry)
+#       - name: 🔁 Safe combine + push
 #         run: |
 #           set -e
 # 
@@ -113,41 +113,53 @@
 #           while [ $TRY -le $MAX_TRIES ]; do
 #             echo "🔁 Combine attempt $TRY / $MAX_TRIES"
 # 
-#             # 1️⃣ Always start from latest remote main
 #             git fetch origin main
 #             git reset --hard origin/main
 # 
-#             # 2️⃣ Deterministic combine
 #             python combine_shards.py
 # 
 #             git add advance/
 # 
 #             if git diff --cached --quiet; then
 #               echo "✅ No changes after combine"
-#               exit 0
+#               break
 #             fi
 # 
-#             git commit -m "Final combined BMS data ($(date +'%Y-%m-%d %H:%M IST'))"
+#             git commit -m "Final combined Advance BMS data ($(date +'%Y-%m-%d %H:%M IST'))"
 # 
-#             # 3️⃣ Try push
 #             if git push origin main; then
 #               echo "✅ Combine push successful"
-#               exit 0
+#               break
 #             fi
 # 
-#             echo "⚠ Push failed (main moved). Retrying..."
+#             echo "⚠ Push failed — main moved. Retrying..."
 #             TRY=$((TRY+1))
 #             sleep 5
 #           done
 # 
-#           echo "❌ Combine failed after $MAX_TRIES attempts"
-#           exit 1
+#       # ✨ SYNC TO MONGODB IMMEDIATELY (5-10 SECONDS)
+#       - name: 🔄 Sync Advance Data to MongoDB
+#         if: success()
+#         env:
+#           MONGODB_URI: ${{ secrets.MONGODB_URI }}
+#           MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
+#         run: |
+#           python mongodb/sync_advance.py
+# 
+#       - name: 📊 Final Summary
+#         if: always()
+#         run: |
+#           echo "================================"
+#           echo "Workflow Complete"
+#           echo "================================"
+#           echo "Time: $(date +'%Y-%m-%d %H:%M IST')"
+#           echo "Status: ${{ job.status }}"
 # 
 # # =====================================================
-# # 3️⃣ AUTO RE-RUN COMBINER IF IT STILL FAILS
+# # 3️⃣ AUTO RE-RUN COMBINER ON FAILURE
 # # =====================================================
 #   retry-combine:
-#     name: Auto re-run combiner
+#     name: Auto retry combiner
 #     needs: combine
 #     if: failure()
 #     runs-on: ubuntu-latest
@@ -163,6 +175,8 @@
 #               workflow_id: context.workflow,
 #               ref: context.ref
 #             });
+
+
 
 
 name: BMS TmrwAdv 1–9 + Combine (Matrix | HARD SAFE)
@@ -194,7 +208,7 @@ jobs:
       - name: 🧾 Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 1                # ✅ Only latest commit — no history needed
           persist-credentials: true
 
       - name: 🐍 Setup Python
@@ -218,7 +232,7 @@ jobs:
       - name: 🚀 Run shard scraper
         env:
           MY_API_URL: ${{ matrix.shard == 9 && secrets.MY_API_URL || '' }}
-        run: | 
+        run: |
           python bms${{ matrix.shard }}.py
 
       - name: 💾 Commit & push shard data
@@ -227,10 +241,16 @@ jobs:
           git config user.email "actions@github.com"
 
           git add advance/
-          git commit -m "Advance BMS shard ${{ matrix.shard }} ($(date +'%Y-%m-%d %H:%M IST'))" || exit 0
+
+          # Skip if nothing changed — saves a round-trip
+          git diff --cached --quiet && exit 0
+
+          git commit -m "Advance BMS shard ${{ matrix.shard }} ($(date +'%Y-%m-%d %H:%M IST'))"
 
           for i in 1 2 3; do
-            git pull --rebase origin main || true
+            # ✅ Shallow fetch — only grab the latest tip, not full history
+            git fetch --depth=1 origin main || true
+            git rebase origin/main || true
             git push origin main && exit 0
             sleep 3
           done
@@ -254,7 +274,7 @@ jobs:
       - name: 🧾 Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1                # ✅ WAS fetch-depth: 0 — THE BIGGEST FIX (saved ~6–7 min)
           persist-credentials: true
 
       - name: 🐍 Setup Python
@@ -279,7 +299,8 @@ jobs:
           while [ $TRY -le $MAX_TRIES ]; do
             echo "🔁 Combine attempt $TRY / $MAX_TRIES"
 
-            git fetch origin main
+            # ✅ Shallow fetch — only the latest tip needed, not full history
+            git fetch --depth=1 origin main
             git reset --hard origin/main
 
             python combine_shards.py
