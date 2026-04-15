@@ -205,21 +205,22 @@ jobs:
         shard: [1,2,3,4,5,6,7,8,9]
 
     steps:
-      # - name: 🧾 Checkout repo
-      #   uses: actions/checkout@v4
-      #   with:
-      #     fetch-depth: 1
-      #     persist-credentials: true
-        - name: 🧾 Checkout repo (sparse — scripts only)
-          uses: actions/checkout@v4
-          with:
-            fetch-depth: 1
-            persist-credentials: true
-            sparse-checkout: |
-              bms${{ matrix.shard }}.py
-              mongodb/
-              *.py
-          sparse-checkout-cone-mode: false
+      - name: 🧾 Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+
+      - name: 🧾 Checkout repo (sparse — scripts only)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+          sparse-checkout: |
+            bms${{ matrix.shard }}.py
+            mongodb/
+            *.py
+          sparse-checkout-cone-mode: false  
 
       - name: 🐍 Setup Python
         uses: actions/setup-python@v5
