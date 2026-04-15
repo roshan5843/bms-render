@@ -179,9 +179,6 @@
 
 
 
-<<<<<<< HEAD
-name: BMS TmrwAdv 1–9 + Combine (Matrix | HARD SAFE)
-=======
 # name: BMS TmrwAdv 1–9 + Combine (Matrix | HARD SAFE)
 
 # on:
@@ -365,7 +362,6 @@ name: BMS TmrwAdv 1–9 + Combine (Matrix | HARD SAFE)
 
 
 name: BMS TmrwAdv 1–9 + Combine (FAST + SAFE)
->>>>>>> d79ee66d8d572a783a897f76e241489c03a65418
 
 on:
   workflow_dispatch:
@@ -431,19 +427,12 @@ jobs:
 
           git add advance/
 
-<<<<<<< HEAD
-          # Skip if nothing changed — saves a round-trip
-          git diff --cached --quiet && exit 0
-
-          git commit -m "Advance BMS shard ${{ matrix.shard }} ($(date +'%Y-%m-%d %H:%M IST'))"
-=======
           if git diff --cached --quiet; then
             echo "✅ No shard changes"
             exit 0
           fi
 
           git commit -m "Shard ${{ matrix.shard }} ($(date +'%Y-%m-%d %H:%M IST'))"
->>>>>>> d79ee66d8d572a783a897f76e241489c03a65418
 
           for i in 1 2 3; do
             # ✅ Shallow fetch — only grab the latest tip, not full history
@@ -473,11 +462,7 @@ jobs:
       - name: 🧾 Checkout repo (SUPER FAST)
         uses: actions/checkout@v4
         with:
-<<<<<<< HEAD
-          fetch-depth: 1                # ✅ WAS fetch-depth: 0 — THE BIGGEST FIX (saved ~6–7 min)
-=======
           fetch-depth: 1   # 🔥 FIX (was 0)
->>>>>>> d79ee66d8d572a783a897f76e241489c03a65418
           persist-credentials: true
           sparse-checkout: |
             advance
@@ -506,12 +491,7 @@ jobs:
           while [ $TRY -le $MAX_TRIES ]; do
             echo "🔁 Combine attempt $TRY"
 
-<<<<<<< HEAD
-            # ✅ Shallow fetch — only the latest tip needed, not full history
-            git fetch --depth=1 origin main
-=======
             git fetch origin main --depth=1
->>>>>>> d79ee66d8d572a783a897f76e241489c03a65418
             git reset --hard origin/main
 
             python combine_shards.py
