@@ -435,7 +435,10 @@ jobs:
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
-          git add --sparse advance/
+          # Disable sparse checkout so advance/ can be staged normally
+          git sparse-checkout disable
+
+          git add advance/
           git commit -m "Advance BMS shard ${{ matrix.shard }} ($(date +'%Y-%m-%d %H:%M IST'))" || exit 0
 
           for i in 1 2 3; do
