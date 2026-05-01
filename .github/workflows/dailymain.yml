@@ -1,207 +1,23 @@
 
 
-# name: BMS DailyBO 1–9 + Combine (Matrix)
-
-# on:
-#   workflow_dispatch:
-#   schedule:
-#     - cron: "0 * * * *"
-
-# permissions:
-#   contents: write
-
-# jobs:
-# # =====================================================
-# # 1️⃣ SHARDS (UNCHANGED)
-# # =====================================================
-#   shards:
-#     name: Shard ${{ matrix.shard }}
-#     runs-on: ubuntu-latest
-#     timeout-minutes: 60
-
-#     strategy:
-#       fail-fast: false
-#       matrix:
-#         shard: [1,2,3,4,5,6,7,8,9]
-
-#     steps:
-#       - name: 🧾 Checkout repo
-#         uses: actions/checkout@v4
-#         with:
-#           fetch-depth: 0
-#           persist-credentials: true
-
-#       - name: 🐍 Setup Python
-#         uses: actions/setup-python@v5
-#         with:
-#           python-version: "3.11"
-
-#       - name: 🌐 Install Chrome
-#         run: |
-#           sudo apt-get update
-#           sudo apt-get install -y wget unzip
-#           wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-#           sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
-#           rm -f google-chrome-stable_current_amd64.deb
-#           google-chrome --version
-
-#       - name: 📦 Install dependencies
-#         run: |
-#           pip install selenium webdriver-manager cloudscraper aiohttp pytz
-
-#       - name: 🚀 Run shard scraper
-#         env:
-#           MY_API_URL: ${{ matrix.shard == 9 && secrets.MY_API_URL || '' }}
-#         run: |
-#           python bmsdaily${{ matrix.shard }}.py
-
-#       - name: 💾 Commit & push shard data
-#         run: |
-#           git config user.name "github-actions"
-#           git config user.email "actions@github.com"
-
-#           git add daily/
-#           git commit -m "Daily BMS shard ${{ matrix.shard }} ($(date +'%Y-%m-%d %H:%M'))" || exit 0
-
-#           for i in 1 2 3; do
-#             git pull --rebase origin main || true
-#             git push origin main && exit 0
-#             sleep 3
-#           done
-
-#           git push --force-with-lease origin main || true
-
-# # =====================================================
-# # 2️⃣ COMBINER + MONGODB SYNC (OPTION B)
-# # =====================================================
-#   combine:
-#     name: Combine + MongoDB Sync
-#     needs: shards
-#     runs-on: ubuntu-latest
-#     timeout-minutes: 30
-
-#     concurrency:
-#       group: bms-combiner
-#       cancel-in-progress: false
-
-#     steps:
-#       - name: 🧾 Checkout repo
-#         uses: actions/checkout@v4
-#         with:
-#           fetch-depth: 0
-#           persist-credentials: true
-
-#       - name: 🐍 Setup Python
-#         uses: actions/setup-python@v5
-#         with:
-#           python-version: "3.11"
-
-#       - name: 📦 Install dependencies
-#         run: |
-#           pip install pytz pymongo dnspython
-
-#       - name: 🔁 Safe combine + push
-#         run: |
-#           set -e
-
-#           git config user.name "github-actions"
-#           git config user.email "actions@github.com"
-
-#           MAX_TRIES=6
-#           TRY=1
-
-#           while [ $TRY -le $MAX_TRIES ]; do
-#             echo "🔁 Combine attempt $TRY / $MAX_TRIES"
-
-#             git fetch origin main
-#             git reset --hard origin/main
-
-#             python combine_dailyshards.py
-
-#             git add daily/
-
-#             if git diff --cached --quiet; then
-#               echo "✅ No changes after combine"
-#               break
-#             fi
-
-#             git commit -m "Final combined BMS data ($(date -u +'%Y-%m-%d %H:%M UTC'))"
-
-#             if git push origin main; then
-#               echo "✅ Combine push successful"
-#               break
-#             fi
-
-#             echo "⚠ Push failed — main moved. Retrying..."
-#             TRY=$((TRY+1))
-#             sleep 5
-#           done
-
-#       # ✨ SYNC TO MONGODB IMMEDIATELY (5-10 SECONDS)
-#       - name: 🔄 Sync to MongoDB
-#         if: success()
-#         env:
-#           MONGODB_URI: ${{ secrets.MONGODB_URI }}
-#           MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
-#         run: |
-#           python mongodb/sync.py
-
-#       - name: 📊 Final Summary
-#         if: always()
-#         run: |
-#           echo "================================"
-#           echo "Workflow Complete"
-#           echo "================================"
-#           echo "Time: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
-#           echo "Status: ${{ job.status }}"
-
-# # =====================================================
-# # 3️⃣ AUTO RE-RUN COMBINER ON FAILURE
-# # =====================================================
-#   retry-combine:
-#     name: Auto retry combiner
-#     needs: combine
-#     if: failure()
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: 🔁 Trigger workflow again
-#         uses: actions/github-script@v7
-#         with:
-#           script: |
-#             await github.rest.actions.createWorkflowDispatch({
-#               owner: context.repo.owner,
-#               repo: context.repo.repo,
-#               workflow_id: context.workflow,
-#               ref: context.ref
-#             });
-
-
-
-
-name: BMS DailyBO Optimized (Shard + Combine + Self Loop)
+name: BMS DailyBO 1–9 + Combine (Matrix)
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */3 * * *"   # backup trigger every 3 hours
+    - cron: "0 * * * *"
 
 permissions:
   contents: write
 
-concurrency:
-  group: bms-dailybo-global
-  cancel-in-progress: false
-
 jobs:
-
 # =====================================================
-# 1️⃣ SHARDS (PARALLEL - NO GIT PUSH)
+# 1️⃣ SHARDS (UNCHANGED)
 # =====================================================
   shards:
     name: Shard ${{ matrix.shard }}
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 60
 
     strategy:
       fail-fast: false
@@ -211,27 +27,27 @@ jobs:
     steps:
       - name: 🧾 Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
 
       - name: 🐍 Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: 📦 Cache pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+      - name: 🌐 Install Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
+          rm -f google-chrome-stable_current_amd64.deb
+          google-chrome --version
 
       - name: 📦 Install dependencies
         run: |
-          pip install -r requirements.txt
-
-      - name: 🌐 Verify Chrome
-        run: |
-          google-chrome --version || echo "Chrome already available"
+          pip install selenium webdriver-manager cloudscraper aiohttp pytz
 
       - name: 🚀 Run shard scraper
         env:
@@ -239,14 +55,24 @@ jobs:
         run: |
           python bmsdaily${{ matrix.shard }}.py
 
-      - name: 📤 Upload shard data
-        uses: actions/upload-artifact@v4
-        with:
-          name: shard-${{ matrix.shard }}
-          path: daily/
+      - name: 💾 Commit & push shard data
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+
+          git add daily/
+          git commit -m "Daily BMS shard ${{ matrix.shard }} ($(date +'%Y-%m-%d %H:%M'))" || exit 0
+
+          for i in 1 2 3; do
+            git pull --rebase origin main || true
+            git push origin main && exit 0
+            sleep 3
+          done
+
+          git push --force-with-lease origin main || true
 
 # =====================================================
-# 2️⃣ COMBINE + PUSH + MONGODB
+# 2️⃣ COMBINER + MONGODB SYNC (OPTION B)
 # =====================================================
   combine:
     name: Combine + MongoDB Sync
@@ -254,100 +80,92 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
+    concurrency:
+      group: bms-combiner
+      cancel-in-progress: false
+
     steps:
       - name: 🧾 Checkout repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          persist-credentials: true
 
       - name: 🐍 Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: 📦 Cache pip
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
       - name: 📦 Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install pytz pymongo dnspython
 
-      - name: 📥 Download all shard artifacts
-        uses: actions/download-artifact@v4
-        with:
-          path: shards
-
-      - name: 🔁 Combine shards
+      - name: 🔁 Safe combine + push
         run: |
-          python combine_dailyshards.py
+          set -e
 
-      - name: 💾 Commit & push combined data
-        run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
 
-          git add daily/
-          git commit -m "Final combined BMS data ($(date -u +'%Y-%m-%d %H:%M UTC'))" || echo "No changes"
+          MAX_TRIES=6
+          TRY=1
 
-          git push origin main
+          while [ $TRY -le $MAX_TRIES ]; do
+            echo "🔁 Combine attempt $TRY / $MAX_TRIES"
 
+            git fetch origin main
+            git reset --hard origin/main
+
+            python combine_dailyshards.py
+
+            git add daily/
+
+            if git diff --cached --quiet; then
+              echo "✅ No changes after combine"
+              break
+            fi
+
+            git commit -m "Final combined BMS data ($(date -u +'%Y-%m-%d %H:%M UTC'))"
+
+            if git push origin main; then
+              echo "✅ Combine push successful"
+              break
+            fi
+
+            echo "⚠ Push failed — main moved. Retrying..."
+            TRY=$((TRY+1))
+            sleep 5
+          done
+
+      # ✨ SYNC TO MONGODB IMMEDIATELY (5-10 SECONDS)
       - name: 🔄 Sync to MongoDB
+        if: success()
         env:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
         run: |
           python mongodb/sync.py
 
-# =====================================================
-# 3️⃣ SELF-HEALING NEXT RUN (CORE FIX)
-# =====================================================
-  schedule-next-run:
-    name: Schedule Next Run
-    needs: combine
-    if: always()
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: ⏳ Wait until next hour
+      - name: 📊 Final Summary
+        if: always()
         run: |
-          echo "Current UTC time:"
-          date -u
-
-          MIN=$(date -u +%M)
-          SEC=$(date -u +%S)
-
-          WAIT=$((3600 - (MIN*60 + SEC)))
-
-          echo "Sleeping $WAIT seconds until next hour..."
-          sleep $WAIT
-
-      - name: 🔁 Trigger next run
-        uses: actions/github-script@v7
-        with:
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: context.workflow,
-              ref: context.ref
-            });
+          echo "================================"
+          echo "Workflow Complete"
+          echo "================================"
+          echo "Time: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          echo "Status: ${{ job.status }}"
 
 # =====================================================
-# 4️⃣ AUTO RETRY IF COMBINE FAILS
+# 3️⃣ AUTO RE-RUN COMBINER ON FAILURE
 # =====================================================
   retry-combine:
-    name: Retry Combine
+    name: Auto retry combiner
     needs: combine
     if: failure()
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🔁 Re-trigger workflow
+      - name: 🔁 Trigger workflow again
         uses: actions/github-script@v7
         with:
           script: |
@@ -357,3 +175,6 @@ jobs:
               workflow_id: context.workflow,
               ref: context.ref
             });
+
+
+
