@@ -280,7 +280,6 @@ jobs:
           MONGODB_URI:      ${{ secrets.MONGODB_URI }}
           MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
         run: |
-          cd $GITHUB_WORKSPACE   # ← ensures we're always at repo root
           python mongodb/sync.py
 
       - name: 📊 Final Summary
