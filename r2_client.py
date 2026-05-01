@@ -1,8 +1,15 @@
 # r2_client.py
+from r2_client import r2_download_json, get_r2, BUCKET
 import boto3
 import json
 import os
 
+# mongodb/sync.py — add this at the very top
+import sys
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# NOW this will work:
+from r2_client import r2_download_json, get_r2, BUCKET
 
 def get_r2():
     return boto3.client(
