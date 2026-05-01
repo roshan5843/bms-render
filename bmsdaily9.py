@@ -6,6 +6,8 @@ import aiohttp
 from datetime import datetime, timedelta
 import pytz
 
+from r2_client import r2_upload_json, r2_download_json
+
 # =====================================================
 # CONFIG
 # =====================================================
@@ -26,6 +28,9 @@ DATE_DISTRICT = NOW_IST.strftime("%Y-%m-%d")
 BASE_DIR = os.path.join("daily", "data", DATE_CODE)
 LOG_DIR = os.path.join(BASE_DIR, "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
+
+R2_DETAILED_KEY = f"daily/{DATE_CODE}/detailed{SHARD_ID}.json"
+R2_SUMMARY_KEY = f"daily/{DATE_CODE}/movie_summary{SHARD_ID}.json"
 
 DETAILED_FILE = f"{BASE_DIR}/detailed{SHARD_ID}.json"
 SUMMARY_FILE = f"{BASE_DIR}/movie_summary{SHARD_ID}.json"
@@ -309,18 +314,61 @@ def build_summary(detailed):
 # =====================================================
 
 
+# async def main():
+#     log("🚀 DISTRICT DAILY SCRAPER STARTED")
+#
+#     results = await fetch_all()
+#     fresh = parse(results)
+#
+#     # -------- NEVER DELETE SHOWS --------
+#     if os.path.exists(DETAILED_FILE):
+#         with open(DETAILED_FILE, "r", encoding="utf-8") as f:
+#             old_rows = json.load(f)
+#     else:
+#         old_rows = []
+#
+#     old_map = {show_key(r): r for r in old_rows}
+#     new_map = {}
+#
+#     for r in fresh:
+#         key = show_key(r)
+#         if key in old_map:
+#             old_map[key].update({
+#                 "totalSeats": r["totalSeats"],
+#                 "available": r["available"],
+#                 "sold": r["sold"],
+#                 "gross": r["gross"],
+#                 "minsLeft": r["minsLeft"]
+#             })
+#             new_map[key] = old_map[key]
+#         else:
+#             new_map[key] = r
+#
+#     for key, r in old_map.items():
+#         if key not in new_map:
+#             new_map[key] = r
+#
+#     detailed = list(new_map.values())
+#     summary = build_summary(detailed)
+#
+#     with open(DETAILED_FILE, "w", encoding="utf-8") as f:
+#         json.dump(detailed, f, indent=2, ensure_ascii=False)
+#
+#     with open(SUMMARY_FILE, "w", encoding="utf-8") as f:
+#         json.dump(summary, f, indent=2, ensure_ascii=False)
+#
+#     log(f"✅ DONE | Shows={len(detailed)} | Movies={len(summary)}")
+
+
 async def main():
     log("🚀 DISTRICT DAILY SCRAPER STARTED")
 
     results = await fetch_all()
     fresh = parse(results)
 
-    # -------- NEVER DELETE SHOWS --------
-    if os.path.exists(DETAILED_FILE):
-        with open(DETAILED_FILE, "r", encoding="utf-8") as f:
-            old_rows = json.load(f)
-    else:
-        old_rows = []
+    # -------- LOAD FROM R2 (NOT DISK) --------
+    old_rows = r2_download_json(R2_DETAILED_KEY, default=[])
+    log(f"📥 Loaded {len(old_rows)} existing rows from R2")
 
     old_map = {show_key(r): r for r in old_rows}
     new_map = {}
@@ -346,11 +394,9 @@ async def main():
     detailed = list(new_map.values())
     summary = build_summary(detailed)
 
-    with open(DETAILED_FILE, "w", encoding="utf-8") as f:
-        json.dump(detailed, f, indent=2, ensure_ascii=False)
-
-    with open(SUMMARY_FILE, "w", encoding="utf-8") as f:
-        json.dump(summary, f, indent=2, ensure_ascii=False)
+    # -------- UPLOAD TO R2 (NOT DISK) --------
+    r2_upload_json(R2_DETAILED_KEY, detailed)
+    r2_upload_json(R2_SUMMARY_KEY, summary)
 
     log(f"✅ DONE | Shows={len(detailed)} | Movies={len(summary)}")
 
