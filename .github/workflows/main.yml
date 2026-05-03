@@ -653,7 +653,7 @@ jobs:
           R2_ENDPOINT:      ${{ secrets.R2_ENDPOINT }}
           R2_ACCESS_KEY:    ${{ secrets.R2_ACCESS_KEY }}
           R2_SECRET_KEY:    ${{ secrets.R2_SECRET_KEY }}
-         R2_BUCKET: ${{ secrets.R2_BUCKET_ADVANCE }}
+          R2_BUCKET:        ${{ secrets.R2_BUCKET_ADVANCE }}
           MONGODB_URI:      ${{ secrets.MONGODB_URI }}
           MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
         run: |
