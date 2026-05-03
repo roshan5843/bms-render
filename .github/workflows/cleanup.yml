@@ -1,53 +1,95 @@
-name: Cleanup Extra Shard JSONs
+# name: Cleanup Extra Shard JSONs
+# 
+# on:
+#   workflow_dispatch:
+#   schedule:
+#     # Daily at 03:00 IST (21:30 UTC previous day)
+#     - cron: "30 21 * * *"
+# 
+# permissions:
+#   contents: write
+# 
+# jobs:
+#   cleanup:
+#     name: Remove shard-level JSON files
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 10
+# 
+#     steps:
+#       - name: 🧾 Checkout repo
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 0
+# 
+#       - name: 🐍 Setup Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.11"
+# 
+#       - name: 📦 Install Python dependencies
+#         run: |
+#           python -m pip install --upgrade pip
+#           pip install pytz
+# 
+#       - name: 🧹 Run cleanup script
+#         run: |
+#           python cleanup_shard_files.py
+# 
+#       - name: 💾 Commit & push cleanup
+#         run: |
+#           git config user.name "github-actions"
+#           git config user.email "actions@github.com"
+# 
+#           git add advance/ daily/
+#           git status
+# 
+#           if git diff --cached --quiet; then
+#             echo "No cleanup needed"
+#             exit 0
+#           fi
+# 
+#           git commit -m "Cleanup shard JSONs till yesterday (IST)"
+#           git pull --rebase origin main
+#           git push origin main
+
+
+name: Cleanup Extra Shard JSONs (R2)
 
 on:
   workflow_dispatch:
   schedule:
-    # Daily at 03:00 IST (21:30 UTC previous day)
-    - cron: "30 21 * * *"
+    - cron: "30 21 * * *"   # Daily 03:00 IST
 
 permissions:
-  contents: write
+  contents: read   # no git writes needed anymore
 
 jobs:
   cleanup:
-    name: Remove shard-level JSON files
+    name: Remove shard-level JSON files from R2
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
     steps:
-      - name: 🧾 Checkout repo
+      - name: 🧾 Checkout repo (code only)
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: 🐍 Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: 📦 Install Python dependencies
+      - name: 📦 Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install pytz
+          pip install pytz boto3
 
-      - name: 🧹 Run cleanup script
+      - name: 🧹 Run R2 cleanup
+        env:
+          R2_ENDPOINT:      ${{ secrets.R2_ENDPOINT }}
+          R2_ACCESS_KEY:    ${{ secrets.R2_ACCESS_KEY }}
+          R2_SECRET_KEY:    ${{ secrets.R2_SECRET_KEY }}
+          R2_BUCKET:        ${{ secrets.R2_BUCKET }}
+          R2_BUCKET_ADVANCE: ${{ secrets.R2_BUCKET_ADVANCE }}
         run: |
           python cleanup_shard_files.py
-
-      - name: 💾 Commit & push cleanup
-        run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
-
-          git add advance/ daily/
-          git status
-
-          if git diff --cached --quiet; then
-            echo "No cleanup needed"
-            exit 0
-          fi
-
-          git commit -m "Cleanup shard JSONs till yesterday (IST)"
-          git pull --rebase origin main
-          git push origin main
