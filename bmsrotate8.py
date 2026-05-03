@@ -9,7 +9,7 @@ from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 
 import cloudscraper
-
+from r2_client import r2_upload_json
 # =====================================================
 # CONFIG
 # =====================================================
@@ -21,14 +21,11 @@ MAX_RECOVERY_ROUNDS = 5
 IST = timezone(timedelta(hours=5, minutes=30))
 DATE_CODE = os.environ["DATE_CODE"]
 
-BASE_DIR = os.path.join("advance", "data", DATE_CODE)
-LOG_DIR = os.path.join(BASE_DIR, "logs")
-os.makedirs(LOG_DIR, exist_ok=True)
+# REPLACE with simple log to stdout only (no disk)
+BASE_DIR = f"advance/{DATE_CODE}"  # used only for R2 key naming
 
-SUMMARY_FILE  = f"{BASE_DIR}/movie_summary{SHARD_ID}.json"
-DETAILED_FILE = f"{BASE_DIR}/detailed{SHARD_ID}.json"
-LOG_FILE      = f"{LOG_DIR}/bms{SHARD_ID}.log"
-
+R2_DETAILED_KEY = f"advance/{DATE_CODE}/detailed{SHARD_ID}.json"
+R2_SUMMARY_KEY  = f"advance/{DATE_CODE}/movie_summary{SHARD_ID}.json"
 # =====================================================
 # LOGGING
 # =====================================================
@@ -36,8 +33,6 @@ def log(msg):
     ts = datetime.now(IST).strftime("%H:%M:%S")
     line = f"[{ts}] {msg}"
     print(line, flush=True)
-    with open(LOG_FILE, "a", encoding="utf-8") as f:
-        f.write(line + "\n")
 
 # =====================================================
 # HARD TIMEOUT
@@ -354,12 +349,9 @@ if __name__ == "__main__":
             })
 
     # =====================================================
-    # SAVE FILES
+    # SAVE TO R2 (NOT DISK)
     # =====================================================
-    with open(DETAILED_FILE, "w", encoding="utf-8") as f:
-        json.dump(detailed, f, indent=2, ensure_ascii=False)
-
-    with open(SUMMARY_FILE, "w", encoding="utf-8") as f:
-        json.dump(final_summary, f, indent=2, ensure_ascii=False)
+    r2_upload_json(R2_DETAILED_KEY, detailed)
+    r2_upload_json(R2_SUMMARY_KEY, final_summary)
 
     log(f"✅ DONE | Shows={len(detailed)} | Movies={len(final_summary)}")

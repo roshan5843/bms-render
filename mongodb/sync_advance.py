@@ -1,239 +1,441 @@
+#
+# import json
+# import os
+# import sys
+# from datetime import datetime
+# from pathlib import Path
+# from pymongo import MongoClient
+# import pytz
+#
+# from config import (
+#     MONGODB_URI,
+#     DATABASE_NAME,
+#     COLLECTION_ADVANCE,
+#     IST
+# )
+#
+#
+# class MongoDBAdvanceSync:
+#     def __init__(self):
+#         if not MONGODB_URI:
+#             raise ValueError("MONGODB_URI environment variable not set")
+#
+#         self.client = MongoClient(MONGODB_URI)
+#         self.db = self.client[DATABASE_NAME]
+#
+#         print(f"✅ Connected to MongoDB: {DATABASE_NAME}")
+#
+#     # ---------------------------------------------------
+#     # 🔍 FIND FILES
+#     # ---------------------------------------------------
+#     def find_all_advance_summaries(self):
+#         print("\n🔍 Searching for advance summary files...")
+#
+#         base_dir = Path("advance/data")
+#
+#         if not base_dir.exists():
+#             print(f"❌ Directory not found: {base_dir}")
+#             return []
+#
+#         date_dirs = sorted(
+#             [d for d in base_dir.iterdir() if d.is_dir() and d.name.isdigit()],
+#             key=lambda x: x.name
+#         )
+#
+#         summary_files = []
+#
+#         for date_dir in date_dirs:
+#             summary_path = date_dir / "finalsummary.json"
+#
+#             if summary_path.exists():
+#                 summary_files.append({
+#                     "path": str(summary_path),
+#                     "date": date_dir.name
+#                 })
+#
+#         print(f"📊 Total summaries found: {len(summary_files)}")
+#         return summary_files
+#
+#     # ---------------------------------------------------
+#     # 📂 LOAD JSON
+#     # ---------------------------------------------------
+#     def load_json(self, filepath):
+#         try:
+#             with open(filepath, "r", encoding="utf-8") as f:
+#                 return json.load(f)
+#         except Exception as e:
+#             print(f"❌ Error loading {filepath}: {e}")
+#             return None
+#
+#     # ---------------------------------------------------
+#     # 🔄 SYNC SINGLE FILE
+#     # ---------------------------------------------------
+#     def sync_single_summary(self, filepath, date_code):
+#         data = self.load_json(filepath)
+#         if not data:
+#             return False
+#
+#         movies = data.get("movies", {})
+#         if not movies:
+#             print(f"⚠️ No movies found in {filepath}")
+#             return False
+#
+#         last_updated = data.get("last_updated", "")
+#         timestamp = datetime.now(IST)
+#
+#         collection = self.db[COLLECTION_ADVANCE]
+#
+#         movies_array = []
+#         for movie_name, movie_data in movies.items():
+#             movies_array.append({
+#                 "movie": movie_name,
+#                 **movie_data
+#             })
+#
+#         doc = {
+#             "_id": f"advance_{date_code}",
+#             "show_date": date_code,
+#             "last_updated": last_updated,
+#             "synced_at": timestamp,
+#             "total_movies": len(movies),
+#             "movies": movies_array
+#         }
+#
+#         try:
+#             result = collection.replace_one(
+#                 {"_id": doc["_id"]},
+#                 doc,
+#                 upsert=True
+#             )
+#
+#             if result.upserted_id:
+#                 print(f"   ✅ Inserted: {doc['_id']}")
+#             else:
+#                 print(f"   🔄 Updated: {doc['_id']}")
+#
+#             return True
+#
+#         except Exception as e:
+#             print(f"   ❌ Error syncing {date_code}: {e}")
+#             return False
+#
+#     # ---------------------------------------------------
+#     # ⚡ SMART SYNC (MAIN FIX)
+#     # ---------------------------------------------------
+#     def sync_all(self):
+#         summary_files = self.find_all_advance_summaries()
+#
+#         if not summary_files:
+#             print("\n❌ No files found")
+#             return False
+#
+#         collection = self.db[COLLECTION_ADVANCE]
+#
+#         print("\n🧠 Smart filtering (new + updated only)...")
+#
+#         new_files = []
+#         skipped = 0
+#
+#         for file_info in summary_files:
+#             filepath = file_info["path"]
+#             date_code = file_info["date"]
+#             doc_id = f"advance_{date_code}"
+#
+#             # Load only metadata (fast)
+#             data = self.load_json(filepath)
+#             if not data:
+#                 continue
+#
+#             file_last_updated = data.get("last_updated", "")
+#
+#             # 🔥 SMART CHECK (Mongo vs File)
+#             doc = collection.find_one(
+#                 {"_id": doc_id},
+#                 {"last_updated": 1}
+#             )
+#
+#             if not doc or doc.get("last_updated") != file_last_updated:
+#                 new_files.append({
+#                     "path": filepath,
+#                     "date": date_code
+#                 })
+#             else:
+#                 skipped += 1
+#
+#         print(f"🆕 To Sync: {len(new_files)}")
+#         print(f"⏭ Skipped (unchanged): {skipped}")
+#
+#         if not new_files:
+#             print("✅ Everything already up-to-date")
+#             return True
+#
+#         # ---------------------------------------------------
+#         # 🚀 PROCESS ONLY REQUIRED FILES
+#         # ---------------------------------------------------
+#         success_count = 0
+#         fail_count = 0
+#
+#         for file_info in new_files:
+#             print(f"\n📅 Processing: {file_info['date']}")
+#
+#             if self.sync_single_summary(
+#                 file_info["path"],
+#                 file_info["date"]
+#             ):
+#                 success_count += 1
+#             else:
+#                 fail_count += 1
+#
+#         # ---------------------------------------------------
+#         # 📊 SUMMARY
+#         # ---------------------------------------------------
+#         print("\n" + "=" * 60)
+#         print("📊 FINAL SYNC SUMMARY")
+#         print(f"   ✅ Success: {success_count}")
+#         print(f"   ❌ Failed: {fail_count}")
+#         print(f"   🆕 Processed: {len(new_files)}")
+#         print(f"   ⏭ Skipped: {skipped}")
+#         print("=" * 60)
+#
+#         return success_count > 0
+#
+#     # ---------------------------------------------------
+#     def close(self):
+#         self.client.close()
+#         print("\n👋 MongoDB connection closed")
+#
+#
+# # -------------------------------------------------------
+# # 🚀 MAIN
+# # -------------------------------------------------------
+# def main():
+#     print("🚀 Starting Smart MongoDB Sync...")
+#     print(f"⏰ Time: {datetime.now(IST).strftime('%Y-%m-%d %H:%M:%S IST')}")
+#
+#     syncer = MongoDBAdvanceSync()
+#
+#     try:
+#         success = syncer.sync_all()
+#
+#         if success:
+#             print("\n✅ SYNC COMPLETED SUCCESSFULLY")
+#             sys.exit(0)
+#         else:
+#             print("\n❌ SYNC FAILED")
+#             sys.exit(1)
+#
+#     except Exception as e:
+#         print(f"\n❌ Fatal error: {e}")
+#         import traceback
+#         traceback.print_exc()
+#         sys.exit(1)
+#
+#     finally:
+#         syncer.close()
+#
+#
+# if __name__ == "__main__":
+#     main()
+#
 
+
+# mongodb/sync_advance.py — R2 VERSION
 import json
 import os
 import sys
 from datetime import datetime
-from pathlib import Path
 from pymongo import MongoClient
 import pytz
 
-from config import (
-    MONGODB_URI,
-    DATABASE_NAME,
-    COLLECTION_ADVANCE,
-    IST
-)
+from config import MONGODB_URI, DATABASE_NAME, COLLECTION_ADVANCE, IST
+from r2_client import r2_download_json, get_r2, BUCKET
 
 
 class MongoDBAdvanceSync:
     def __init__(self):
         if not MONGODB_URI:
             raise ValueError("MONGODB_URI environment variable not set")
-
         self.client = MongoClient(MONGODB_URI)
         self.db = self.client[DATABASE_NAME]
-
         print(f"✅ Connected to MongoDB: {DATABASE_NAME}")
 
-    # ---------------------------------------------------
-    # 🔍 FIND FILES
-    # ---------------------------------------------------
-    def find_all_advance_summaries(self):
-        print("\n🔍 Searching for advance summary files...")
+    def find_all_advance_dates(self):
+        """List all advance date folders in R2."""
+        print("\n🔍 Scanning R2 for advance summary files...")
+        r2 = get_r2()
+        try:
+            paginator = r2.get_paginator("list_objects_v2")
+            pages = paginator.paginate(
+                Bucket=BUCKET, Prefix="advance/", Delimiter="/")
 
-        base_dir = Path("advance/data")
+            date_codes = []
+            for page in pages:
+                for prefix in page.get("CommonPrefixes", []):
+                    # e.g. "advance/20260502/"
+                    folder = prefix["Prefix"]
+                    date_part = folder.rstrip("/").split("/")[-1]
+                    if date_part.isdigit() and len(date_part) == 8:
+                        date_codes.append(date_part)
 
-        if not base_dir.exists():
-            print(f"❌ Directory not found: {base_dir}")
+            date_codes.sort()
+            print(f"📊 Total advance dates found in R2: {len(date_codes)}")
+            return date_codes
+
+        except Exception as e:
+            print(f"❌ R2 listing error: {e}")
             return []
 
-        date_dirs = sorted(
-            [d for d in base_dir.iterdir() if d.is_dir() and d.name.isdigit()],
-            key=lambda x: x.name
-        )
-
-        summary_files = []
-
-        for date_dir in date_dirs:
-            summary_path = date_dir / "finalsummary.json"
-
-            if summary_path.exists():
-                summary_files.append({
-                    "path": str(summary_path),
-                    "date": date_dir.name
-                })
-
-        print(f"📊 Total summaries found: {len(summary_files)}")
-        return summary_files
-
-    # ---------------------------------------------------
-    # 📂 LOAD JSON
-    # ---------------------------------------------------
-    def load_json(self, filepath):
+    def r2_key_exists(self, key):
+        r2 = get_r2()
         try:
-            with open(filepath, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception as e:
-            print(f"❌ Error loading {filepath}: {e}")
-            return None
+            r2.head_object(Bucket=BUCKET, Key=key)
+            return True
+        except:
+            return False
 
-    # ---------------------------------------------------
-    # 🔄 SYNC SINGLE FILE
-    # ---------------------------------------------------
-    def sync_single_summary(self, filepath, date_code):
-        data = self.load_json(filepath)
+    def sync_single_summary(self, r2_key, date_code):
+        data = r2_download_json(r2_key)
         if not data:
             return False
 
         movies = data.get("movies", {})
         if not movies:
-            print(f"⚠️ No movies found in {filepath}")
+            print(f"⚠️  No movies in {r2_key}")
             return False
 
         last_updated = data.get("last_updated", "")
         timestamp = datetime.now(IST)
-
         collection = self.db[COLLECTION_ADVANCE]
 
-        movies_array = []
-        for movie_name, movie_data in movies.items():
-            movies_array.append({
-                "movie": movie_name,
-                **movie_data
-            })
+        movies_array = [{"movie": name, **mdata}
+                        for name, mdata in movies.items()]
 
         doc = {
-            "_id": f"advance_{date_code}",
-            "show_date": date_code,
+            "_id":          f"advance_{date_code}",
+            "show_date":    date_code,
             "last_updated": last_updated,
-            "synced_at": timestamp,
+            "synced_at":    timestamp,
             "total_movies": len(movies),
-            "movies": movies_array
+            "movies":       movies_array
         }
 
         try:
             result = collection.replace_one(
-                {"_id": doc["_id"]},
-                doc,
-                upsert=True
-            )
-
-            if result.upserted_id:
-                print(f"   ✅ Inserted: {doc['_id']}")
-            else:
-                print(f"   🔄 Updated: {doc['_id']}")
-
+                {"_id": doc["_id"]}, doc, upsert=True)
+            action = "Inserted" if result.upserted_id else "Updated"
+            print(f"   ✅ {action}: advance_{date_code} ({len(movies)} movies)")
             return True
-
         except Exception as e:
             print(f"   ❌ Error syncing {date_code}: {e}")
             return False
 
-    # ---------------------------------------------------
-    # ⚡ SMART SYNC (MAIN FIX)
-    # ---------------------------------------------------
     def sync_all(self):
-        summary_files = self.find_all_advance_summaries()
-
-        if not summary_files:
-            print("\n❌ No files found")
+        date_codes = self.find_all_advance_dates()
+        if not date_codes:
+            print("\n❌ No advance dates found in R2")
             return False
 
         collection = self.db[COLLECTION_ADVANCE]
-
         print("\n🧠 Smart filtering (new + updated only)...")
 
-        new_files = []
+        to_sync = []
         skipped = 0
 
-        for file_info in summary_files:
-            filepath = file_info["path"]
-            date_code = file_info["date"]
-            doc_id = f"advance_{date_code}"
+        for date_code in date_codes:
+            r2_key = f"advance/{date_code}/finalsummary.json"
 
-            # Load only metadata (fast)
-            data = self.load_json(filepath)
+            # Check if R2 file exists
+            if not self.r2_key_exists(r2_key):
+                print(f"⚠️  No finalsummary.json for {date_code}, skipping")
+                continue
+
+            # Download just to check last_updated (smart check)
+            data = r2_download_json(r2_key)
             if not data:
                 continue
 
             file_last_updated = data.get("last_updated", "")
+            doc_id = f"advance_{date_code}"
 
-            # 🔥 SMART CHECK (Mongo vs File)
-            doc = collection.find_one(
-                {"_id": doc_id},
-                {"last_updated": 1}
-            )
+            # Compare with MongoDB
+            existing = collection.find_one(
+                {"_id": doc_id}, {"last_updated": 1})
 
-            if not doc or doc.get("last_updated") != file_last_updated:
-                new_files.append({
-                    "path": filepath,
-                    "date": date_code
-                })
+            if not existing or existing.get("last_updated") != file_last_updated:
+                to_sync.append(
+                    {"r2_key": r2_key, "date_code": date_code, "data": data})
             else:
                 skipped += 1
 
-        print(f"🆕 To Sync: {len(new_files)}")
-        print(f"⏭ Skipped (unchanged): {skipped}")
+        print(f"🆕 To sync: {len(to_sync)}")
+        print(f"⏭  Skipped (unchanged): {skipped}")
 
-        if not new_files:
+        if not to_sync:
             print("✅ Everything already up-to-date")
             return True
 
-        # ---------------------------------------------------
-        # 🚀 PROCESS ONLY REQUIRED FILES
-        # ---------------------------------------------------
         success_count = 0
         fail_count = 0
 
-        for file_info in new_files:
-            print(f"\n📅 Processing: {file_info['date']}")
+        for item in to_sync:
+            print(f"\n📅 Processing: {item['date_code']}")
+            # Pass already-downloaded data directly
+            movies = item["data"].get("movies", {})
+            if not movies:
+                fail_count += 1
+                continue
 
-            if self.sync_single_summary(
-                file_info["path"],
-                file_info["date"]
-            ):
+            last_updated = item["data"].get("last_updated", "")
+            date_code = item["date_code"]
+            movies_array = [{"movie": name, **mdata}
+                            for name, mdata in movies.items()]
+            doc = {
+                "_id":          f"advance_{date_code}",
+                "show_date":    date_code,
+                "last_updated": last_updated,
+                "synced_at":    datetime.now(IST),
+                "total_movies": len(movies),
+                "movies":       movies_array
+            }
+            try:
+                result = collection.replace_one(
+                    {"_id": doc["_id"]}, doc, upsert=True)
+                action = "Inserted" if result.upserted_id else "Updated"
+                print(
+                    f"   ✅ {action}: advance_{date_code} ({len(movies)} movies)")
                 success_count += 1
-            else:
+            except Exception as e:
+                print(f"   ❌ Error: {e}")
                 fail_count += 1
 
-        # ---------------------------------------------------
-        # 📊 SUMMARY
-        # ---------------------------------------------------
-        print("\n" + "=" * 60)
-        print("📊 FINAL SYNC SUMMARY")
-        print(f"   ✅ Success: {success_count}")
-        print(f"   ❌ Failed: {fail_count}")
-        print(f"   🆕 Processed: {len(new_files)}")
-        print(f"   ⏭ Skipped: {skipped}")
-        print("=" * 60)
-
+        print("\n" + "="*60)
+        print(
+            f"✅ Success: {success_count} | ❌ Failed: {fail_count} | ⏭ Skipped: {skipped}")
+        print("="*60)
         return success_count > 0
 
-    # ---------------------------------------------------
     def close(self):
         self.client.close()
         print("\n👋 MongoDB connection closed")
 
 
-# -------------------------------------------------------
-# 🚀 MAIN
-# -------------------------------------------------------
 def main():
-    print("🚀 Starting Smart MongoDB Sync...")
+    print("🚀 Starting Smart MongoDB Advance Sync (R2)...")
     print(f"⏰ Time: {datetime.now(IST).strftime('%Y-%m-%d %H:%M:%S IST')}")
 
     syncer = MongoDBAdvanceSync()
-
     try:
         success = syncer.sync_all()
-
-        if success:
-            print("\n✅ SYNC COMPLETED SUCCESSFULLY")
-            sys.exit(0)
-        else:
-            print("\n❌ SYNC FAILED")
-            sys.exit(1)
-
+        print("\n✅ SYNC COMPLETED" if success else "\n❌ SYNC FAILED")
+        sys.exit(0 if success else 1)
     except Exception as e:
         print(f"\n❌ Fatal error: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)
-
     finally:
         syncer.close()
 
 
 if __name__ == "__main__":
     main()
-

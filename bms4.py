@@ -1,4 +1,4 @@
-#bms-render/bms4.py
+# bms-render/bms4.py
 import json
 import os
 import random
@@ -9,7 +9,8 @@ from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 
 import cloudscraper
-
+# ADD at top after existing imports
+from r2_client import r2_upload_json
 # =====================================================
 # CONFIG
 # =====================================================
@@ -21,13 +22,13 @@ MAX_RECOVERY_ROUNDS = 5
 IST = timezone(timedelta(hours=5, minutes=30))
 DATE_CODE = (datetime.now(IST) + timedelta(days=1)).strftime("%Y%m%d")
 
-BASE_DIR = os.path.join("advance", "data", DATE_CODE)
-LOG_DIR = os.path.join(BASE_DIR, "logs")
-os.makedirs(LOG_DIR, exist_ok=True)
+# REPLACE with simple log to stdout only (no disk)
+BASE_DIR = f"advance/{DATE_CODE}"  # used only for R2 key naming
 
-SUMMARY_FILE  = f"{BASE_DIR}/movie_summary{SHARD_ID}.json"
-DETAILED_FILE = f"{BASE_DIR}/detailed{SHARD_ID}.json"
-LOG_FILE      = f"{LOG_DIR}/bms{SHARD_ID}.log"
+# ADD after LOG_FILE definition
+R2_DETAILED_KEY = f"advance/{DATE_CODE}/detailed{SHARD_ID}.json"
+R2_SUMMARY_KEY = f"advance/{DATE_CODE}/movie_summary{SHARD_ID}.json"
+
 
 # =====================================================
 # LOGGING
@@ -36,17 +37,20 @@ def log(msg):
     ts = datetime.now(IST).strftime("%H:%M:%S")
     line = f"[{ts}] {msg}"
     print(line, flush=True)
-    with open(LOG_FILE, "a", encoding="utf-8") as f:
-        f.write(line + "\n")
+
 
 # =====================================================
 # HARD TIMEOUT
 # =====================================================
+
+
 class TimeoutError(Exception):
     pass
 
+
 def _timeout_handler(signum, frame):
     raise TimeoutError("Hard timeout hit")
+
 
 def hard_timeout(seconds):
     def deco(fn):
@@ -60,6 +64,7 @@ def hard_timeout(seconds):
         return wrapper
     return deco
 
+
 # =====================================================
 # USER AGENTS
 # =====================================================
@@ -71,12 +76,14 @@ USER_AGENTS = [
 
 thread_local = threading.local()
 
+
 class Identity:
     def __init__(self):
         self.ua = random.choice(USER_AGENTS)
         self.ip = ".".join(str(random.randint(20, 230)) for _ in range(4))
         self.scraper = cloudscraper.create_scraper(
-            browser={"browser": "chrome", "platform": "windows", "desktop": True}
+            browser={"browser": "chrome",
+                     "platform": "windows", "desktop": True}
         )
 
     def headers(self):
@@ -89,11 +96,13 @@ class Identity:
             "X-Forwarded-For": self.ip,
         }
 
+
 def get_identity():
     if not hasattr(thread_local, "identity"):
         thread_local.identity = Identity()
         log("🧠 New identity created")
     return thread_local.identity
+
 
 def reset_identity():
     if hasattr(thread_local, "identity"):
@@ -103,6 +112,8 @@ def reset_identity():
 # =====================================================
 # FETCH API
 # =====================================================
+
+
 @hard_timeout(HARD_TIMEOUT)
 def fetch_api_raw(venue_code):
     ident = get_identity()
@@ -118,6 +129,8 @@ def fetch_api_raw(venue_code):
 # =====================================================
 # PARSER
 # =====================================================
+
+
 def parse_payload(data):
     out = []
 
@@ -127,14 +140,14 @@ def parse_payload(data):
 
     venue = sd[0].get("Venues", {})
     venue_name = venue.get("VenueName", "")
-    venue_add  = venue.get("VenueAdd", "")
-    chain      = venue.get("VenueCompName", "Unknown")
+    venue_add = venue.get("VenueAdd", "")
+    chain = venue.get("VenueCompName", "Unknown")
 
     for ev in sd[0].get("Event", []):
         title = ev.get("EventTitle", "Unknown")
 
         for ch in ev.get("ChildEvents", []):
-            dim  = ch.get("EventDimension", "").strip()
+            dim = ch.get("EventDimension", "").strip()
             lang = ch.get("EventLanguage", "").strip()
             suffix = " | ".join(x for x in (dim, lang) if x)
             movie = f"{title} [{suffix}]" if suffix else title
@@ -147,11 +160,11 @@ def parse_payload(data):
                 total = sold = avail = gross = 0
                 for cat in sh.get("Categories", []):
                     seats = int(cat.get("MaxSeats", 0))
-                    free  = int(cat.get("SeatsAvail", 0))
+                    free = int(cat.get("SeatsAvail", 0))
                     price = float(cat.get("CurPrice", 0))
                     total += seats
                     avail += free
-                    sold  += seats - free
+                    sold += seats - free
                     gross += (seats - free) * price
 
                 out.append({
@@ -173,6 +186,8 @@ def parse_payload(data):
 # =====================================================
 # DEDUPE
 # =====================================================
+
+
 def dedupe(rows):
     seen = set()
     out = []
@@ -188,6 +203,7 @@ def dedupe(rows):
         seen.add(key)
         out.append(r)
     return out
+
 
 # =====================================================
 # MAIN
@@ -228,15 +244,15 @@ if __name__ == "__main__":
 
     for r in detailed:
         movie = r["movie"]
-        city  = r["city"]
+        city = r["city"]
         state = r["state"]
         venue = r["venue"]
         chain = r["chain"]
 
         total = r["totalSeats"]
-        sold  = r["sold"]
+        sold = r["sold"]
         gross = r["gross"]
-        occ   = (sold / total * 100) if total else 0
+        occ = (sold / total * 100) if total else 0
 
         if movie not in summary:
             summary[movie] = {
@@ -354,12 +370,9 @@ if __name__ == "__main__":
             })
 
     # =====================================================
-    # SAVE FILES
+    # SAVE TO R2 (NOT DISK)
     # =====================================================
-    with open(DETAILED_FILE, "w", encoding="utf-8") as f:
-        json.dump(detailed, f, indent=2, ensure_ascii=False)
-
-    with open(SUMMARY_FILE, "w", encoding="utf-8") as f:
-        json.dump(final_summary, f, indent=2, ensure_ascii=False)
+    r2_upload_json(R2_DETAILED_KEY, detailed)
+    r2_upload_json(R2_SUMMARY_KEY, final_summary)
 
     log(f"✅ DONE | Shows={len(detailed)} | Movies={len(final_summary)}")

@@ -5,7 +5,7 @@ import asyncio
 import aiohttp
 from datetime import datetime, timedelta
 import pytz
-
+from r2_client import r2_upload_json
 # =====================================================
 # CONFIG
 # =====================================================
@@ -19,13 +19,11 @@ NOW_IST = datetime.now(IST)
 DATE_CODE = (NOW_IST + timedelta(days=1)).strftime("%Y%m%d")
 DATE_DISTRICT = (NOW_IST + timedelta(days=1)).strftime("%Y-%m-%d")
 
-BASE_DIR = os.path.join("advance", "data", DATE_CODE)
-LOG_DIR = os.path.join(BASE_DIR, "logs")
-os.makedirs(LOG_DIR, exist_ok=True)
+# REPLACE with simple log to stdout only (no disk)
+BASE_DIR = f"advance/{DATE_CODE}"  # used only for R2 key naming
 
-DETAILED_FILE = f"{BASE_DIR}/detailed{SHARD_ID}.json"
-SUMMARY_FILE = f"{BASE_DIR}/movie_summary{SHARD_ID}.json"
-LOG_FILE = f"{LOG_DIR}/district{SHARD_ID}.log"
+R2_DETAILED_KEY = f"advance/{DATE_CODE}/detailed{SHARD_ID}.json"
+R2_SUMMARY_KEY = f"advance/{DATE_CODE}/movie_summary{SHARD_ID}.json"
 
 API_URL = os.getenv("MY_API_URL")
 
@@ -41,8 +39,6 @@ def log(msg):
     ts = datetime.now(IST).strftime("%H:%M:%S")
     line = f"[{ts}] {msg}"
     print(line, flush=True)
-    with open(LOG_FILE, "a", encoding="utf-8") as f:
-        f.write(line + "\n")
 
 
 # =====================================================
@@ -388,11 +384,9 @@ async def main():
     detailed = parse(results)
     summary = build_summary(detailed)
 
-    with open(DETAILED_FILE, "w", encoding="utf-8") as f:
-        json.dump(detailed, f, indent=2, ensure_ascii=False)
-
-    with open(SUMMARY_FILE, "w", encoding="utf-8") as f:
-        json.dump(summary, f, indent=2, ensure_ascii=False)
+    # SAVE TO R2
+    r2_upload_json(R2_DETAILED_KEY, detailed)
+    r2_upload_json(R2_SUMMARY_KEY, summary)
 
     log(f"✅ DONE | Shows={len(detailed)} | Movies={len(summary)}")
 
