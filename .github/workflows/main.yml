@@ -560,7 +560,7 @@ name: BMS TmrwAdv 1–9 + Combine (Matrix | R2)
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 21-23/2,1-17/2 * * *"
+    - cron: "17 21-23/2,1-17/2 * * *"
 
 permissions:
   contents: read   # ✅ read only — no more git push needed

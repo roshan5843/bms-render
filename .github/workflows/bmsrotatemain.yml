@@ -487,7 +487,7 @@ name: BMS Advance Tracker (2,3,4,5) — R2
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 21-23,0-17 * * *"
+    - cron: "17 21-23,0-17 * * *"
 
 permissions:
   contents: read   # ✅ read only
