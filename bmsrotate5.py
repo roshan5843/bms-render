@@ -1,4 +1,5 @@
 # bms-render/bmsrotate5.py
+
 import json
 import os
 import random
@@ -10,25 +11,31 @@ from datetime import datetime, timedelta, timezone
 
 import cloudscraper
 from r2_client import r2_upload_json
+
 # =====================================================
-# CONFIG
+# CONFIG – tune these for speed vs. safety
 # =====================================================
 SHARD_ID = 5
 API_TIMEOUT = 12
 HARD_TIMEOUT = 15
-MAX_RECOVERY_ROUNDS = 5
+MAX_RECOVERY_ROUNDS = 5           # max retries per venue (initial + retry rounds)
+IDENTITY_ROTATE_EVERY = 10        # new identity after every N requests
+FAILURE_THRESHOLD = 5             # consecutive failures before cooldown
+COOLDOWN_SECONDS = 30             # pause when too many failures
+BASE_DELAY = 0.45                 # minimum seconds between requests
+MAX_DELAY = 1.75                  # maximum seconds between requests (adaptive)
 
 IST = timezone(timedelta(hours=5, minutes=30))
 DATE_CODE = os.environ["DATE_CODE"]
 
-# REPLACE with simple log to stdout only (no disk)
-BASE_DIR = f"advance/{DATE_CODE}"  # used only for R2 key naming
+# used only for R2 key naming (nothing is written to disk)
+BASE_DIR = f"advance/{DATE_CODE}"
 
 R2_DETAILED_KEY = f"advance/{DATE_CODE}/detailed{SHARD_ID}.json"
 R2_SUMMARY_KEY = f"advance/{DATE_CODE}/movie_summary{SHARD_ID}.json"
 
 # =====================================================
-# LOGGING
+# LOGGING (stdout only)
 # =====================================================
 
 
@@ -66,12 +73,14 @@ def hard_timeout(seconds):
 # USER AGENTS
 # =====================================================
 USER_AGENTS = [
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36",
-    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/119 Safari/537.36",
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/118 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0",
 ]
 
 thread_local = threading.local()
+request_counter = 0
 
 
 class Identity:
@@ -84,20 +93,35 @@ class Identity:
         )
 
     def headers(self):
+        # Full browser-like headers
         return {
             "User-Agent": self.ua,
             "Accept": "application/json, text/plain, */*",
             "Accept-Language": "en-IN,en;q=0.9",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Connection": "keep-alive",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-origin",
             "Origin": "https://in.bookmyshow.com",
             "Referer": "https://in.bookmyshow.com/",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
             "X-Forwarded-For": self.ip,
         }
 
 
 def get_identity():
+    global request_counter
     if not hasattr(thread_local, "identity"):
         thread_local.identity = Identity()
         log("🧠 New identity created")
+    request_counter += 1
+    # Rotate proactively every N requests
+    if request_counter % IDENTITY_ROTATE_EVERY == 0:
+        reset_identity()
+        thread_local.identity = Identity()
+        log(f"🔄 Identity rotated (every {IDENTITY_ROTATE_EVERY} requests)")
     return thread_local.identity
 
 
@@ -107,7 +131,7 @@ def reset_identity():
     log("🔄 Identity reset")
 
 # =====================================================
-# FETCH API
+# FETCH API (with retry and block detection)
 # =====================================================
 
 
@@ -119,9 +143,27 @@ def fetch_api_raw(venue_code):
         f"?venueCode={venue_code}&dateCode={DATE_CODE}"
     )
     r = ident.scraper.get(url, headers=ident.headers(), timeout=API_TIMEOUT)
-    if not r.text.strip().startswith("{"):
-        raise RuntimeError("Blocked / HTML")
+    if r.status_code != 200:
+        raise RuntimeError(f"HTTP {r.status_code}")
+    text = r.text.strip()
+    if not text.startswith("{"):
+        snippet = text[:200].replace("\n", " ")
+        raise RuntimeError(f"Blocked / HTML (snippet: {snippet})")
     return r.json()
+
+
+def fetch_with_retry(venue_code, attempt=1):
+    try:
+        return fetch_api_raw(venue_code)
+    except Exception as e:
+        if attempt >= MAX_RECOVERY_ROUNDS:
+            log(f"❌ {venue_code} failed after {MAX_RECOVERY_ROUNDS} attempts")
+            raise
+        delay = (2 ** attempt) + random.uniform(0, 1)   # exponential backoff
+        log(f"🔄 Retry {attempt}/{MAX_RECOVERY_ROUNDS} for {venue_code} in {delay:.1f}s")
+        reset_identity()
+        time.sleep(delay)
+        return fetch_with_retry(venue_code, attempt + 1)
 
 # =====================================================
 # PARSER
@@ -213,11 +255,19 @@ if __name__ == "__main__":
 
     all_rows = []
     retry = set()
+    failure_count = 0
 
+    # ------ INITIAL PASS ------
     for i, vcode in enumerate(venues, 1):
         log(f"[{i}/{len(venues)}] {vcode}")
+
+        # Adaptive delay: increase after failures
+        delay = BASE_DELAY + (failure_count * 0.2)
+        delay = min(delay, MAX_DELAY)
+        time.sleep(random.uniform(delay, delay + 0.3))
+
         try:
-            raw = fetch_api_raw(vcode)
+            raw = fetch_with_retry(vcode)   # internal retries
             rows = parse_payload(raw)
             for r in rows:
                 r["city"] = venues[vcode].get("City", "Unknown")
@@ -225,11 +275,50 @@ if __name__ == "__main__":
                 r["source"] = "BMS"
                 r["date"] = DATE_CODE
             all_rows.extend(rows)
+            failure_count = 0   # reset on success
         except Exception as e:
             retry.add(vcode)
+            failure_count += 1
+            if failure_count >= FAILURE_THRESHOLD:
+                log(f"⛔ {failure_count} consecutive failures – cooling down {COOLDOWN_SECONDS}s")
+                time.sleep(COOLDOWN_SECONDS)
+                failure_count = 0
             reset_identity()
-            log(f"❌ {vcode} | {type(e).__name__}")
-        time.sleep(random.uniform(0.35, 0.7))
+            log(f"❌ {vcode} final failure | {type(e).__name__} | {str(e)[:100]}")
+
+    # ------ RETRY ROUNDS (for failed venues) ------
+    for attempt in range(1, MAX_RECOVERY_ROUNDS + 1):
+        if not retry:
+            break
+
+        log(f"🔁 RETRY ROUND {attempt} | Remaining: {len(retry)}")
+        current_retry = list(retry)
+        retry.clear()
+
+        for vcode in current_retry:
+            log(f"[RETRY-{attempt}] {vcode}")
+            # Adaptive delay inside retry (slightly longer)
+            time.sleep(random.uniform(1.0, 2.5))
+
+            try:
+                raw = fetch_with_retry(vcode, attempt=1)  # will use its own retries
+                rows = parse_payload(raw)
+                for r in rows:
+                    r["city"] = venues[vcode].get("City", "Unknown")
+                    r["state"] = venues[vcode].get("State", "Unknown")
+                    r["source"] = "BMS"
+                    r["date"] = DATE_CODE
+                all_rows.extend(rows)
+            except Exception as e:
+                retry.add(vcode)
+                reset_identity()
+                log(f"❌ RETRY FAIL {vcode} | {type(e).__name__}")
+
+            time.sleep(random.uniform(0.5, 1.0))   # small delay between retry items
+
+    if retry:
+        log(f"⚠️ FINAL FAILED VENUES: {len(retry)}")
+        log(f"FAILED LIST: {list(retry)}")
 
     log("🧹 Deduping shows")
     detailed = dedupe(all_rows)
