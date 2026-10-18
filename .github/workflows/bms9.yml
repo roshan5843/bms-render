@@ -44,7 +44,7 @@ jobs:
       # ---------------- RUN SCRAPER ----------------
       - name: 🚀 Run BMS shard 9 scraper
         env:
-          MY_API_URL: ${{ secrets.MY_API_URL }}
+          ADVANCE_API_URL: ${{ secrets.ADVANCE_API_URL }}
         run: |
           python bms9.py
 
