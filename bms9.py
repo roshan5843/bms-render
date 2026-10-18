@@ -417,10 +417,18 @@ DISTRICT_VENUES_FILE = "districtvenues.json"
 REQUEST_TIMEOUT = 30
 CUTOFF_MINUTES = 20000
 
-# Loaded from environment (GitHub Actions secret), not hard-coded
-API_URL1 = (os.getenv("ADVANCE_API_URL") or "").strip().rstrip("/")
-if not API_URL1:
-    raise RuntimeError("❌ ADVANCE_API_URL env variable not set")
+# Loaded from GitHub Actions environment (never hard-code the URL).
+# Support both names so this script works with existing workflows/secrets.
+API_URL = (
+    os.getenv("ADVANCE_API_URL")
+    or os.getenv("MY_API_URL")
+    or ""
+).strip().rstrip("/")
+if not API_URL:
+    raise RuntimeError(
+        "❌ API URL env variable not set. Add ADVANCE_API_URL or MY_API_URL "
+        "to your GitHub Actions repository secrets/variables."
+    )
 
 IST = pytz.timezone("Asia/Kolkata")
 NOW_IST = datetime.now(IST)
