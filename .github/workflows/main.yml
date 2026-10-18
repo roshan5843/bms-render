@@ -53,7 +53,7 @@ jobs:
           R2_ACCESS_KEY: ${{ secrets.R2_ACCESS_KEY }}
           R2_SECRET_KEY: ${{ secrets.R2_SECRET_KEY }}
           R2_BUCKET: ${{ secrets.R2_BUCKET_ADVANCE }}
-          MY_API_URL:    ${{ matrix.shard == 9 && secrets.MY_API_URL || '' }}
+          ADVANCE_API_URL:    ${{ matrix.shard == 9 && secrets.ADVANCE_API_URL || '' }}
         run: |
           python bms${{ matrix.shard }}.py
 
