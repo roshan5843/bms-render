@@ -556,7 +556,7 @@ jobs:
           R2_BUCKET: ${{ secrets.R2_BUCKET_ADVANCE }}
           DATE_CODE:     ${{ needs.decide-day.outputs.date_code }}
           DAYS_AHEAD:    ${{ needs.decide-day.outputs.days_ahead }}
-          MY_API_URL:    ${{ matrix.shard == 9 && secrets.MY_API_URL || '' }}
+          ADVANCE_API_URL:    ${{ matrix.shard == 9 && secrets.ADVANCE_API_URL || '' }}
         run: |
           python bmsrotate${{ matrix.shard }}.py
 
