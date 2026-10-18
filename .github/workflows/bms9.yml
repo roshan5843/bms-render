@@ -44,7 +44,7 @@ jobs:
       # ---------------- RUN SCRAPER ----------------
       - name: 🚀 Run BMS shard 9 scraper
         env:
-          ADVANCE_API_URL: ${{ vars.ADVANCE_API_URL }}
+          ADVANCE_API_URL: ${{ secrets.ADVANCE_API_URL }}
         run: |
           python bms9.py
 
@@ -55,7 +55,7 @@ jobs:
           git config user.email "actions@github.com"
 
           git add advance/
-          git commit -m "Advance BMS shard 8 ($(date +'%Y-%m-%d'))" || echo "Nothing to commit"
+          git commit -m "Advance BMS shard 9 ($(date +'%Y-%m-%d'))" || echo "Nothing to commit"
 
           # 🔁 retry-safe push
           for i in 1 2 3; do
