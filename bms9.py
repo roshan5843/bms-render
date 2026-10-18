@@ -415,9 +415,9 @@ IST = pytz.timezone("Asia/Kolkata")
 # Base URL comes from the environment (GitHub secret/variable), not hard-coded.
 # For this script it must point at the ADVANCE folder.
 # Loaded from environment (GitHub Actions secret), not hard-coded
-API_URL1 = (os.getenv("ADVANCE_API_URL") or "").strip().rstrip("/")
-if not API_URL1:
-    raise RuntimeError("❌ ADVANCE_API_URL env variable not set")
+API_URL = (os.getenv("MY_API_URL") or "").strip().rstrip("/")
+if not API_URL:
+    raise RuntimeError("❌ MY_API_URL env variable not set")
 
 # ============================================================
 # DATE / PATHS
@@ -568,7 +568,7 @@ def calculate_minutes_left(show_time):
 # FETCH SOURCE
 # ============================================================
 def fetch_source():
-    url = f"{API_URL1}/{DATE_DISTRICT}_Detailed.json"
+    url = f"{API_URL}/{DATE_DISTRICT}_Detailed.json"
     # URL is intentionally NOT logged (it comes from a secret env variable)
     log(f"📡 Fetching Detailed JSON for {DATE_DISTRICT}")
     request = Request(url, headers={"User-Agent": "Mozilla/5.0 (compatible; BMS9/1.0)"})
