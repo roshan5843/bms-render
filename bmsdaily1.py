@@ -846,7 +846,6 @@
 #     log(f"✅ DONE | Shows={len(detailed)} | Movies={len(final_summary)}")
 
 
-
 # bms-render/bmsdaily1.py
 import json
 import os
@@ -869,6 +868,7 @@ HARD_TIMEOUT = 15
 MAX_RECOVERY_ROUNDS = 5           # max retries per venue (initial + retry rounds)
 IDENTITY_ROTATE_EVERY = 10        # new identity after every N requests
 FAILURE_THRESHOLD = 5             # consecutive failures before cooldown
+BLOCK_ABORT_AFTER = 10            # stop the run if this many venues in a row return 403
 COOLDOWN_SECONDS = 90             # pause when too many failures
 BASE_DELAY = 0.45                 # minimum seconds between requests
 MAX_DELAY = 1.75                  # maximum seconds between requests (adaptive)
@@ -908,6 +908,11 @@ def log(msg):
 
 
 class TimeoutError(Exception):
+    pass
+
+
+class BlockedError(Exception):
+    """Server refused the request (HTTP 403). Retrying won't help."""
     pass
 
 
@@ -1000,6 +1005,8 @@ def fetch_api_raw(venue_code):
         f"?venueCode={venue_code}&dateCode={DATE_CODE}"
     )
     r = ident.scraper.get(url, headers=ident.headers(), timeout=API_TIMEOUT)
+    if r.status_code == 403:
+        raise BlockedError("HTTP 403")
     if r.status_code != 200:
         raise RuntimeError(f"HTTP {r.status_code}")
     text = r.text.strip()
@@ -1012,6 +1019,8 @@ def fetch_api_raw(venue_code):
 def fetch_with_retry(venue_code, attempt=1):
     try:
         return fetch_api_raw(venue_code)
+    except BlockedError:
+        raise                      # 403: don't waste 30s of backoff on it
     except Exception as e:
         if attempt >= MAX_RECOVERY_ROUNDS:
             log(f"❌ {venue_code} failed after {MAX_RECOVERY_ROUNDS} attempts")
@@ -1152,6 +1161,7 @@ if __name__ == "__main__":
     fetched = []
     retry = set()
     failure_count = 0
+    blocked_streak = 0
 
     # ---------- FIRST PASS ----------
     for i, vcode in enumerate(venues, 1):
@@ -1166,6 +1176,16 @@ if __name__ == "__main__":
             raw = fetch_with_retry(vcode)   # retry wrapper
             collect_rows(raw, vcode, venues, fetched)
             failure_count = 0   # reset on success
+            blocked_streak = 0
+
+        except BlockedError:
+            retry.add(vcode)
+            blocked_streak += 1
+            log(f"🚫 {vcode} blocked | HTTP 403 ({blocked_streak} in a row)")
+            if blocked_streak >= BLOCK_ABORT_AFTER:
+                log(f"🛑 {blocked_streak} venues in a row returned 403 – this IP is being "
+                    "refused by BMS. Stopping without touching R2 data.")
+                raise SystemExit(1)
 
         except Exception as e:
             retry.add(vcode)
