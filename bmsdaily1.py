@@ -846,7 +846,9 @@
 #     log(f"✅ DONE | Shows={len(detailed)} | Movies={len(final_summary)}")
 
 
-# bms-render/bmsdaily1.py
+
+
+
 import json
 import os
 import random
@@ -854,45 +856,30 @@ import time
 import threading
 import signal
 from datetime import datetime, timedelta, timezone
-
 import cloudscraper
-
 from r2_client import r2_upload_json, r2_download_json
-
-# =====================================================
-# CONFIG
-# =====================================================
-SHARD_ID = 1                      # ← change this per shard file (1 through 8)
+SHARD_ID = 1
 API_TIMEOUT = 12
 HARD_TIMEOUT = 15
-MAX_RECOVERY_ROUNDS = 5           # max retries per venue (initial + retry rounds)
+# max retries per venue (initial + retry rounds)
+MAX_RECOVERY_ROUNDS = 5
 IDENTITY_ROTATE_EVERY = 10        # new identity after every N requests
 FAILURE_THRESHOLD = 5             # consecutive failures before cooldown
-BLOCK_ABORT_AFTER = 10            # stop the run if this many venues in a row return 403
 COOLDOWN_SECONDS = 90             # pause when too many failures
-BASE_DELAY = 0.45                 # minimum seconds between requests
-MAX_DELAY = 1.75                  # maximum seconds between requests (adaptive)
-
+BASE_DELAY = 0.45                  # minimum seconds between requests
+# maximum seconds between requests (adaptive)
+MAX_DELAY = 1.75
 CUTOFF_MINUTES = 210              # ≈ 3h 30m – only shows within this window are kept
-
 IST = timezone(timedelta(hours=5, minutes=30))
-
 DATE_CODE = datetime.now(IST).strftime("%Y%m%d")
-
 BASE_DIR = os.path.join("daily", "data", DATE_CODE)
 LOG_DIR = os.path.join(BASE_DIR, "logs")
 os.makedirs(LOG_DIR, exist_ok=True)
-
 R2_DETAILED_KEY = f"daily/{DATE_CODE}/detailed{SHARD_ID}.json"
 R2_SUMMARY_KEY = f"daily/{DATE_CODE}/movie_summary{SHARD_ID}.json"
-
 DETAILED_FILE = f"{BASE_DIR}/detailed{SHARD_ID}.json"
 SUMMARY_FILE = f"{BASE_DIR}/movie_summary{SHARD_ID}.json"
 LOG_FILE = f"{LOG_DIR}/bmsdaily{SHARD_ID}.log"
-
-# =====================================================
-# LOGGING
-# =====================================================
 
 
 def log(msg):
@@ -902,17 +889,8 @@ def log(msg):
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(line + "\n")
 
-# =====================================================
-# HARD TIMEOUT
-# =====================================================
-
 
 class TimeoutError(Exception):
-    pass
-
-
-class BlockedError(Exception):
-    """Server refused the request (HTTP 403). Retrying won't help."""
     pass
 
 
@@ -933,16 +911,12 @@ def hard_timeout(seconds):
     return deco
 
 
-# =====================================================
-# IDENTITY / UA ROTATION
-# =====================================================
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
     "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36",
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/121.0",
 ]
-
 thread_local = threading.local()
 request_counter = 0
 
@@ -958,18 +932,18 @@ class Identity:
 
     def headers(self):
         return {
-            "User-Agent":      self.ua,
-            "Accept":          "application/json, text/plain, */*",
+            "User-Agent": self.ua,
+            "Accept": "application/json, text/plain, */*",
             "Accept-Language": "en-IN,en;q=0.9",
             "Accept-Encoding": "gzip, deflate, br",
-            "Connection":      "keep-alive",
-            "Sec-Fetch-Dest":  "empty",
-            "Sec-Fetch-Mode":  "cors",
-            "Sec-Fetch-Site":  "same-origin",
-            "Origin":          "https://in.bookmyshow.com",
-            "Referer":         "https://in.bookmyshow.com/",
-            "Cache-Control":   "no-cache",
-            "Pragma":          "no-cache",
+            "Connection": "keep-alive",
+            "Sec-Fetch-Dest": "empty",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Site": "same-origin",
+            "Origin": "https://in.bookmyshow.com",
+            "Referer": "https://in.bookmyshow.com/",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
             "X-Forwarded-For": self.ip,
         }
 
@@ -992,10 +966,6 @@ def reset_identity():
         del thread_local.identity
     log("🔄 Identity reset")
 
-# =====================================================
-# FETCH API (with retry and block detection)
-# =====================================================
-
 
 @hard_timeout(HARD_TIMEOUT)
 def fetch_api_raw(venue_code):
@@ -1005,8 +975,6 @@ def fetch_api_raw(venue_code):
         f"?venueCode={venue_code}&dateCode={DATE_CODE}"
     )
     r = ident.scraper.get(url, headers=ident.headers(), timeout=API_TIMEOUT)
-    if r.status_code == 403:
-        raise BlockedError("HTTP 403")
     if r.status_code != 200:
         raise RuntimeError(f"HTTP {r.status_code}")
     text = r.text.strip()
@@ -1019,8 +987,6 @@ def fetch_api_raw(venue_code):
 def fetch_with_retry(venue_code, attempt=1):
     try:
         return fetch_api_raw(venue_code)
-    except BlockedError:
-        raise                      # 403: don't waste 30s of backoff on it
     except Exception as e:
         if attempt >= MAX_RECOVERY_ROUNDS:
             log(f"❌ {venue_code} failed after {MAX_RECOVERY_ROUNDS} attempts")
@@ -1031,74 +997,41 @@ def fetch_with_retry(venue_code, attempt=1):
         time.sleep(delay)
         return fetch_with_retry(venue_code, attempt + 1)
 
-# =====================================================
-# TIME HELPERS
-# =====================================================
-
 
 def minutes_left(show_time_str):
-    """Convert 'hh:mm AM/PM' to minutes left from now (IST)."""
     try:
         now = datetime.now(IST)
         t = datetime.strptime(show_time_str, "%I:%M %p")
-        t = t.replace(year=now.year, month=now.month, day=now.day, tzinfo=IST)
+        t = t.replace(
+            year=now.year,
+            month=now.month,
+            day=now.day,
+            tzinfo=IST
+        )
         return (t - now).total_seconds() / 60
     except Exception:
         return 9999
 
 
-def get_period(show_time_str):
-    """
-    Returns 'morning' | 'afternoon' | 'evening' | 'night' based on show start hour.
-
-    Boundaries:
-      Morning   00:00 – 11:59   (hour < 12)
-      Afternoon 12:00 – 15:59   (12 ≤ hour < 16)
-      Evening   16:00 – 19:59   (16 ≤ hour < 20)
-      Night     20:00 – 23:59   (hour ≥ 20)
-    """
-    try:
-        hour = datetime.strptime(show_time_str, "%I:%M %p").hour
-        if hour < 12:
-            return "morning"
-        if hour < 16:
-            return "afternoon"
-        if hour < 20:
-            return "evening"
-        return "night"
-    except Exception:
-        return None
-
-# =====================================================
-# PARSER
-# =====================================================
-
-
 def parse_payload(data):
     out = []
-
     sd = data.get("ShowDetails", [])
     if not sd:
         return out
-
     venue = sd[0].get("Venues", {})
     venue_name = venue.get("VenueName", "")
     venue_add = venue.get("VenueAdd", "")
     chain = venue.get("VenueCompName", "Unknown")
-
     for ev in sd[0].get("Event", []):
         title = ev.get("EventTitle", "Unknown")
-
         for ch in ev.get("ChildEvents", []):
             dim = ch.get("EventDimension", "").strip()
             lang = ch.get("EventLanguage", "").strip()
             suffix = " | ".join(x for x in (dim, lang) if x)
             movie = f"{title} [{suffix}]" if suffix else title
-
             for sh in ch.get("ShowTimes", []):
                 if sh.get("ShowDateCode") != DATE_CODE:
                     continue
-
                 total = sold = avail = gross = 0
                 for cat in sh.get("Categories", []):
                     seats = int(cat.get("MaxSeats", 0))
@@ -1108,85 +1041,55 @@ def parse_payload(data):
                     avail += free
                     sold += seats - free
                     gross += (seats - free) * price
-
                 out.append({
-                    "movie":      movie,
-                    "venue":      venue_name,
-                    "address":    venue_add,
-                    "chain":      chain,
-                    "time":       sh.get("ShowTime", ""),
-                    "audi":       sh.get("Attributes", "") or "",
+                    "movie": movie,
+                    "venue": venue_name,
+                    "address": venue_add,
+                    "chain": chain,
+                    "time": sh.get("ShowTime", ""),
+                    "audi": sh.get("Attributes", "") or "",
                     "session_id": str(sh.get("SessionId", "")),
                     "totalSeats": total,
-                    "available":  avail,
-                    "sold":       sold,
-                    "gross":      round(gross, 2),
+                    "available": avail,
+                    "sold": sold,
+                    "gross": round(gross, 2)
                 })
-
     return out
-
-# =====================================================
-# STABLE SHOW KEY
-# =====================================================
 
 
 def show_key(r):
-    return (r["venue"], r["time"], r["session_id"], r["audi"])
+    return (
+        r["venue"],
+        r["time"],
+        r["session_id"],
+        r["audi"]
+    )
 
 
-# =====================================================
-# HELPER: keep rows inside the cutoff window
-# =====================================================
-def collect_rows(raw, vcode, venues, fetched):
-    for r in parse_payload(raw):
-        mins = minutes_left(r["time"])
-        if mins <= CUTOFF_MINUTES:
-            r["minsLeft"] = round(mins, 1)
-            r["city"] = venues[vcode].get("City", "Unknown")
-            r["state"] = venues[vcode].get("State", "Unknown")
-            r["source"] = "BMS"
-            r["date"] = DATE_CODE
-            fetched.append(r)
-
-
-# =====================================================
-# MAIN
-# =====================================================
 if __name__ == "__main__":
     log("🚀 BMS DAILY TRACKER STARTED (enhanced anti‑detection)")
-
     with open(f"venues{SHARD_ID}.json", "r", encoding="utf-8") as f:
         venues = json.load(f)
-
     fetched = []
     retry = set()
     failure_count = 0
-    blocked_streak = 0
-
-    # ---------- FIRST PASS ----------
     for i, vcode in enumerate(venues, 1):
         log(f"[{i}/{len(venues)}] {vcode}")
-
-        # Adaptive delay: slows down as consecutive failures build up
         delay = BASE_DELAY + (failure_count * 0.2)
         delay = min(delay, MAX_DELAY)
         time.sleep(random.uniform(delay, delay + 0.3))
-
         try:
             raw = fetch_with_retry(vcode)   # retry wrapper
-            collect_rows(raw, vcode, venues, fetched)
+            for r in parse_payload(raw):
+                mins = minutes_left(r["time"])
+                if mins <= CUTOFF_MINUTES:
+                    r["minsLeft"] = round(mins, 1)
+                    r["city"] = venues[vcode].get("City", "Unknown")
+                    r["state"] = venues[vcode].get("State", "Unknown")
+                    r["source"] = "BMS"
+                    r["date"] = DATE_CODE
+                    fetched.append(r)
             failure_count = 0   # reset on success
-            blocked_streak = 0
-
-        except BlockedError:
-            retry.add(vcode)
-            blocked_streak += 1
-            log(f"🚫 {vcode} blocked | HTTP 403 ({blocked_streak} in a row)")
-            if blocked_streak >= BLOCK_ABORT_AFTER:
-                log(f"🛑 {blocked_streak} venues in a row returned 403 – this IP is being "
-                    "refused by BMS. Stopping without touching R2 data.")
-                raise SystemExit(1)
-
         except Exception as e:
             retry.add(vcode)
             failure_count += 1
@@ -1195,43 +1098,42 @@ if __name__ == "__main__":
                 time.sleep(COOLDOWN_SECONDS)
                 failure_count = 0
             reset_identity()
-            log(f"❌ {vcode} final failure | {type(e).__name__} | {str(e)[:100]}")
-
-    # ---------- RETRY ROUNDS ----------
+            log(
+                f"❌ {vcode} final failure | {type(e).__name__} | {str(e)[:100]}")
     for attempt in range(1, MAX_RECOVERY_ROUNDS + 1):
         if not retry:
             break
-
         log(f"🔁 RETRY ROUND {attempt} | Remaining: {len(retry)}")
         current_retry = list(retry)
         retry.clear()
-
         for vcode in current_retry:
             log(f"[RETRY-{attempt}] {vcode}")
             time.sleep(random.uniform(1.0, 2.5))
             try:
-                raw = fetch_with_retry(vcode, attempt=1)  # will use its own retries
-                collect_rows(raw, vcode, venues, fetched)
+                # will use its own retries
+                raw = fetch_with_retry(vcode, attempt=1)
+                for r in parse_payload(raw):
+                    mins = minutes_left(r["time"])
+                    if mins <= CUTOFF_MINUTES:
+                        r["minsLeft"] = round(mins, 1)
+                        r["city"] = venues[vcode].get("City", "Unknown")
+                        r["state"] = venues[vcode].get("State", "Unknown")
+                        r["source"] = "BMS"
+                        r["date"] = DATE_CODE
+                        fetched.append(r)
             except Exception as e:
                 retry.add(vcode)
                 reset_identity()
                 log(f"❌ RETRY FAIL {vcode} | {type(e).__name__}")
-
-            time.sleep(random.uniform(0.5, 1.0))   # small delay between retry items
-
+            # small delay between retry items
+            time.sleep(random.uniform(0.5, 1.0))
     if retry:
         log(f"⚠️ FINAL FAILED VENUES: {len(retry)}")
         log(f"FAILED LIST: {list(retry)}")
-
-    # =====================================================
-    # LOAD OLD DETAILED FROM R2
-    # =====================================================
     old_rows = r2_download_json(R2_DETAILED_KEY, default=[])
     print(f"📥 Loaded {len(old_rows)} existing rows from R2")
-
     old_map = {show_key(r): r for r in old_rows}
     new_map = {}
-
     for r in fetched:
         key = show_key(r)
         if key in old_map:
@@ -1240,52 +1142,35 @@ if __name__ == "__main__":
                 "available":  r["available"],
                 "sold":       r["sold"],
                 "gross":      r["gross"],
-                "minsLeft":   r.get("minsLeft"),
+                "minsLeft":   r.get("minsLeft")
             })
             new_map[key] = old_map[key]
         else:
             new_map[key] = r
-
     for key, r in old_map.items():
         if key not in new_map:
             new_map[key] = r
-
     detailed = list(new_map.values())
-
-    # =====================================================
-    # SUMMARY (REBUILT FROM DETAILED)
-    # =====================================================
-    def _empty_periods():
-        return {
-            p: {"shows": 0, "sold": 0, "totalSeats": 0, "gross": 0.0}
-            for p in ("morning", "afternoon", "evening", "night")
-        }
-
     summary = {}
-
     for r in detailed:
         movie = r["movie"]
-        venue = r["venue"]
         city = r["city"]
-
+        venue = r["venue"]
         total = r["totalSeats"]
         sold = r["sold"]
         gross = r["gross"]
         occ = (sold / total * 100) if total else 0
-
         if movie not in summary:
             summary[movie] = {
-                "shows":       0,
-                "gross":       0.0,
-                "sold":        0,
-                "totalSeats":  0,
-                "venues":      set(),
-                "cities":      set(),
+                "shows": 0,
+                "gross": 0.0,
+                "sold": 0,
+                "totalSeats": 0,
+                "venues": set(),
+                "cities": set(),
                 "fastfilling": 0,
-                "housefull":   0,
-                "periods":     _empty_periods(),
+                "housefull": 0
             }
-
         m = summary[movie]
         m["shows"] += 1
         m["gross"] += gross
@@ -1293,52 +1178,24 @@ if __name__ == "__main__":
         m["totalSeats"] += total
         m["venues"].add(venue)
         m["cities"].add(city)
-
         if occ >= 98:
             m["housefull"] += 1
         elif occ >= 50:
             m["fastfilling"] += 1
-
-        period = get_period(r["time"])
-        if period:
-            pd = m["periods"][period]
-            pd["shows"] += 1
-            pd["sold"] += sold
-            pd["totalSeats"] += total
-            pd["gross"] += gross
-
-    final_summary = {}
-    for movie, m in summary.items():
-        periods_out = {
-            slot: {
-                "shows":      pd["shows"],
-                "sold":       pd["sold"],
-                "totalSeats": pd["totalSeats"],
-                "gross":      round(pd["gross"], 2),
-                "occupancy":  round((pd["sold"] / pd["totalSeats"]) * 100, 2)
-                if pd["totalSeats"] else 0.0,
-            }
-            for slot, pd in m["periods"].items()
-        }
-
-        final_summary[movie] = {
-            "shows":       m["shows"],
-            "gross":       round(m["gross"], 2),
-            "sold":        m["sold"],
-            "totalSeats":  m["totalSeats"],
-            "venues":      len(m["venues"]),
-            "cities":      len(m["cities"]),
+    final_summary = {
+        movie: {
+            "shows": m["shows"],
+            "gross": round(m["gross"], 2),
+            "sold": m["sold"],
+            "totalSeats": m["totalSeats"],
+            "venues": len(m["venues"]),
+            "cities": len(m["cities"]),
             "fastfilling": m["fastfilling"],
-            "housefull":   m["housefull"],
-            "occupancy":   round((m["sold"] / m["totalSeats"]) * 100, 2)
-            if m["totalSeats"] else 0.0,
-            "periods":     periods_out,
+            "housefull": m["housefull"],
+            "occupancy": round((m["sold"] / m["totalSeats"]) * 100, 2) if m["totalSeats"] else 0.0
         }
-
-    # =====================================================
-    # SAVE TO R2
-    # =====================================================
+        for movie, m in summary.items()
+    }
     r2_upload_json(R2_DETAILED_KEY, detailed)
-    r2_upload_json(R2_SUMMARY_KEY,  final_summary)
-
+    r2_upload_json(R2_SUMMARY_KEY, final_summary)
     log(f"✅ DONE | Shows={len(detailed)} | Movies={len(final_summary)}")
