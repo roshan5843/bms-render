@@ -546,7 +546,7 @@ jobs:
 
       - name: 📦 Install dependencies
         run: |
-          pip install cloudscraper aiohttp pytz boto3
+          pip install -U cloudscraper aiohttp pytz boto3 "curl_cffi>=0.7.0"
 
       - name: 🚀 Run shard scraper
         env:
@@ -584,7 +584,7 @@ jobs:
 
       - name: 📦 Install dependencies
         run: |
-          pip install -U cloudscraper aiohttp pytz boto3 "curl_cffi>=0.7.0"
+          pip install pytz pymongo dnspython boto3
 
       - name: 🔁 Combine shards from R2
         env:
