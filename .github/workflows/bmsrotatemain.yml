@@ -584,7 +584,7 @@ jobs:
 
       - name: 📦 Install dependencies
         run: |
-          pip install pytz pymongo dnspython boto3
+          pip install -U cloudscraper aiohttp pytz boto3 "curl_cffi>=0.7.0"
 
       - name: 🔁 Combine shards from R2
         env:
