@@ -844,12 +844,11 @@
 #     log(f"✅ DONE | Shows={len(detailed)} | Movies={len(final_summary)}")
 
 
-
-
-# bms-render/bmsrotate1.py
+ # bms-render/bmsrotate1.py
 import json
 import os
 import random
+import sys
 import time
 import threading
 import signal
@@ -863,25 +862,26 @@ except ImportError:
     import cloudscraper
     HAVE_CFFI = False
 
-SHARD_ID = 8
+from r2_client import r2_upload_json
+
+# =====================================================
+# CONFIG
+# =====================================================
+SHARD_ID = 1
 API_TIMEOUT = 12
 HARD_TIMEOUT = 20
-# attempts per venue per pass (single retry layer)
-MAX_ATTEMPTS = 3
+MAX_ATTEMPTS = 3                  # attempts per venue per pass (single retry layer)
 FINAL_RETRY_ROUNDS = 2            # extra passes over failed venues at the end
-# rotate a warmed-up identity after N requests (per identity)
-IDENTITY_ROTATE_EVERY = 40
+IDENTITY_ROTATE_EVERY = 40        # rotate a warmed-up identity after N requests
 FAILURE_THRESHOLD = 5             # consecutive failed venues before cooldown
-COOLDOWN_SECONDS = 90
-# still blocked after this many cooldowns -> IP is blocked, stop
-MAX_COOLDOWNS_IN_A_ROW = 3
+COOLDOWN_SECONDS = 60
+MAX_COOLDOWNS_IN_A_ROW = 3        # still blocked after this many cooldowns -> stop
 BLOCK_BACKOFF = 6                 # base backoff (s) on 403/429
 BASE_DELAY = 0.45
 MAX_DELAY = 1.75
-CUTOFF_MINUTES = 210              # only shows within ~3h30m are kept
+START_JITTER_MAX = 30             # random startup delay so parallel shards don't hit at the same second
 
-# Optional proxy (strongly recommended on GitHub Actions / any datacenter IP).
-# e.g. BMS_PROXY="http://user:pass@host:port" (an Indian residential/ISP proxy works best)
+# Optional proxy, e.g. BMS_PROXY="http://user:pass@host:port" (Indian residential/ISP works best)
 PROXY_URL = os.environ.get("BMS_PROXY", "").strip()
 PROXIES = {"http": PROXY_URL, "https": PROXY_URL} if PROXY_URL else None
 
@@ -889,22 +889,15 @@ HOME_URL = "https://in.bookmyshow.com/"
 IMPERSONATE_TARGETS = ["chrome120", "chrome124"]
 
 IST = timezone(timedelta(hours=5, minutes=30))
-DATE_CODE = datetime.now(IST).strftime("%Y%m%d")
-BASE_DIR = os.path.join("daily", "data", DATE_CODE)
-LOG_DIR = os.path.join(BASE_DIR, "logs")
-os.makedirs(LOG_DIR, exist_ok=True)
+DATE_CODE = os.environ["DATE_CODE"]
 
-DETAILED_FILE = f"{BASE_DIR}/detailed{SHARD_ID}.json"
-SUMMARY_FILE = f"{BASE_DIR}/movie_summary{SHARD_ID}.json"
-LOG_FILE = f"{LOG_DIR}/bmsdaily{SHARD_ID}.log"
+R2_DETAILED_KEY = f"advance/{DATE_CODE}/detailed{SHARD_ID}.json"
+R2_SUMMARY_KEY = f"advance/{DATE_CODE}/movie_summary{SHARD_ID}.json"
 
 
 def log(msg):
     ts = datetime.now(IST).strftime("%H:%M:%S")
-    line = f"[{ts}] {msg}"
-    print(line, flush=True)
-    with open(LOG_FILE, "a", encoding="utf-8") as f:
-        f.write(line + "\n")
+    print(f"[{ts}] {msg}", flush=True)
 
 
 class HardTimeout(Exception):
@@ -933,12 +926,12 @@ def hard_timeout(seconds):
 
 
 thread_local = threading.local()
+_diag_logged = False
 
 
 class Identity:
     """One browser-like session. UA/TLS fingerprint come from the library so they
-    always match each other (a random UA on top of a Chrome TLS fingerprint is
-    what gets flagged). Cookies are collected via a warm-up request."""
+    always match each other. Cookies are collected via a warm-up request."""
 
     def __init__(self):
         self.requests_made = 0
@@ -949,8 +942,7 @@ class Identity:
             )
         else:
             self.session = cloudscraper.create_scraper(
-                browser={"browser": "chrome",
-                         "platform": "windows", "desktop": True}
+                browser={"browser": "chrome", "platform": "windows", "desktop": True}
             )
             if PROXIES:
                 self.session.proxies.update(PROXIES)
@@ -965,7 +957,8 @@ class Identity:
             log(f"🧠 New identity created (warm-up failed: {type(e).__name__})")
 
     def api_headers(self):
-        # Do NOT set User-Agent, Accept-Encoding, Sec-* or X-Forwarded-For here.
+        # No User-Agent / Accept-Encoding / Sec-* / X-Forwarded-For: the library sets
+        # a consistent set for the impersonated browser.
         return {
             "Accept": "application/json, text/plain, */*",
             "Origin": "https://in.bookmyshow.com",
@@ -996,6 +989,30 @@ def reset_identity():
         del thread_local.identity
 
 
+def log_egress_ip():
+    """Log the runner's public IP so you can compare working vs failing runs."""
+    try:
+        if HAVE_CFFI:
+            ip = cffi_requests.get("https://api.ipify.org", timeout=10, proxies=PROXIES).text
+        else:
+            ip = cloudscraper.create_scraper().get("https://api.ipify.org", timeout=10).text
+        log(f"🌐 Egress IP: {ip}")
+    except Exception as e:
+        log(f"🌐 Egress IP lookup failed: {type(e).__name__}")
+
+
+def log_block_diagnostics(r):
+    """Log once who is blocking us (Cloudflare / Akamai / app)."""
+    global _diag_logged
+    if _diag_logged:
+        return
+    _diag_logged = True
+    h = {k.lower(): v for k, v in r.headers.items()}
+    interesting = {k: h[k] for k in ("server", "cf-ray", "x-akamai-request-id", "x-cache", "via") if k in h}
+    snippet = r.text[:200].replace("\n", " ")
+    log(f"🔎 Block diagnostics | status={r.status_code} | headers={interesting} | body={snippet}")
+
+
 @hard_timeout(HARD_TIMEOUT)
 def fetch_api_raw(venue_code):
     ident = get_identity()
@@ -1003,14 +1020,15 @@ def fetch_api_raw(venue_code):
         "https://in.bookmyshow.com/api/v2/mobile/showtimes/byvenue"
         f"?venueCode={venue_code}&dateCode={DATE_CODE}"
     )
-    r = ident.session.get(
-        url, headers=ident.api_headers(), timeout=API_TIMEOUT)
+    r = ident.session.get(url, headers=ident.api_headers(), timeout=API_TIMEOUT)
     if r.status_code in (403, 429):
+        log_block_diagnostics(r)
         raise BlockedError(f"HTTP {r.status_code}")
     if r.status_code != 200:
         raise RuntimeError(f"HTTP {r.status_code}")
     text = r.text.strip()
     if not text.startswith("{"):
+        log_block_diagnostics(r)
         snippet = text[:200].replace("\n", " ")
         raise BlockedError(f"Blocked / HTML (snippet: {snippet})")
     return r.json()
@@ -1029,23 +1047,16 @@ def fetch_with_retry(venue_code, attempts=MAX_ATTEMPTS):
                 raise
             base = BLOCK_BACKOFF * attempt if blocked else 2 ** attempt
             delay = base + random.uniform(0, 2)
-            log(
-                f"🔄 Retry {attempt}/{attempts} for {venue_code} in {delay:.1f}s ({type(e).__name__}: {str(e)[:60]})")
+            log(f"🔄 Retry {attempt}/{attempts} for {venue_code} in {delay:.1f}s ({type(e).__name__}: {str(e)[:60]})")
             time.sleep(delay)
 
 
-def minutes_left(show_time_str):
-    try:
-        now = datetime.now(IST)
-        t = datetime.strptime(show_time_str, "%I:%M %p")
-        t = t.replace(year=now.year, month=now.month, day=now.day, tzinfo=IST)
-        return (t - now).total_seconds() / 60
-    except Exception:
-        return 9999
-
-
+# =====================================================
+# PARSER
+# =====================================================
 def parse_payload(data):
     out = []
+
     sd = data.get("ShowDetails", [])
     if not sd:
         return out
@@ -1057,6 +1068,7 @@ def parse_payload(data):
 
     for ev in sd[0].get("Event", []):
         title = ev.get("EventTitle", "Unknown")
+
         for ch in ev.get("ChildEvents", []):
             dim = ch.get("EventDimension", "").strip()
             lang = ch.get("EventLanguage", "").strip()
@@ -1090,62 +1102,79 @@ def parse_payload(data):
                     "sold": sold,
                     "gross": round(gross, 2)
                 })
+
     return out
 
 
-def show_key(r):
-    return (r["venue"], r["time"], r["session_id"], r["audi"])
+def dedupe(rows):
+    seen = set()
+    out = []
+    for r in rows:
+        key = (r["venue"], r["time"], r["session_id"], r["audi"])
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(r)
+    return out
 
 
-def process_venue(vcode, venues, fetched, attempts=MAX_ATTEMPTS):
+def process_venue(vcode, venues, all_rows, attempts=MAX_ATTEMPTS):
     raw = fetch_with_retry(vcode, attempts=attempts)
-    for r in parse_payload(raw):
-        mins = minutes_left(r["time"])
-        if mins <= CUTOFF_MINUTES:
-            r["minsLeft"] = round(mins, 1)
-            r["city"] = venues[vcode].get("City", "Unknown")
-            r["state"] = venues[vcode].get("State", "Unknown")
-            r["source"] = "BMS"
-            r["date"] = DATE_CODE
-            fetched.append(r)
+    rows = parse_payload(raw)
+    for r in rows:
+        r["city"] = venues[vcode].get("City", "Unknown")
+        r["state"] = venues[vcode].get("State", "Unknown")
+        r["source"] = "BMS"
+        r["date"] = DATE_CODE
+    all_rows.extend(rows)
 
 
+# =====================================================
+# MAIN
+# =====================================================
 if __name__ == "__main__":
-    log(f"🚀 BMS DAILY TRACKER STARTED | client={'curl_cffi' if HAVE_CFFI else 'cloudscraper'} | proxy={'on' if PROXIES else 'off'}")
+    log(f"🚀 SCRIPT STARTED | shard={SHARD_ID} | date={DATE_CODE} | "
+        f"client={'curl_cffi' if HAVE_CFFI else 'cloudscraper'} | proxy={'on' if PROXIES else 'off'}")
     if not HAVE_CFFI:
         log("⚠️ curl_cffi not installed – run `pip install -U curl_cffi` for far fewer 403s")
+
+    log_egress_ip()
+
+    # Spread out parallel shards so they don't all hit BMS in the same second
+    jitter = random.uniform(0, START_JITTER_MAX)
+    log(f"⏳ Startup jitter {jitter:.1f}s")
+    time.sleep(jitter)
 
     with open(f"venues{SHARD_ID}.json", "r", encoding="utf-8") as f:
         venues = json.load(f)
 
-    fetched = []
+    all_rows = []
     retry = set()
     failure_count = 0
     cooldowns_in_a_row = 0
     blocked_out = False
     venue_list = list(venues)
 
+    # ------ INITIAL PASS ------
     for i, vcode in enumerate(venue_list, 1):
         log(f"[{i}/{len(venue_list)}] {vcode}")
         delay = min(BASE_DELAY + failure_count * 0.2, MAX_DELAY)
         time.sleep(random.uniform(delay, delay + 0.3))
 
         try:
-            process_venue(vcode, venues, fetched)
+            process_venue(vcode, venues, all_rows)
             failure_count = 0
             cooldowns_in_a_row = 0
         except Exception as e:
             retry.add(vcode)
             failure_count += 1
-            log(
-                f"❌ {vcode} final failure | {type(e).__name__} | {str(e)[:100]}")
+            log(f"❌ {vcode} final failure | {type(e).__name__} | {str(e)[:100]}")
 
             if failure_count >= FAILURE_THRESHOLD:
                 cooldowns_in_a_row += 1
                 if cooldowns_in_a_row >= MAX_COOLDOWNS_IN_A_ROW:
-                    log("⛔ Still blocked after repeated cooldowns – this IP is blocked. "
-                        "Stopping early and saving what we have. Use BMS_PROXY or a different runner.")
-                    # everything not attempted yet
+                    log("⛔ Still blocked after repeated cooldowns – this runner's IP is blocked. "
+                        "Stopping early. Set BMS_PROXY or stagger shards.")
                     retry.update(venue_list[i:])
                     blocked_out = True
                     break
@@ -1154,13 +1183,12 @@ if __name__ == "__main__":
                 failure_count = 0
                 reset_identity()
 
-    # Final retry passes (skipped if the IP is clearly blocked – it would only waste time)
+    # ------ FINAL RETRY PASSES (skipped if clearly IP-blocked) ------
     if not blocked_out:
         for rnd in range(1, FINAL_RETRY_ROUNDS + 1):
             if not retry:
                 break
             log(f"🔁 RETRY ROUND {rnd} | Remaining: {len(retry)}")
-            # let the block window cool off
             time.sleep(random.uniform(20, 40))
             current_retry = list(retry)
             retry.clear()
@@ -1168,51 +1196,35 @@ if __name__ == "__main__":
                 log(f"[RETRY-{rnd}] {vcode}")
                 time.sleep(random.uniform(1.0, 2.5))
                 try:
-                    process_venue(vcode, venues, fetched, attempts=2)
+                    process_venue(vcode, venues, all_rows, attempts=2)
                 except Exception as e:
                     retry.add(vcode)
                     log(f"❌ RETRY FAIL {vcode} | {type(e).__name__}")
 
     if retry:
-        log(f"⚠️ FINAL FAILED VENUES: {len(retry)}")
+        log(f"⚠️ FINAL FAILED VENUES: {len(retry)} / {len(venue_list)}")
         log(f"FAILED LIST: {sorted(retry)}")
 
-    # ---------- merge with existing data ----------
-    if os.path.exists(DETAILED_FILE):
-        with open(DETAILED_FILE, "r", encoding="utf-8") as f:
-            old_rows = json.load(f)
-    else:
-        old_rows = []
+    # Never overwrite good data in R2 with an empty result
+    if not all_rows:
+        log("🚫 No rows collected – NOT uploading to R2 (keeping existing data). Failing the job.")
+        sys.exit(1)
 
-    old_map = {show_key(r): r for r in old_rows}
-    new_map = {}
+    log("🧹 Deduping shows")
+    detailed = dedupe(all_rows)
 
-    for r in fetched:
-        key = show_key(r)
-        if key in old_map:
-            old_map[key].update({
-                "totalSeats": r["totalSeats"],
-                "available": r["available"],
-                "sold": r["sold"],
-                "gross": r["gross"],
-                "minsLeft": r.get("minsLeft")
-            })
-            new_map[key] = old_map[key]
-        else:
-            new_map[key] = r
-
-    for key, r in old_map.items():
-        if key not in new_map:
-            new_map[key] = r
-
-    detailed = list(new_map.values())
-
-    # ---------- summary ----------
+    # =====================================================
+    # SUMMARY (AFTER DEDUPE)
+    # =====================================================
     summary = {}
+
     for r in detailed:
         movie = r["movie"]
         city = r["city"]
+        state = r["state"]
         venue = r["venue"]
+        chain = r["chain"]
+
         total = r["totalSeats"]
         sold = r["sold"]
         gross = r["gross"]
@@ -1221,7 +1233,9 @@ if __name__ == "__main__":
         if movie not in summary:
             summary[movie] = {
                 "shows": 0, "gross": 0.0, "sold": 0, "totalSeats": 0,
-                "venues": set(), "cities": set(), "fastfilling": 0, "housefull": 0
+                "venues": set(), "cities": set(),
+                "fastfilling": 0, "housefull": 0,
+                "details": {}, "Chain_details": {}
             }
 
         m = summary[movie]
@@ -1237,8 +1251,50 @@ if __name__ == "__main__":
         elif occ >= 50:
             m["fastfilling"] += 1
 
-    final_summary = {
-        movie: {
+        ck = (city, state)
+        if ck not in m["details"]:
+            m["details"][ck] = {
+                "city": city, "state": state, "venues": set(),
+                "shows": 0, "gross": 0.0, "sold": 0, "totalSeats": 0,
+                "fastfilling": 0, "housefull": 0
+            }
+
+        d = m["details"][ck]
+        d["venues"].add(venue)
+        d["shows"] += 1
+        d["gross"] += gross
+        d["sold"] += sold
+        d["totalSeats"] += total
+        if occ >= 98:
+            d["housefull"] += 1
+        elif occ >= 50:
+            d["fastfilling"] += 1
+
+        if chain not in m["Chain_details"]:
+            m["Chain_details"][chain] = {
+                "chain": chain, "venues": set(),
+                "shows": 0, "gross": 0.0, "sold": 0, "totalSeats": 0,
+                "fastfilling": 0, "housefull": 0
+            }
+
+        c = m["Chain_details"][chain]
+        c["venues"].add(venue)
+        c["shows"] += 1
+        c["gross"] += gross
+        c["sold"] += sold
+        c["totalSeats"] += total
+        if occ >= 98:
+            c["housefull"] += 1
+        elif occ >= 50:
+            c["fastfilling"] += 1
+
+    # =====================================================
+    # FINALIZE SUMMARY
+    # =====================================================
+    final_summary = {}
+
+    for movie, m in summary.items():
+        final_summary[movie] = {
             "shows": m["shows"],
             "gross": round(m["gross"], 2),
             "sold": m["sold"],
@@ -1247,16 +1303,42 @@ if __name__ == "__main__":
             "cities": len(m["cities"]),
             "fastfilling": m["fastfilling"],
             "housefull": m["housefull"],
-            "occupancy": round((m["sold"] / m["totalSeats"]) * 100, 2) if m["totalSeats"] else 0.0
+            "occupancy": round((m["sold"] / m["totalSeats"]) * 100, 2) if m["totalSeats"] else 0.0,
+            "details": [],
+            "Chain_details": []
         }
-        for movie, m in summary.items()
-    }
 
-    with open(DETAILED_FILE, "w", encoding="utf-8") as f:
-        json.dump(detailed, f, indent=2, ensure_ascii=False)
+        for d in m["details"].values():
+            final_summary[movie]["details"].append({
+                "city": d["city"],
+                "state": d["state"],
+                "venues": len(d["venues"]),
+                "shows": d["shows"],
+                "gross": round(d["gross"], 2),
+                "sold": d["sold"],
+                "totalSeats": d["totalSeats"],
+                "fastfilling": d["fastfilling"],
+                "housefull": d["housefull"],
+                "occupancy": round((d["sold"] / d["totalSeats"]) * 100, 2) if d["totalSeats"] else 0.0
+            })
 
-    with open(SUMMARY_FILE, "w", encoding="utf-8") as f:
-        json.dump(final_summary, f, indent=2, ensure_ascii=False)
+        for c in m["Chain_details"].values():
+            final_summary[movie]["Chain_details"].append({
+                "chain": c["chain"],
+                "venues": len(c["venues"]),
+                "shows": c["shows"],
+                "gross": round(c["gross"], 2),
+                "sold": c["sold"],
+                "totalSeats": c["totalSeats"],
+                "fastfilling": c["fastfilling"],
+                "housefull": c["housefull"],
+                "occupancy": round((c["sold"] / c["totalSeats"]) * 100, 2) if c["totalSeats"] else 0.0
+            })
+
+    # =====================================================
+    # SAVE TO R2
+    # =====================================================
+    r2_upload_json(R2_DETAILED_KEY, detailed)
+    r2_upload_json(R2_SUMMARY_KEY, final_summary)
 
     log(f"✅ DONE | Shows={len(detailed)} | Movies={len(final_summary)}")
-
