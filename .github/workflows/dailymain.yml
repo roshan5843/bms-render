@@ -39,7 +39,7 @@ jobs:
 
       - name: 📦 Install dependencies
         run: |
-          pip install selenium webdriver-manager cloudscraper aiohttp pytz boto3
+          pip install -U selenium webdriver-manager cloudscraper aiohttp pytz boto3 "curl_cffi>=0.7.0"
 
       - name: 🚀 Run shard scraper
         env:
