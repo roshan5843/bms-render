@@ -1,1 +1,400 @@
+# #name: BMS 5 Nov Adv 1–9 + Combine (Matrix | R2)
+# 
+# on:
+#   workflow_dispatch:
+#   repository_dispatch:
+#     types: [run-advance-scrape]
+#   schedule:
+#     - cron: "17 */2 * * *"
+# 
+# permissions:
+#   contents: read   # ✅ read only — no git push needed (data goes to R2)
+# 
+# jobs:
+# 
+# # =====================================================
+# # 0️⃣ Decide DATE OFFSET + FREEZE DATE_CODE
+# # =====================================================
+#   decide-day:
+#     name: Decide tracking day
+#     runs-on: ubuntu-latest
+#     outputs:
+#       days_ahead: ${{ steps.set.outputs.days_ahead }}
+#       date_code:  ${{ steps.set.outputs.date_code }}
+# 
+#     steps:
+#       - name: Decide tracking day (FREEZE)
+#         id: set
+#         run: |
+#           TARGET="2026-11-05"
+#           TODAY=$(TZ=Asia/Kolkata date +%Y-%m-%d)
+# 
+#           DAYS_AHEAD=$(( ( $(date -d "$TARGET" +%s) - $(date -d "$TODAY" +%s) ) / 86400 ))
+# 
+#           if [ $DAYS_AHEAD -lt 0 ]; then
+#             DAYS_AHEAD=0
+#           fi
+# 
+#           DATE_CODE="20261105"
+# 
+#           echo "📅 Target date  : $TARGET"
+#           echo "📆 Today (IST)  : $TODAY"
+#           echo "⏳ Days ahead   : $DAYS_AHEAD"
+#           echo "🔒 DATE_CODE    : $DATE_CODE"
+# 
+#           echo "days_ahead=$DAYS_AHEAD" >> $GITHUB_OUTPUT
+#           echo "date_code=$DATE_CODE" >> $GITHUB_OUTPUT
+# 
+# # =====================================================
+# # 1️⃣ SHARDS — scrape and upload directly to R2
+# # =====================================================
+#   shards:
+#     name: Shard ${{ matrix.shard }}
+#     needs: decide-day
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 60
+# 
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         shard: [1,2,3,4,5,6,7,8,9]
+# 
+#     steps:
+#       - name: 🧾 Checkout repo (code only)
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 1
+# 
+#       - name: 🐍 Setup Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.11"
+# 
+#       - name: 🌐 Install Chrome
+#         run: |
+#           sudo apt-get update -q
+#           sudo apt-get install -y wget unzip
+#           wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#           sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
+#           rm -f google-chrome-stable_current_amd64.deb
+# 
+#       - name: 📦 Install dependencies
+#         run: |
+#           pip install -U selenium webdriver-manager cloudscraper aiohttp pytz boto3 "curl_cffi>=0.7.0"
+# 
+#       - name: 🚀 Run shard scraper
+#         env:
+#           DAYS_AHEAD: ${{ needs.decide-day.outputs.days_ahead }}
+#           DATE_CODE:  ${{ needs.decide-day.outputs.date_code }}
+#           R2_ENDPOINT:   ${{ secrets.R2_ENDPOINT }}
+#           R2_ACCESS_KEY: ${{ secrets.R2_ACCESS_KEY }}
+#           R2_SECRET_KEY: ${{ secrets.R2_SECRET_KEY }}
+#           R2_BUCKET: ${{ secrets.R2_BUCKET_ADVANCE }}
+#           ADVANCE_API_URL:    ${{ matrix.shard == 9 && secrets.ADVANCE_API_URL || '' }}
+#         run: |
+#           python bms${{ matrix.shard }}.py
+# 
+#       # ✅ NO git commit/push — data goes straight to R2
+# 
+# # =====================================================
+# # 2️⃣ COMBINE + MONGODB SYNC
+# # =====================================================
+#   combine:
+#     name: Combine + MongoDB Sync
+#     needs: [decide-day, shards]
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 30
+# 
+#     concurrency:
+#       group: bms-adv-combiner
+#       cancel-in-progress: false
+# 
+#     steps:
+#       - name: 🧾 Checkout repo (code only)
+#         uses: actions/checkout@v4
+#         with:
+#           fetch-depth: 1
+# 
+#       - name: 🐍 Setup Python
+#         uses: actions/setup-python@v5
+#         with:
+#           python-version: "3.11"
+# 
+#       - name: 📦 Install dependencies
+#         run: |
+#           pip install pytz pymongo dnspython boto3
+# 
+#       - name: 🔁 Combine shards from R2
+#         env:
+#           DATE_CODE: ${{ needs.decide-day.outputs.date_code }}
+#           R2_ENDPOINT:   ${{ secrets.R2_ENDPOINT }}
+#           R2_ACCESS_KEY: ${{ secrets.R2_ACCESS_KEY }}
+#           R2_SECRET_KEY: ${{ secrets.R2_SECRET_KEY }}
+#           R2_BUCKET: ${{ secrets.R2_BUCKET_ADVANCE }}
+#         run: |
+#           python combine_shards_rotate.py
+# 
+#       - name: 🔄 Sync Advance Data to MongoDB
+#         if: success()
+#         env:
+#           DATE_CODE:        ${{ needs.decide-day.outputs.date_code }}
+#           R2_ENDPOINT:      ${{ secrets.R2_ENDPOINT }}
+#           R2_ACCESS_KEY:    ${{ secrets.R2_ACCESS_KEY }}
+#           R2_SECRET_KEY:    ${{ secrets.R2_SECRET_KEY }}
+#           R2_BUCKET:        ${{ secrets.R2_BUCKET_ADVANCE }}
+#           MONGODB_URI:      ${{ secrets.MONGODB_URI }}
+#           MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
+#         run: |
+#           python mongodb/sync_advance.py
+# 
+#       - name: 📊 Final Summary
+#         if: always()
+#         run: |
+#           echo "================================"
+#           echo "Workflow Complete: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+#           echo "DATE_CODE: ${{ needs.decide-day.outputs.date_code }}"
+#           echo "Status: ${{ job.status }}"
+# 
+# # =====================================================
+# # 3️⃣ AUTO RETRY ON FAILURE
+# # =====================================================
+#   retry-combine:
+#     name: Auto retry combiner
+#     needs: combine
+#     if: failure()
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: 🔁 Trigger workflow again
+#         uses: actions/github-script@v7
+#         with:
+#           script: |
+#             await github.rest.actions.createWorkflowDispatch({
+#               owner: context.repo.owner,
+#               repo: context.repo.repo,
+#               workflow_id: context.workflow,
+#               ref: context.ref
+#             });
 
+
+name: BMS Dec 17–20 Adv Rotate 1–9 + Combine (Matrix | R2)
+
+on:
+  workflow_dispatch:
+    inputs:
+      date_code:
+        description: "Force a date (YYYYMMDD). Leave empty to use the rotation."
+        required: false
+        default: ""
+  repository_dispatch:
+    types: [run-advance-scrape]
+  schedule:
+    - cron: "17 */2 * * *"
+
+permissions:
+  contents: read   # ✅ read only — no git push needed (data goes to R2)
+  actions: write   # needed by the auto-retry job to re-dispatch this workflow
+
+jobs:
+
+# =====================================================
+# 0️⃣ PICK DATE FROM ROTATION + FREEZE DATE_CODE
+# =====================================================
+  decide-day:
+    name: Decide tracking day (rotation)
+    runs-on: ubuntu-latest
+    outputs:
+      days_ahead: ${{ steps.set.outputs.days_ahead }}
+      date_code:  ${{ steps.set.outputs.date_code }}
+      skip:       ${{ steps.set.outputs.skip }}
+
+    steps:
+      - name: Pick date from rotation (FREEZE)
+        id: set
+        env:
+          INPUT_DATE: ${{ inputs.date_code || github.event.client_payload.date_code || '' }}
+        run: |
+          # ---- Dates in rotation (edit this list to change the dates) ----
+          DATES=("2026-12-17" "2026-12-18" "2026-12-19" "2026-12-20")
+
+          TODAY=$(TZ=Asia/Kolkata date +%Y-%m-%d)
+
+          # Drop dates that are already in the past (IST)
+          ACTIVE=()
+          for d in "${DATES[@]}"; do
+            if [[ ! "$d" < "$TODAY" ]]; then
+              ACTIVE+=("$d")
+            fi
+          done
+
+          if [ -n "$INPUT_DATE" ]; then
+            # Manual / retry run: use the given date as-is
+            if ! [[ "$INPUT_DATE" =~ ^[0-9]{8}$ ]]; then
+              echo "❌ Invalid date_code input: $INPUT_DATE (expected YYYYMMDD)"
+              exit 1
+            fi
+            TARGET="${INPUT_DATE:0:4}-${INPUT_DATE:4:2}-${INPUT_DATE:6:2}"
+            echo "🎯 Forced date from input"
+          elif [ ${#ACTIVE[@]} -eq 0 ]; then
+            echo "🏁 All rotation dates are in the past – nothing to track."
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "date_code=" >> $GITHUB_OUTPUT
+            echo "days_ahead=0" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            # Rotation slot from the UTC hour of the 2-hourly cron (0,2,4…22).
+            # UTC hour is used so a delayed scheduled run stays in the same slot.
+            UTC_HOUR=$(date -u +%H)
+            SLOT=$(( (10#$UTC_HOUR / 2) % ${#ACTIVE[@]} ))
+            TARGET="${ACTIVE[$SLOT]}"
+            echo "🔁 Rotation slot $SLOT of ${#ACTIVE[@]} (UTC hour $UTC_HOUR)"
+          fi
+
+          DATE_CODE=$(date -d "$TARGET" +%Y%m%d)
+          DAYS_AHEAD=$(( ( $(date -d "$TARGET" +%s) - $(date -d "$TODAY" +%s) ) / 86400 ))
+          if [ $DAYS_AHEAD -lt 0 ]; then
+            DAYS_AHEAD=0
+          fi
+
+          echo "📋 Active dates : ${ACTIVE[*]:-none}"
+          echo "📅 Target date  : $TARGET"
+          echo "📆 Today (IST)  : $TODAY"
+          echo "⏳ Days ahead   : $DAYS_AHEAD"
+          echo "🔒 DATE_CODE    : $DATE_CODE"
+
+          echo "skip=false" >> $GITHUB_OUTPUT
+          echo "days_ahead=$DAYS_AHEAD" >> $GITHUB_OUTPUT
+          echo "date_code=$DATE_CODE" >> $GITHUB_OUTPUT
+
+# =====================================================
+# 1️⃣ SHARDS — scrape and upload directly to R2
+# =====================================================
+  shards:
+    name: Shard ${{ matrix.shard }} (${{ needs.decide-day.outputs.date_code }})
+    needs: decide-day
+    if: needs.decide-day.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1,2,3,4,5,6,7,8,9]
+
+    steps:
+      - name: 🧾 Checkout repo (code only)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 🌐 Install Chrome
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y wget unzip
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
+          rm -f google-chrome-stable_current_amd64.deb
+
+      - name: 📦 Install dependencies
+        run: |
+          pip install -U selenium webdriver-manager cloudscraper aiohttp pytz boto3 "curl_cffi>=0.7.0"
+
+      - name: 🚀 Run shard scraper
+        env:
+          DAYS_AHEAD: ${{ needs.decide-day.outputs.days_ahead }}
+          DATE_CODE:  ${{ needs.decide-day.outputs.date_code }}
+          R2_ENDPOINT:   ${{ secrets.R2_ENDPOINT }}
+          R2_ACCESS_KEY: ${{ secrets.R2_ACCESS_KEY }}
+          R2_SECRET_KEY: ${{ secrets.R2_SECRET_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET_ADVANCE }}
+          ADVANCE_API_URL:    ${{ matrix.shard == 9 && secrets.ADVANCE_API_URL || '' }}
+        run: |
+          python bmsrotate${{ matrix.shard }}.py
+
+      # ✅ NO git commit/push — data goes straight to R2
+
+# =====================================================
+# 2️⃣ COMBINE + MONGODB SYNC
+# =====================================================
+  combine:
+    name: Combine + MongoDB Sync (${{ needs.decide-day.outputs.date_code }})
+    needs: [decide-day, shards]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    concurrency:
+      group: bms-adv-combiner
+      cancel-in-progress: false
+
+    steps:
+      - name: 🧾 Checkout repo (code only)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 📦 Install dependencies
+        run: |
+          pip install pytz pymongo dnspython boto3
+
+      - name: 🔁 Combine shards from R2
+        env:
+          DATE_CODE: ${{ needs.decide-day.outputs.date_code }}
+          R2_ENDPOINT:   ${{ secrets.R2_ENDPOINT }}
+          R2_ACCESS_KEY: ${{ secrets.R2_ACCESS_KEY }}
+          R2_SECRET_KEY: ${{ secrets.R2_SECRET_KEY }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET_ADVANCE }}
+        run: |
+          python combine_shards_rotate.py
+
+      - name: 🔄 Sync Advance Data to MongoDB
+        if: success()
+        env:
+          DATE_CODE:        ${{ needs.decide-day.outputs.date_code }}
+          R2_ENDPOINT:      ${{ secrets.R2_ENDPOINT }}
+          R2_ACCESS_KEY:    ${{ secrets.R2_ACCESS_KEY }}
+          R2_SECRET_KEY:    ${{ secrets.R2_SECRET_KEY }}
+          R2_BUCKET:        ${{ secrets.R2_BUCKET_ADVANCE }}
+          MONGODB_URI:      ${{ secrets.MONGODB_URI }}
+          MONGODB_DATABASE: ${{ secrets.MONGODB_DATABASE }}
+        run: |
+          python mongodb/sync_advance.py
+
+      - name: 📊 Final Summary
+        if: always()
+        run: |
+          echo "================================"
+          echo "Workflow Complete: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          echo "DATE_CODE: ${{ needs.decide-day.outputs.date_code }}"
+          echo "Status: ${{ job.status }}"
+
+# =====================================================
+# 3️⃣ AUTO RETRY ON FAILURE (same date, not the next one)
+# =====================================================
+  retry-combine:
+    name: Auto retry combiner
+    needs: [decide-day, combine]
+    if: failure() && needs.decide-day.outputs.date_code != ''
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🔁 Trigger workflow again for the same date
+        uses: actions/github-script@v7
+        env:
+          RETRY_DATE: ${{ needs.decide-day.outputs.date_code }}
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: context.workflow,
+              ref: context.ref,
+              inputs: { date_code: process.env.RETRY_DATE }
+            });
