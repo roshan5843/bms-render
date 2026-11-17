@@ -1,6 +1,6 @@
 # BMS Render — Agentic Coding Reference
 
-## What This Repo Does
+# What This Repo Does
 
 Real-time Indian box office scraper for **BookMyShow (BMS)**. It runs parallel scraping jobs across 9 shards, aggregates results, and stores everything in **Cloudflare R2** (S3-compatible) with optional sync to **MongoDB Atlas**. Powers a movie analytics/blog platform.
 
